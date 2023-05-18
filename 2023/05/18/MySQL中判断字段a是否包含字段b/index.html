@@ -6,22 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>关于爬虫遇到https需要证书校验的问题 | Hexo</title>
+  <title>MySQL中判断字段a是否包含字段b | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于爬虫遇到https需要证书校验的问题昨天在工作中爬取数据时候，遇到爬虫出现SSL_error问题，因为爬取的链接是https,出现证书校验的问题 在网上搜了一下，发现如下方法是可行的 在requests发起链接时候，传入参数  verify&#x3D;False表示取消校验，算是一种避免https需要证书校验的问题，但是需要注意控制台仍然出现警告，需要看看能否成功获取数据。">
+  <meta name="description" content="MySQL中判断字段a是否包含字段b今天在写sql,由于业务需要查询，出现情况表中字段a是否出现在新查询别名字段中，如果是标记为Y，否则为N 百度一下找不到自己想要的答案 于是求助ChatGpt 他给出一个例子 12UPDATE your_tableSET result &#x3D; IF(b LIKE CONCAT(&amp;#x27;%&amp;#x27;, a, &amp;#x27;%&amp;#x27;), &amp;#x27;Y&amp;#x2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于爬虫遇到https需要证书校验的问题">
-<meta property="og:url" content="http://example.com/2023/04/20/%E5%85%B3%E4%BA%8E%E7%88%AC%E8%99%AB%E9%81%87%E5%88%B0https%E9%9C%80%E8%A6%81%E8%AF%81%E4%B9%A6%E6%A0%A1%E9%AA%8C%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="MySQL中判断字段a是否包含字段b">
+<meta property="og:url" content="http://example.com/2023/05/18/MySQL%E4%B8%AD%E5%88%A4%E6%96%AD%E5%AD%97%E6%AE%B5a%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E5%AD%97%E6%AE%B5b/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="关于爬虫遇到https需要证书校验的问题昨天在工作中爬取数据时候，遇到爬虫出现SSL_error问题，因为爬取的链接是https,出现证书校验的问题 在网上搜了一下，发现如下方法是可行的 在requests发起链接时候，传入参数  verify&#x3D;False表示取消校验，算是一种避免https需要证书校验的问题，但是需要注意控制台仍然出现警告，需要看看能否成功获取数据。">
+<meta property="og:description" content="MySQL中判断字段a是否包含字段b今天在写sql,由于业务需要查询，出现情况表中字段a是否出现在新查询别名字段中，如果是标记为Y，否则为N 百度一下找不到自己想要的答案 于是求助ChatGpt 他给出一个例子 12UPDATE your_tableSET result &#x3D; IF(b LIKE CONCAT(&amp;#x27;%&amp;#x27;, a, &amp;#x27;%&amp;#x27;), &amp;#x27;Y&amp;#x2">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/img%5C20230420.png">
-<meta property="article:published_time" content="2023-04-20T01:15:03.000Z">
-<meta property="article:modified_time" content="2023-04-21T08:26:00.567Z">
+<meta property="article:published_time" content="2023-05-18T02:25:32.000Z">
+<meta property="article:modified_time" content="2023-05-18T06:20:09.588Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="爬虫">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img%5C20230420.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -157,31 +154,42 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-关于爬虫遇到https需要证书校验的问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MySQL中判断字段a是否包含字段b" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      关于爬虫遇到https需要证书校验的问题
+      MySQL中判断字段a是否包含字段b
     </h1>
   
 
         
-        <a href="/2023/04/20/%E5%85%B3%E4%BA%8E%E7%88%AC%E8%99%AB%E9%81%87%E5%88%B0https%E9%9C%80%E8%A6%81%E8%AF%81%E4%B9%A6%E6%A0%A1%E9%AA%8C%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2023-04-20T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-20</time>
+        <a href="/2023/05/18/MySQL%E4%B8%AD%E5%88%A4%E6%96%AD%E5%AD%97%E6%AE%B5a%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E5%AD%97%E6%AE%B5b/" class="archive-article-date">
+  	<time datetime="2023-05-18T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="关于爬虫遇到https需要证书校验的问题"><a href="#关于爬虫遇到https需要证书校验的问题" class="headerlink" title="关于爬虫遇到https需要证书校验的问题"></a>关于爬虫遇到https需要证书校验的问题</h1><p>昨天在工作中爬取数据时候，遇到爬虫出现SSL_error问题，因为爬取的链接是https,出现证书校验的问题</p>
-<p>在网上搜了一下，发现如下方法是可行的</p>
-<p>在requests发起链接时候，传入参数</p>
-<p><img src="/img%5C20230420.png"></p>
-<p>verify&#x3D;False表示取消校验，算是一种避免https需要证书校验的问题，但是需要注意控制台仍然出现警告，需要看看能否成功获取数据。</p>
+        <h1 id="MySQL中判断字段a是否包含字段b"><a href="#MySQL中判断字段a是否包含字段b" class="headerlink" title="MySQL中判断字段a是否包含字段b"></a>MySQL中判断字段a是否包含字段b</h1><p>今天在写sql,由于业务需要查询，出现情况表中字段a是否出现在新查询别名字段中，如果是标记为Y，否则为N</p>
+<p>百度一下找不到自己想要的答案</p>
+<p>于是求助ChatGpt</p>
+<p>他给出一个例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE your_table</span><br><span class="line">SET result = IF(b LIKE CONCAT(&#x27;%&#x27;, a, &#x27;%&#x27;), &#x27;Y&#x27;, &#x27;N&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>参考这种写法</p>
+<p>我写下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">IF(DATE_FORMAT(t.pay_date,&#x27;%Y-%m&#x27;) LIKE CONCAT(&#x27;%&#x27;, pro.pDate, &#x27;%&#x27;), &#x27;Y&#x27;, &#x27;N&#x27;) as isDiZeng</span><br><span class="line"></span><br><span class="line">.....</span><br><span class="line">LEFT JOIN (</span><br><span class="line">        SELECT</span><br><span class="line">        rent.contract_id AS rId,</span><br><span class="line">        GROUP_CONCAT(DATE_FORMAT(rent.begintime,&#x27;%Y-%m&#x27;)) as pDate</span><br><span class="line">        FROM</span><br><span class="line">        wuye_rent_type rent</span><br><span class="line">        GROUP BY rent.contract_id</span><br><span class="line">        ) pro on pro.rId=c.id</span><br></pre></td></tr></table></figure>
+
+<p>确实实现了需求。</p>
+<p>但是很快出现另外一个问题，新起别名的字段如何作为查询字段使用，于是再次求助chatgpt</p>
+<p>它的回答</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">在MySQL中，您无法在WHERE子句中直接使用字段别名，因为WHERE子句是在执行查询之前进行条件筛选的阶段。别名是在查询结果返回后才生成的。</span><br><span class="line"></span><br><span class="line">但是，您可以使用派生表（Derived Table）或子查询（Subquery）来解决这个问题。您可以将带有别名的字段作为内部查询的结果，并在外部查询中使用该字段。</span><br><span class="line"></span><br><span class="line">下面是一个示例，演示如何在WHERE子句中使用字段别名</span><br><span class="line">SELECT *</span><br><span class="line">FROM (</span><br><span class="line">  SELECT column_name AS alias_name</span><br><span class="line">  FROM table_name</span><br><span class="line">) AS derived_table</span><br><span class="line">WHERE alias_name = &#x27;some_value&#x27;;</span><br><span class="line"></span><br><span class="line">在上面的示例中，内部查询使用AS关键字将column_name字段命名为alias_name。然后，将内部查询作为派生表（Derived Table）使用，并在外部查询中将其命名为derived_table。在外部查询的WHERE子句中，您可以使用alias_name作为条件进行筛选。</span><br><span class="line"></span><br><span class="line">请注意，上述示例中的*表示选择所有字段。您可以根据需要替换为特定的字段列表。</span><br><span class="line"></span><br><span class="line">使用派生表或子查询可以让您在查询过程中使用字段别名，并对其进行条件筛选。</span><br></pre></td></tr></table></figure>
+
+<p>其实在派生表中别出来后，在主表就可以使用了</p>
 
       
 
@@ -211,24 +219,13 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        			<a href="/categories/MySQL//" class="article-tag-list-link color1">MySQL</a>
         		</li>
       		
 		</ul>
@@ -283,7 +280,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/04/20/%E5%85%B3%E4%BA%8E%E7%88%AC%E8%99%AB%E9%81%87%E5%88%B0https%E9%9C%80%E8%A6%81%E8%AF%81%E4%B9%A6%E6%A0%A1%E9%AA%8C%E7%9A%84%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/05/18/MySQL%E4%B8%AD%E5%88%A4%E6%96%AD%E5%AD%97%E6%AE%B5a%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E5%AD%97%E6%AE%B5b/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -297,18 +294,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2023/05/18/MySQL%E4%B8%AD%E5%88%A4%E6%96%AD%E5%AD%97%E6%AE%B5a%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E5%AD%97%E6%AE%B5b/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          MySQL中判断字段a是否包含字段b
-        
-      </div>
-    </a>
   
-  
-    <a href="/2023/04/13/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hexo常用命令</div>
+    <a href="/2023/04/20/%E5%85%B3%E4%BA%8E%E7%88%AC%E8%99%AB%E9%81%87%E5%88%B0https%E9%9C%80%E8%A6%81%E8%AF%81%E4%B9%A6%E6%A0%A1%E9%AA%8C%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于爬虫遇到https需要证书校验的问题</div>
       <i class="icon-circle-right"></i>
     </a>
   
