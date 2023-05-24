@@ -16,7 +16,7 @@
 <meta property="og:description" content="MySQL中判断字段a是否包含字段b今天在写sql,由于业务需要查询，出现情况表中字段a是否出现在新查询别名字段中，如果是标记为Y，否则为N 百度一下找不到自己想要的答案 于是求助ChatGpt 他给出一个例子 12UPDATE your_tableSET result &#x3D; IF(b LIKE CONCAT(&amp;#x27;%&amp;#x27;, a, &amp;#x27;%&amp;#x27;), &amp;#x27;Y&amp;#x2">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-05-18T02:25:32.000Z">
-<meta property="article:modified_time" content="2023-05-18T06:20:09.588Z">
+<meta property="article:modified_time" content="2023-05-18T07:13:02.207Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -184,7 +184,7 @@
 <p>我写下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">IF(DATE_FORMAT(t.pay_date,&#x27;%Y-%m&#x27;) LIKE CONCAT(&#x27;%&#x27;, pro.pDate, &#x27;%&#x27;), &#x27;Y&#x27;, &#x27;N&#x27;) as isDiZeng</span><br><span class="line"></span><br><span class="line">.....</span><br><span class="line">LEFT JOIN (</span><br><span class="line">        SELECT</span><br><span class="line">        rent.contract_id AS rId,</span><br><span class="line">        GROUP_CONCAT(DATE_FORMAT(rent.begintime,&#x27;%Y-%m&#x27;)) as pDate</span><br><span class="line">        FROM</span><br><span class="line">        wuye_rent_type rent</span><br><span class="line">        GROUP BY rent.contract_id</span><br><span class="line">        ) pro on pro.rId=c.id</span><br></pre></td></tr></table></figure>
 
-<p>确实实现了需求。</p>
+<p>其实直接用find_in_set就好了。</p>
 <p>但是很快出现另外一个问题，新起别名的字段如何作为查询字段使用，于是再次求助chatgpt</p>
 <p>它的回答</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">在MySQL中，您无法在WHERE子句中直接使用字段别名，因为WHERE子句是在执行查询之前进行条件筛选的阶段。别名是在查询结果返回后才生成的。</span><br><span class="line"></span><br><span class="line">但是，您可以使用派生表（Derived Table）或子查询（Subquery）来解决这个问题。您可以将带有别名的字段作为内部查询的结果，并在外部查询中使用该字段。</span><br><span class="line"></span><br><span class="line">下面是一个示例，演示如何在WHERE子句中使用字段别名</span><br><span class="line">SELECT *</span><br><span class="line">FROM (</span><br><span class="line">  SELECT column_name AS alias_name</span><br><span class="line">  FROM table_name</span><br><span class="line">) AS derived_table</span><br><span class="line">WHERE alias_name = &#x27;some_value&#x27;;</span><br><span class="line"></span><br><span class="line">在上面的示例中，内部查询使用AS关键字将column_name字段命名为alias_name。然后，将内部查询作为派生表（Derived Table）使用，并在外部查询中将其命名为derived_table。在外部查询的WHERE子句中，您可以使用alias_name作为条件进行筛选。</span><br><span class="line"></span><br><span class="line">请注意，上述示例中的*表示选择所有字段。您可以根据需要替换为特定的字段列表。</span><br><span class="line"></span><br><span class="line">使用派生表或子查询可以让您在查询过程中使用字段别名，并对其进行条件筛选。</span><br></pre></td></tr></table></figure>
@@ -295,8 +295,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2023/04/20/%E5%85%B3%E4%BA%8E%E7%88%AC%E8%99%AB%E9%81%87%E5%88%B0https%E9%9C%80%E8%A6%81%E8%AF%81%E4%B9%A6%E6%A0%A1%E9%AA%8C%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">关于爬虫遇到https需要证书校验的问题</div>
+    <a href="/2023/05/12/(%E4%B8%80)Mysql%E6%9F%A5%E8%AF%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">(一)Mysql查询</div>
       <i class="icon-circle-right"></i>
     </a>
   
