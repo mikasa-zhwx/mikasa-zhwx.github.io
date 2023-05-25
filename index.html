@@ -152,6 +152,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-(四)Mysql多表查询" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/05/25/(%E5%9B%9B)Mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">(四)Mysql多表查询</a>
+    </h1>
+  
+
+        
+        <a href="/2023/05/25/(%E5%9B%9B)Mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/" class="archive-article-date">
+  	<time datetime="2023-05-25T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h1><p>实际开发中经常出现的是多表查询，多表查询容易出现的一个问题是出现笛卡尔积，所谓笛卡尔积是指</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">当集合A(a,b,c)和集合B（x,y）连表查询时</span><br><span class="line">出现</span><br><span class="line">2*3=6条结果时，即为笛卡尔积，也就是ax,ay,bx,by,cx,cy</span><br><span class="line"></span><br><span class="line">select *</span><br><span class="line">from A,B;   //不加链接条件就容易出现笛卡尔积</span><br></pre></td></tr></table></figure>
+
+<p>所以应该加上多表之间的关联条件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">*</span><br><span class="line">from A,B</span><br><span class="line">where A.id=B.id  //这样会匹配特定记录，但如果出现A.id=null或者A.id跟B无法匹配时，这样记录则不会返					回</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="一-链接方式"><a href="#一-链接方式" class="headerlink" title="一.链接方式"></a>一.链接方式</h2><h3 id="1-等值链接和非等值连接"><a href="#1-等值链接和非等值连接" class="headerlink" title="1.等值链接和非等值连接"></a>1.等值链接和非等值连接</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select emp.id,emp.dept_id,dept.dept_id</span><br><span class="line">from emp,dept</span><br><span class="line">where emp.dept_id=dept.dept_id  //等值链接</span><br><span class="line"></span><br><span class="line">select emp.id,emp.dept_id,job.greed</span><br><span class="line">from emp,job</span><br><span class="line">where emp.salary between job.low_salart and job.high_salary   //非等值链接</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-自链接和非自链接"><a href="#2-自链接和非自链接" class="headerlink" title="2.自链接和非自链接"></a>2.自链接和非自链接</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">与自己相连-自链接</span><br><span class="line">不与自己相连-非自链接</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select emp.id,emp.dept_id,mgr.id</span><br><span class="line">from emp,emp as mgr</span><br><span class="line">where emp.manage_id=mgr.id  //自链接</span><br><span class="line"></span><br><span class="line">select emp.id,emp.dept_id,dept.dept_id</span><br><span class="line">from emp,dept</span><br><span class="line">where emp.dept_id=dept.dept_id  //非自链接</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-内链接和外链接"><a href="#3-内链接和外链接" class="headerlink" title="3.内链接和外链接"></a>3.内链接和外链接</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#内链接</span><br><span class="line">只查询满足两张表满足条件的数据</span><br><span class="line">select </span><br><span class="line">*</span><br><span class="line">from A,B</span><br><span class="line">where A.id=B.id</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#外链接：除了满足条件的数据，还包括左表或者右表，或者全部的数据</span><br><span class="line">	#左连接:除了满足条件的数据，还包括左表不满足条件的数据</span><br><span class="line">        select </span><br><span class="line">        *</span><br><span class="line">        from A</span><br><span class="line">        left join B on  A.id=B.id</span><br><span class="line">    #右连接:除了满足条件的数据，还包括右表不满足条件的数据</span><br><span class="line">        select </span><br><span class="line">        *</span><br><span class="line">        from A</span><br><span class="line">        right join B on A.id=B.id</span><br><span class="line">        </span><br><span class="line">    #全连接</span><br><span class="line">    	select </span><br><span class="line">        *</span><br><span class="line">        from A</span><br><span class="line">        full join B on A.id=B.id   //orcale支持这些写法，mysql不支持</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+<h2 id="二-UNION和UNION-ALL"><a href="#二-UNION和UNION-ALL" class="headerlink" title="二.UNION和UNION ALL"></a>二.UNION和UNION ALL</h2><p>此关键字可以将两张表链接起来，使用此关键字必须保证两表的列数和列相同</p>
+<p>union会去除重复数据，union all则不会；所以能用union all尽量使用union all节省效率。</p>
+<h2 id="三-7种链接方式"><a href="#三-7种链接方式" class="headerlink" title="三.7种链接方式"></a>三.7种链接方式</h2><p><img src="/img/20230525-1.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">#左上角:左连接</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">left join departments d on e.department_id=d.department_id</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#右上角:右连接</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line"></span><br><span class="line">#左中</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line">where d.department_id is null</span><br><span class="line"></span><br><span class="line">#中：内链接</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">join departments d on e.department_id=d.department_id</span><br><span class="line"></span><br><span class="line">#右中</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line">where e.department_id is null;</span><br><span class="line"></span><br><span class="line">#左下</span><br><span class="line">#方式1：左上+右中</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">left join departments d on e.department_id=d.department_id</span><br><span class="line">union all</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line">where e.department_id is null;</span><br><span class="line">#方式2：左中+右上</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line">where d.department_id is null</span><br><span class="line">union all</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#右下</span><br><span class="line">#左中+右中</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line">where d.department_id is null</span><br><span class="line">union all</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line">where e.department_id is null;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="四-SQL99新特性（了解即可）"><a href="#四-SQL99新特性（了解即可）" class="headerlink" title="四.SQL99新特性（了解即可）"></a>四.SQL99新特性（了解即可）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#natural join </span><br><span class="line">#自然链接本质上是等值链接，他会自动帮你查找两张表中所有相同的字段</span><br><span class="line"></span><br><span class="line">select emp.id,emp.dept_id,dept.dept_id</span><br><span class="line">from emp </span><br><span class="line">join dept on emp.dept_id=dept.dept_id</span><br><span class="line">and emp.location_id=dept.location_id</span><br><span class="line"></span><br><span class="line">等价于</span><br><span class="line">select emp.id,emp.dept_id,dept.dept_id</span><br><span class="line">from emp </span><br><span class="line">natural join dept </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#USING</span><br><span class="line">#使用using表示两张表共同的字段来作为链接条件</span><br><span class="line"></span><br><span class="line">select emp.id,emp.dept_id,dept.dept_id</span><br><span class="line">from emp </span><br><span class="line">join dept </span><br><span class="line">using(deparment_id)</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/MySQL//" class="article-tag-list-link color1">MySQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/05/25/(%E5%9B%9B)Mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-MySQL中判断字段a是否包含字段b" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -363,7 +466,7 @@
 
 <h2 id="2-比较运算符"><a href="#2-比较运算符" class="headerlink" title="2.比较运算符"></a>2.比较运算符</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">=  &lt;=&gt;  &lt;&gt;  !=  &lt; &lt;=  &gt;  &gt;=</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2.1 =使用 相等返回1，否则返回0。</span><br><span class="line"></span><br><span class="line">select 1=1, 1=&#x27;1&#x27;,1=&#x27;a&#x27;,0=&#x27;a&#x27; from dual;  //左边数字右边字符，会将字符看作0</span><br><span class="line">select &#x27;a&#x27;=&#x27;a&#x27;,&#x27;avc&#x27;=&#x27;acv&#x27;,&#x27;a&#x27;=&#x27;b&#x27; //字符比较字符的ansi码</span><br><span class="line">select null=null from dual;  //返回null</span><br><span class="line"></span><br><span class="line">select emp_name</span><br><span class="line">from emp</span><br><span class="line">where emp_name=null  //返回结果为null,因为null参与运算都为null,select在where过滤时候会把结果等于1的返回,由于是null，结果则为null</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2.2 &lt;=&gt; 安全等于，专门用来判断null情况，效果跟=类似</span><br><span class="line"></span><br><span class="line">select 1&lt;=&gt;null, null&lt;=&gt; null ;  //结果是0，1</span><br><span class="line">//&lt;=&gt;两边都是null则为1，只有一边null参与判断则为0，其他情况跟=作用相同</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2.3不等于</span><br><span class="line">&lt;&gt;和!= 功能一样</span><br><span class="line"></span><br><span class="line">select 1&lt;&gt;2, 2!=2, 1!=2 from dual;</span><br><span class="line"></span><br><span class="line">2.3</span><br><span class="line">&gt; &gt;= 大于，大于等于</span><br><span class="line">&lt; &lt;= 小于，小于等于</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="3-关键字运算符"><a href="#3-关键字运算符" class="headerlink" title="3.关键字运算符"></a>3.关键字运算符</h2><p><img src="/" alt="img/20230523-1.png"></p>
+<h2 id="3-关键字运算符"><a href="#3-关键字运算符" class="headerlink" title="3.关键字运算符"></a>3.关键字运算符</h2><p><img src="/img/20230523-1.png"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">3.1</span><br><span class="line">#is null/is not null/isnull</span><br><span class="line"></span><br><span class="line">select * from emp where emp.id is null;</span><br><span class="line">select * from emp where emp.name is not null</span><br><span class="line">select * from emp where isnull(emp.name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3.2</span><br><span class="line">select LEAST(1,123),GREATEST(1,233) from dual;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3.3模糊查询like</span><br><span class="line"></span><br><span class="line">select * from emp where name like &#x27;%a%&#x27;;  //查询name包含a的结果</span><br><span class="line">select * from emp where name like &#x27;_a%&#x27;;  //查询name中第二个字符为a的结果</span><br><span class="line">select * from emp where name like &#x27;_\_a%&#x27;;  //查询name中第二个字符为_且第三个字符为a的结果</span><br><span class="line">select * from emp where name like &#x27;%a%&#x27; and name like &#x27;%e%&#x27;; //查询name中既包含a又包含e的结果</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2 id="4-逻辑运算符"><a href="#4-逻辑运算符" class="headerlink" title="4.逻辑运算符"></a>4.逻辑运算符</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">4.1 逻辑非</span><br><span class="line">select not A;</span><br><span class="line">SELECT !A  </span><br><span class="line"></span><br><span class="line">4.2逻辑与</span><br><span class="line">select a and b;</span><br><span class="line">select a&amp;&amp;b;</span><br><span class="line"></span><br><span class="line">4.3逻辑或</span><br><span class="line">select a||b </span><br><span class="line">select a or b</span><br><span class="line"></span><br><span class="line">4.4逻辑异或</span><br><span class="line">selct a xor b</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line">and 和 or 能同时使用 但是and的优先级高</span><br><span class="line">xxxx and</span><br><span class="line">or </span><br><span class="line">xxx and   //会先把and处理最后处理or</span><br><span class="line"></span><br><span class="line">select * from emp where name=0 and age=18 or title=24 and handle=&#x27;11&#x27; or dept_name=&#x27;oooo&#x27;</span><br><span class="line">//它的意思是选择名字为0且年龄为18，或者职称为24且句柄为&#x27;11&#x27;，或者部门名称为&#x27;oooo&#x27;的员工信息。</span><br><span class="line">查询语句中使用了逻辑运算符（AND 和 OR）来组合多个条件。根据优先级规则，AND 运算符的优先级高于 OR 运算符，所以它会先计算 name=0 and age=18 or title=24 and handle=&#x27;11&#x27; 的结果，然后再与 dept_name=&#x27;oooo&#x27; 进行 OR 运算。</span><br><span class="line">如果这个查询语句符合您的预期，它将返回符合以下任一条件的员工信息：</span><br><span class="line">名字为0且年龄为18的员工；</span><br><span class="line">职称为24且句柄为&#x27;11&#x27;的员工；</span><br><span class="line">部门名称为&#x27;oooo&#x27;的员工。</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -376,8 +479,7 @@
 
 
 
-<p>运算符的优先级</p>
-<p><img src="/" alt="img/20230524-1.png"></p>
+<p>运算符的优先级<br><img src="/img/20230524-1.png"></p>
 
       
 
@@ -611,6 +713,94 @@
 
 
   
+    <article id="post-(三)Mysql-排序和分页" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/04/12/(%E4%B8%89)Mysql-%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%A1%B5/">(三)Mysql-排序和分页</a>
+    </h1>
+  
+
+        
+        <a href="/2023/04/12/(%E4%B8%89)Mysql-%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%A1%B5/" class="archive-article-date">
+  	<time datetime="2023-04-12T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">order by</span><br><span class="line"></span><br><span class="line">#1.升序，降序</span><br><span class="line">asc,desc</span><br><span class="line">select * from emp order by name;</span><br><span class="line">select * from emp order by name desc;</span><br><span class="line">select * from emp order by name,age desc;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#2.</span><br><span class="line">select </span><br><span class="line">emp.name as eName</span><br><span class="line">from emp</span><br><span class="line">where eName like &#x27;%123&#x27;</span><br><span class="line">order by eName         //报错</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select </span><br><span class="line">emp.name as eName</span><br><span class="line">from emp</span><br><span class="line">where emp.id  in (12,13,14)</span><br><span class="line">order by eName       //不会报错</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#这里涉及到mysql执行顺序的问题</span><br><span class="line">先从</span><br><span class="line">from emp</span><br><span class="line">到</span><br><span class="line">where</span><br><span class="line">到</span><br><span class="line">select</span><br><span class="line">到</span><br><span class="line">order by</span><br><span class="line">所以上面eName作为列的别名问题，出现在where报错，但是在order by 那里出现则不会</span><br></pre></td></tr></table></figure>
+
+<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">limit</span><br><span class="line"></span><br><span class="line">select * from emp</span><br><span class="line">limit 0,10  //查询第一页，10条数据</span><br><span class="line"></span><br><span class="line">select * from emp</span><br><span class="line">limit 10,10   //查询第二页。10条数据</span><br><span class="line"></span><br><span class="line">select * from emp</span><br><span class="line">limit (pageNum-1)*pageSize,pageSize  //查询第pageNum页，pageSize条数据</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select * from emp</span><br><span class="line">limit 3 offset 1 </span><br><span class="line">等价于</span><br><span class="line">select * from emp</span><br><span class="line">limit </span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/MySQL//" class="article-tag-list-link color1">MySQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/04/12/(%E4%B8%89)Mysql-%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%A1%B5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-把本地项目推送到gitLab" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -685,94 +875,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/04/12/%E6%8A%8A%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E6%8E%A8%E9%80%81%E5%88%B0gitLab/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-(三)Mysql-排序和分页" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/04/12/(%E4%B8%89)Mysql-%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%A1%B5/">(三)Mysql-排序和分页</a>
-    </h1>
-  
-
-        
-        <a href="/2023/04/12/(%E4%B8%89)Mysql-%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%A1%B5/" class="archive-article-date">
-  	<time datetime="2023-04-12T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">order by</span><br><span class="line"></span><br><span class="line">#1.升序，降序</span><br><span class="line">asc,desc</span><br><span class="line">select * from emp order by name;</span><br><span class="line">select * from emp order by name desc;</span><br><span class="line">select * from emp order by name,age desc;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#2.</span><br><span class="line">select </span><br><span class="line">emp.name as eName</span><br><span class="line">from emp</span><br><span class="line">where eName like &#x27;%123&#x27;</span><br><span class="line">order by eName         //报错</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select </span><br><span class="line">emp.name as eName</span><br><span class="line">from emp</span><br><span class="line">where emp.id  in (12,13,14)</span><br><span class="line">order by eName       //不会报错</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#这里涉及到mysql执行顺序的问题</span><br><span class="line">先从</span><br><span class="line">from emp</span><br><span class="line">到</span><br><span class="line">where</span><br><span class="line">到</span><br><span class="line">select</span><br><span class="line">到</span><br><span class="line">order by</span><br><span class="line">所以上面eName作为列的别名问题，出现在where报错，但是在order by 那里出现则不会</span><br></pre></td></tr></table></figure>
-
-<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">limit</span><br><span class="line"></span><br><span class="line">select * from emp</span><br><span class="line">limit 0,10  //查询第一页，10条数据</span><br><span class="line"></span><br><span class="line">select * from emp</span><br><span class="line">limit 10,10   //查询第二页。10条数据</span><br><span class="line"></span><br><span class="line">select * from emp</span><br><span class="line">limit (pageNum-1)*pageSize,pageSize  //查询第pageNum页，pageSize条数据</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select * from emp</span><br><span class="line">limit 3 offset 1 </span><br><span class="line">等价于</span><br><span class="line">select * from emp</span><br><span class="line">limit </span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/MySQL//" class="article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/04/12/(%E4%B8%89)Mysql-%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%A1%B5/">展开全文 >></a>
         </p>
       
 
@@ -947,91 +1049,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/03/10/%E6%95%99%E5%B8%88%E8%B5%84%E6%A0%BC%E8%AF%81-%E6%95%99%E5%AD%A6%E6%A1%88%E4%BE%8B%E6%A8%A1%E6%9D%BF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-随笔一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/03/10/%E9%9A%8F%E7%AC%94%E4%B8%80/">随笔一：乱七八糟的第一篇博客</a>
-    </h1>
-  
-
-        
-        <a href="/2023/03/10/%E9%9A%8F%E7%AC%94%E4%B8%80/" class="archive-article-date">
-  	<time datetime="2023-03-10T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="为什么写博客"><a href="#为什么写博客" class="headerlink" title="为什么写博客"></a>为什么写博客</h1><p>其实博客在我看来更像是日记，说出来我是个crud的程序员（我都不觉得自己算是，因为crud实在是经过培训或者自学就能达到会用的水平。）程序员都说要有自己的博客，而且我这个人钱没赚到多少，老是有很大的好奇心，对自己疑惑感兴趣的东西，总喜欢美其名曰的“研究”一番。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/03/10/%E9%9A%8F%E7%AC%94%E4%B8%80/">展开全文 >></a>
         </p>
       
 
