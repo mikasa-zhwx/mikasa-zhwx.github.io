@@ -152,6 +152,91 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-关于Java日期类时区设置问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/03/10/%E5%85%B3%E4%BA%8EJava%E6%97%A5%E6%9C%9F%E7%B1%BB%E6%97%B6%E5%8C%BA%E8%AE%BE%E7%BD%AE%E9%97%AE%E9%A2%98/">关于Java日期类时区设置问题</a>
+    </h1>
+  
+
+        
+        <a href="/2023/03/10/%E5%85%B3%E4%BA%8EJava%E6%97%A5%E6%9C%9F%E7%B1%BB%E6%97%B6%E5%8C%BA%E8%AE%BE%E7%BD%AE%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2023-03-10T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#关于Java日期类时区设置问题<br>所谓时区问题，举个例子，数据库记录的2023-03-04 00:00:00但是如果应用不做设置，到<br>java层面容易变成2023-03-03 16:00:00 少了8个小时，这是因为我这里是东八区的缘故。<br>一开始遇到这个问题，以为是mysql时区设置问题，查了下数据库显示是正常的，然后发现<br>有个常用注解@JsonFormat里面就有timezone标签来设置时区问题，设置成东八区的区时即可。<br>当然mysql设置好时区，应该可以从根源解决问题，毕竟每个实体类都加上注解是治标不治本的。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/bug//" class="article-tag-list-link color4">bug</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/03/10/%E5%85%B3%E4%BA%8EJava%E6%97%A5%E6%9C%9F%E7%B1%BB%E6%97%B6%E5%8C%BA%E8%AE%BE%E7%BD%AE%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-随笔一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

@@ -152,6 +152,150 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-爬虫Scrapy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/02/%E7%88%AC%E8%99%ABScrapy/">爬虫Scrapy</a>
+    </h1>
+  
+
+        
+        <a href="/2023/06/02/%E7%88%AC%E8%99%ABScrapy/" class="archive-article-date">
+  	<time datetime="2023-06-02T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="爬虫Scrapy"><a href="#爬虫Scrapy" class="headerlink" title="爬虫Scrapy"></a>爬虫Scrapy</h1><p>企业级应用比较广泛的一个框架</p>
+<h2 id="1-安装Scrapy"><a href="#1-安装Scrapy" class="headerlink" title="1.安装Scrapy"></a>1.安装Scrapy</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#1.终端运行（后面豆瓣源方便国内访问，单纯下载外国源太慢了）</span><br><span class="line">pip install scrapy -i https://pypi.douban.com/simple </span><br></pre></td></tr></table></figure>
+
+<h2 id="2-创建项目"><a href="#2-创建项目" class="headerlink" title="2.创建项目"></a>2.创建项目</h2><p>一般来说可以在pycharm终端运行，也可以在命令行运行，下面以pycharm终端操作运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#1.创建项目：项目名称不以数字开头，不要包含中文</span><br><span class="line">scrapy startproject 项目名称</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#2.创建爬虫文件：</span><br><span class="line">scrapy genspider 爬虫文件的名字 要爬取的地址</span><br></pre></td></tr></table></figure>
+
+<p>进入到spider目录执行上述命令</p>
+<p><img src="/img/20230602-2.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#3.运行爬虫</span><br><span class="line">scrapy crawl 爬虫文件</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/20230602-3.png"></p>
+<h2 id="3-爬虫文件结构"><a href="#3-爬虫文件结构" class="headerlink" title="3.爬虫文件结构"></a>3.爬虫文件结构</h2><p><img src="/img/20230602-4.png"></p>
+<h2 id="4-运行项目"><a href="#4-运行项目" class="headerlink" title="4.运行项目"></a>4.运行项目</h2><p>在运行项目时候，发现了一个robots.txt文件，这是一个<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/Robots.txt">爬虫协议</a>，是我们在日常爬虫时候，应该遵循一定的规范（当然你不遵守也是可以的，你就要综合考虑一下）</p>
+<p><img src="/img/20230602-5.png"></p>
+<p>可以看下百度的robots.txt,只需要在主页末端url加上&#x2F;robots.txt(可以看下百度的robots.txt)</p>
+<p><img src="/img/20230602-6.png"></p>
+<p>在scrpay框架中setting文件注释掉遵循robots.txt协议，我们就可以看到返回内容</p>
+<p><img src="/img/20230602-7.png"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/爬虫//" class="article-tag-list-link color3">爬虫</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/02/%E7%88%AC%E8%99%ABScrapy/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-(五)MySql聚合函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MySQL聚合函数"><a href="#MySQL聚合函数" class="headerlink" title="MySQL聚合函数"></a>MySQL聚合函数</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#1.AVG():平均数</span><br><span class="line">SELECT AVG(job) from company_persons</span><br><span class="line"></span><br><span class="line">#2.SUM():求和</span><br><span class="line"></span><br><span class="line">#3.</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/01/(%E4%BA%94)MySql%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-(四)Mysql多表查询" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -875,180 +1019,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/04/12/%E6%8A%8A%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E6%8E%A8%E9%80%81%E5%88%B0gitLab/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-关于Java日期类时区设置问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/03/10/%E5%85%B3%E4%BA%8EJava%E6%97%A5%E6%9C%9F%E7%B1%BB%E6%97%B6%E5%8C%BA%E8%AE%BE%E7%BD%AE%E9%97%AE%E9%A2%98/">关于Java日期类时区设置问题</a>
-    </h1>
-  
-
-        
-        <a href="/2023/03/10/%E5%85%B3%E4%BA%8EJava%E6%97%A5%E6%9C%9F%E7%B1%BB%E6%97%B6%E5%8C%BA%E8%AE%BE%E7%BD%AE%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2023-03-10T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#关于Java日期类时区设置问题<br>所谓时区问题，举个例子，数据库记录的2023-03-04 00:00:00但是如果应用不做设置，到<br>java层面容易变成2023-03-03 16:00:00 少了8个小时，这是因为我这里是东八区的缘故。<br>一开始遇到这个问题，以为是mysql时区设置问题，查了下数据库显示是正常的，然后发现<br>有个常用注解@JsonFormat里面就有timezone标签来设置时区问题，设置成东八区的区时即可。<br>当然mysql设置好时区，应该可以从根源解决问题，毕竟每个实体类都加上注解是治标不治本的。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/bug//" class="article-tag-list-link color4">bug</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/03/10/%E5%85%B3%E4%BA%8EJava%E6%97%A5%E6%9C%9F%E7%B1%BB%E6%97%B6%E5%8C%BA%E8%AE%BE%E7%BD%AE%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-教师资格证-教学案例模板" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/03/10/%E6%95%99%E5%B8%88%E8%B5%84%E6%A0%BC%E8%AF%81-%E6%95%99%E5%AD%A6%E6%A1%88%E4%BE%8B%E6%A8%A1%E6%9D%BF/">教师资格证-教学案例模板</a>
-    </h1>
-  
-
-        
-        <a href="/2023/03/10/%E6%95%99%E5%B8%88%E8%B5%84%E6%A0%BC%E8%AF%81-%E6%95%99%E5%AD%A6%E6%A1%88%E4%BE%8B%E6%A8%A1%E6%9D%BF/" class="archive-article-date">
-  	<time datetime="2023-03-10T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、教学目标"><a href="#一、教学目标" class="headerlink" title="一、教学目标"></a><strong>一、教学目标</strong></h1><p>　　知识与技能：<br>　　理解n次独立重复试验及二项分布模型,会判断一个具体问题是否服从二项分布,培养学生的自主学习能力、数学建摸能力,并能解决相应的实际问题。<br>    过程与方法：<br>    通过主动探究、自主合作、相互交流,从具体事例中归纳出数学概念,使学生充分体会知识的发现过程,并渗透由特殊到一般,由具体到抽象的数学思想方法。<br>    情感态度与价值观：<br>    使学生体会数学的理性与严谨,了解数学来源于实际,应用于实际的唯物主义思想,培养学生对新知识的科学态度,勇于探索和敢于创新的精神。</p>
-<p>#<strong>二、教学重点、难点</strong><br>    重点：独立重复试验、二项分布的理解及应用二项分布模型解决一些简单的实际问题。<br>    难点：二项分布模型的构建。  </p>
-<p>#<strong>三、教学方法与手段</strong><br>　　教学方法：诱思探究教学法.<br>　　学习方法：自主探究、观察发现、合作交流、归纳总结。<br>    教学手段：多媒体辅助教学</p>
-<p>#<strong>四、教学过程</strong><br>    环节教学设计设计说明<br>    创设情景,导入新课<br>    猜数游戏：<br>    游戏：有八组数字,每组数字仅由01或10构成,同学们至少猜对四组才为胜利(请看幻灯片演示)<br>    问题1：前一次猜测的结果是否影响后一次的猜测？也就是每次猜测是否相互独立？<br>　　问题2：游戏对双方是否公平？能否从概率角度解释？<br>　　活跃课堂气氛,学生的热情被充分地调动,从而也引起学生的无意注意,在不知不觉中进入教师设计的教学情景中,为本节课的学习做有利的准备<br>　　学生回答这个问题的同时,可以初步体验独立重复试验模型,为定义的提出作好铺垫。<br>　　引起学生的好奇,激发学习和探究知识的兴趣。<br>　　师生互动,探究新知：<br>　　在满足学生的好奇之前让学生对这两个例子进行对比分析,目的是让学生进一步体验独立重复试验模型,并得出其特征,使定义的提出水到渠成,<br>　　从探究游戏中的第二个问题入手,引导学生合作探索新知识,符合“学生为主体,老师为主导”的现代教育观点,也符合学生的认知规律，同时突出本节课重点，也突破了难点。
-    </p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/教资//" class="article-tag-list-link color3">教资</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/03/10/%E6%95%99%E5%B8%88%E8%B5%84%E6%A0%BC%E8%AF%81-%E6%95%99%E5%AD%A6%E6%A1%88%E4%BE%8B%E6%A8%A1%E6%9D%BF/">展开全文 >></a>
         </p>
       
 
