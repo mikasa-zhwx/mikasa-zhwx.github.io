@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>关于爬虫遇到https需要证书校验的问题 | Xi的精神家园</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于爬虫遇到https需要证书校验的问题昨天在工作中爬取数据时候，遇到爬虫出现SSL_error问题，因为爬取的链接是https,出现证书校验的问题 在网上搜了一下，发现如下方法是可行的 在requests发起链接时候，传入参数  verify&#x3D;False表示取消校验，算是一种避免https需要证书校验的问题，但是需要注意控制台仍然出现警告，需要看看能否成功获取数据。">
+  <meta name="description" content="昨天在工作中爬取数据时候，遇到爬虫出现SSL_error问题，因为爬取的链接是https,出现证书校验的问题 在网上搜了一下，发现如下方法是可行的 在requests发起链接时候，传入参数  verify&#x3D;False表示取消校验，算是一种避免https需要证书校验的问题，但是需要注意控制台仍然出现警告，需要看看能否成功获取数据。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于爬虫遇到https需要证书校验的问题">
 <meta property="og:url" content="http://example.com/2023/04/20/%E5%85%B3%E4%BA%8E%E7%88%AC%E8%99%AB%E9%81%87%E5%88%B0https%E9%9C%80%E8%A6%81%E8%AF%81%E4%B9%A6%E6%A0%A1%E9%AA%8C%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Xi的精神家园">
-<meta property="og:description" content="关于爬虫遇到https需要证书校验的问题昨天在工作中爬取数据时候，遇到爬虫出现SSL_error问题，因为爬取的链接是https,出现证书校验的问题 在网上搜了一下，发现如下方法是可行的 在requests发起链接时候，传入参数  verify&#x3D;False表示取消校验，算是一种避免https需要证书校验的问题，但是需要注意控制台仍然出现警告，需要看看能否成功获取数据。">
+<meta property="og:description" content="昨天在工作中爬取数据时候，遇到爬虫出现SSL_error问题，因为爬取的链接是https,出现证书校验的问题 在网上搜了一下，发现如下方法是可行的 在requests发起链接时候，传入参数  verify&#x3D;False表示取消校验，算是一种避免https需要证书校验的问题，但是需要注意控制台仍然出现警告，需要看看能否成功获取数据。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/img/20230420.png">
 <meta property="article:published_time" content="2023-04-20T01:15:03.000Z">
-<meta property="article:modified_time" content="2023-05-18T06:24:09.713Z">
+<meta property="article:modified_time" content="2023-06-15T07:29:48.152Z">
 <meta property="article:author" content="Xi">
 <meta property="article:tag" content="爬虫">
 <meta name="twitter:card" content="summary">
@@ -62,6 +62,8 @@
 			
 				<li><a href="/">主页</a></li>
 	        
+				<li><a href="/categories/gyw">公考</a></li>
+	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -102,6 +104,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -116,7 +120,9 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 100%"><a href="/">主页</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
+		        
+					<li style="width: 50%"><a href="/categories/gyw">公考</a></li>
 		        
 				</ul>
 			</nav>
@@ -151,7 +157,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="关于爬虫遇到https需要证书校验的问题"><a href="#关于爬虫遇到https需要证书校验的问题" class="headerlink" title="关于爬虫遇到https需要证书校验的问题"></a>关于爬虫遇到https需要证书校验的问题</h1><p>昨天在工作中爬取数据时候，遇到爬虫出现SSL_error问题，因为爬取的链接是https,出现证书校验的问题</p>
+        <p>昨天在工作中爬取数据时候，遇到爬虫出现SSL_error问题，因为爬取的链接是https,出现证书校验的问题</p>
 <p>在网上搜了一下，发现如下方法是可行的</p>
 <p>在requests发起链接时候，传入参数</p>
 <p><img src="/img/20230420.png"></p>
@@ -250,7 +256,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2023/05/12/(%E4%BA%8C)Mysql%E8%BF%90%E7%AE%97%E7%AC%A6/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2023/05/12/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E4%BA%8C)Mysql%E8%BF%90%E7%AE%97%E7%AC%A6/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -371,11 +377,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+                <a href="javascript:void(0)" class="js-tag color4">bug</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">资料分析</a>
               </li>
             
             <div class="clearfix"></div>

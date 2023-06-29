@@ -6,20 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>(一)Mysql查询 | Xi的精神家园</title>
+  <title>资料分析技巧篇-加法 | Xi的精神家园</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.基本结构123456select 字段1，字段2 from 表名；select 1+1,2*3；select 1,2 from dual; &#x2F;&#x2F;dual伪表select * from emp；   &#x2F;&#x2F;*代表所有列  2.列的别名12345678列的别名有三种方式1.select emp_id eId from emp； &#x2F;&#x2F;2.select emp_id as eId from emp；3.">
+  <meta name="description" content="大前提：所有技巧都源于选项 1.尾数法这个应该最先考虑，这种情况一般是选项没带单位，且尾数各不相同，那么我们直接算出尾数即可，没有必要算出每个选项。 2.从头算起对于普遍的加法而言，公考更关心的是它的首位，比如99+48，小学加法是从后往前算，如果我们从前往后算，则会快一点，例如1245874+45784125这种，我们可以大概估算出12+45&#x3D;57也就是答案肯定在57或者58（要看又没">
 <meta property="og:type" content="article">
-<meta property="og:title" content="(一)Mysql查询">
-<meta property="og:url" content="http://example.com/2023/05/12/(%E4%B8%80)Mysql%E6%9F%A5%E8%AF%A2/index.html">
+<meta property="og:title" content="资料分析技巧篇-加法">
+<meta property="og:url" content="http://example.com/2023/06/02/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90%E6%8A%80%E5%B7%A7%E7%AF%87-%E5%8A%A0%E6%B3%95/index.html">
 <meta property="og:site_name" content="Xi的精神家园">
-<meta property="og:description" content="1.基本结构123456select 字段1，字段2 from 表名；select 1+1,2*3；select 1,2 from dual; &#x2F;&#x2F;dual伪表select * from emp；   &#x2F;&#x2F;*代表所有列  2.列的别名12345678列的别名有三种方式1.select emp_id eId from emp； &#x2F;&#x2F;2.select emp_id as eId from emp；3.">
+<meta property="og:description" content="大前提：所有技巧都源于选项 1.尾数法这个应该最先考虑，这种情况一般是选项没带单位，且尾数各不相同，那么我们直接算出尾数即可，没有必要算出每个选项。 2.从头算起对于普遍的加法而言，公考更关心的是它的首位，比如99+48，小学加法是从后往前算，如果我们从前往后算，则会快一点，例如1245874+45784125这种，我们可以大概估算出12+45&#x3D;57也就是答案肯定在57或者58（要看又没">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-05-12T01:15:03.000Z">
-<meta property="article:modified_time" content="2023-05-24T02:36:20.402Z">
+<meta property="og:image" content="http://example.com/img/gyw/20230607-1.png">
+<meta property="og:image" content="http://example.com/img/gyw/20230607-2.png">
+<meta property="article:published_time" content="2023-06-02T01:15:03.000Z">
+<meta property="article:modified_time" content="2023-06-29T02:07:56.137Z">
 <meta property="article:author" content="Xi">
-<meta property="article:tag" content="日常">
+<meta property="article:tag" content="资料分析">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/gyw/20230607-1.png">
   
     <link rel="alternative" href="/atom.xml" title="Xi的精神家园" type="application/atom+xml">
   
@@ -59,6 +62,8 @@
 			<ul>
 			
 				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/categories/gyw">公考</a></li>
 	        
 			</ul>
 		</nav>
@@ -100,6 +105,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -114,7 +121,9 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 100%"><a href="/">主页</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
+		        
+					<li style="width: 50%"><a href="/categories/gyw">公考</a></li>
 		        
 				</ul>
 			</nav>
@@ -129,40 +138,38 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-(一)Mysql查询" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-gyw/行测/资料分析/资料分析技巧篇-加法" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      (一)Mysql查询
+      资料分析技巧篇-加法
     </h1>
   
 
         
-        <a href="/2023/05/12/(%E4%B8%80)Mysql%E6%9F%A5%E8%AF%A2/" class="archive-article-date">
-  	<time datetime="2023-05-12T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-12</time>
+        <a href="/2023/06/02/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90%E6%8A%80%E5%B7%A7%E7%AF%87-%E5%8A%A0%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2023-06-02T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-基本结构"><a href="#1-基本结构" class="headerlink" title="1.基本结构"></a>1.基本结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select 字段1，字段2 from 表名；</span><br><span class="line"></span><br><span class="line">select 1+1,2*3；</span><br><span class="line">select 1,2 from dual; //dual伪表</span><br><span class="line">select * from emp；   //*代表所有列</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-列的别名"><a href="#2-列的别名" class="headerlink" title="2.列的别名"></a>2.列的别名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">列的别名有三种方式</span><br><span class="line">1.select emp_id eId from emp； //</span><br><span class="line"></span><br><span class="line">2.select emp_id as eId from emp；</span><br><span class="line"></span><br><span class="line">3.select emp_id &quot;eId&quot; from emp； //使用双引号，不要使用单引号</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="3-去重"><a href="#3-去重" class="headerlink" title="3.去重"></a>3.去重</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">使用distinct关键字</span><br><span class="line"></span><br><span class="line">select distinct emp_name from emp; //去除emp_name重复值</span><br><span class="line"></span><br><span class="line">select emp_id,distinct emp_name from emp; //会报错，前后数量不同</span><br><span class="line"></span><br><span class="line">select distinct emp_id,emp_name from emp; //emp_id,emp_name两者有一个不同就会返回结果，都相同则会去掉。</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-NULL值参与运算"><a href="#4-NULL值参与运算" class="headerlink" title="4.NULL值参与运算"></a>4.NULL值参与运算</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">空值参与运算</span><br><span class="line">#1.NULL不等同于0,&#x27;&#x27;,&#x27;null&#x27;</span><br><span class="line">#2.null值参与运算结果一定也为null</span><br><span class="line">#3.可以用IFNULL()去替换</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-着重号"><a href="#5-着重号" class="headerlink" title="5.着重号"></a>5.着重号</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">着重号在键盘1左边</span><br><span class="line">当出现数据表名或者字段与mysql关键字冲突时候，使用着重号标识</span><br><span class="line">select * from `order`；</span><br></pre></td></tr></table></figure>
-
-<h2 id="6-显示表结构"><a href="#6-显示表结构" class="headerlink" title="6.显示表结构"></a>6.显示表结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#显示数据表字段，结构</span><br><span class="line">describe table;</span><br><span class="line">desc table;</span><br></pre></td></tr></table></figure>
-
-<h2 id="7-where查询"><a href="#7-where查询" class="headerlink" title="7.where查询"></a>7.where查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#1.where跟在from 后面</span><br><span class="line">#2.where查询时,注意mysql传参数的大写问题</span><br><span class="line"></span><br><span class="line">select * from emp where emp_name=&#x27;king&#x27;</span><br><span class="line">select * from emp where emp_name=&#x27;King&#x27; //在mysql可能一样，但是orcale</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+        <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>大前提：所有技巧都源于选项</p>
+<h2 id="1-尾数法"><a href="#1-尾数法" class="headerlink" title="1.尾数法"></a>1.尾数法</h2><p>这个应该最先考虑，这种情况一般是选项没带单位，且尾数各不相同，那么我们直接算出尾数即可，没有必要算出每个选项。</p>
+<h2 id="2-从头算起"><a href="#2-从头算起" class="headerlink" title="2.从头算起"></a>2.从头算起</h2><p>对于普遍的加法而言，公考更关心的是它的首位，比如99+48，小学加法是从后往前算，如果我们从前往后算，则会快一点，例如1245874+45784125这种，我们可以大概估算出12+45&#x3D;57也就是答案肯定在57或者58（要看又没进位）开头，这样则可以快速锁定答案，因为我并不关心具体多少。</p>
+<h2 id="常识加法"><a href="#常识加法" class="headerlink" title=".*常识加法"></a>.*常识加法</h2><p>说起这个，不得不回忆起23广东省考的第一题，简直就是噩梦，当时就是卡住了，事后一看答案分析，运用到常识加法。什么意思？举个例子，人口&#x3D;男+女。不管什么统计，哪个国家，人口都可以这样算。放到资料分析就有点玄乎。</p>
+<p>以23广东省考为例：</p>
+<p><img src="/img/gyw/20230607-1.png"></p>
+<p><img src="/img/gyw/20230607-2.png"></p>
+<p>粉笔参考答案</p>
+<p>定位表1，可知2020年广东省各经济区域财政科学技术支出情况。根据<strong>省本级&#x3D;全省-珠江三角洲核心区-沿海经济带东翼地区-沿海经济带西翼地区-北部生态发展区</strong>，可得：<strong>2020年广东省省本级财政科学技术支出&#x3D;955.73-823.41-12.98-8.69-26.69&#x3D;83.96亿元</strong>。</p>
+<p>故正确答案为A。</p>
+<p>注：根据文字和表1材料中2021年的财政科学技术支出数据，可推算出省本级（102.05）&#x3D;全省（982.76）-珠江三角洲核心区（845.09）-沿海经济带东翼地区（15.22）-沿海经济带西翼地区（5.52）-北部生态发展区（14.88）</p>
+<p>不考这道题我都不知道省本级的概念：<strong>省本级通常指省级政府本身有权限管辖的行政区域，而全省则指省级政府本身管辖的所有行政区域，包括省本级及其他地方政府管辖的地区</strong>。</p>
 
       
 
@@ -176,7 +183,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">资料分析</a>
         		</li>
       		
 		</ul>
@@ -188,7 +195,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/MySQL//" class="article-tag-list-link color1">MySQL</a>
+        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
         		</li>
       		
 		</ul>
@@ -243,7 +250,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/05/12/(%E4%B8%80)Mysql%E6%9F%A5%E8%AF%A2/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/06/02/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90%E6%8A%80%E5%B7%A7%E7%AF%87-%E5%8A%A0%E6%B3%95/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -257,18 +264,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2023/05/18/MySQL%E4%B8%AD%E5%88%A4%E6%96%AD%E5%AD%97%E6%AE%B5a%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E5%AD%97%E6%AE%B5b/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2023/06/02/%E7%88%AC%E8%99%ABScrapy/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          MySQL中判断字段a是否包含字段b
+          爬虫Scrapy
         
       </div>
     </a>
   
   
-    <a href="/2023/05/12/(%E4%BA%8C)Mysql%E8%BF%90%E7%AE%97%E7%AC%A6/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">(二)Mysql运算符</div>
+    <a href="/2023/06/01/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E4%BA%94)MySql%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -378,11 +385,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+                <a href="javascript:void(0)" class="js-tag color4">bug</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">资料分析</a>
               </li>
             
             <div class="clearfix"></div>

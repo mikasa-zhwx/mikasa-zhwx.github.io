@@ -6,23 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>(二)Mysql运算符 | Xi的精神家园</title>
+  <title>(一)Mysql查询 | Xi的精神家园</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.运算符12345678910+  -  *  &#x2F; %  mysql运算基本没出现浮点数精度问题select 1,1+1,1-1,2*5,10&#x2F;2 from dual;select 1+&amp;#x27;101&amp;#x27; from dual;  &#x2F;&#x2F;结果为102，字符数字当作数字select 1+&amp;#x27;a&amp;#x27;   from dual;  &#x2F;&#x2F;结果为1，把字符当作0select 100+">
+  <meta name="description" content="1.基本结构123456select 字段1，字段2 from 表名；select 1+1,2*3；select 1,2 from dual; &#x2F;&#x2F;dual伪表select * from emp；   &#x2F;&#x2F;*代表所有列  2.列的别名12345678列的别名有三种方式1.select emp_id eId from emp； &#x2F;&#x2F;2.select emp_id as eId from emp；3.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="(二)Mysql运算符">
-<meta property="og:url" content="http://example.com/2023/05/12/(%E4%BA%8C)Mysql%E8%BF%90%E7%AE%97%E7%AC%A6/index.html">
+<meta property="og:title" content="(一)Mysql查询">
+<meta property="og:url" content="http://example.com/2023/05/12/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E4%B8%80)Mysql%E6%9F%A5%E8%AF%A2/index.html">
 <meta property="og:site_name" content="Xi的精神家园">
-<meta property="og:description" content="1.运算符12345678910+  -  *  &#x2F; %  mysql运算基本没出现浮点数精度问题select 1,1+1,1-1,2*5,10&#x2F;2 from dual;select 1+&amp;#x27;101&amp;#x27; from dual;  &#x2F;&#x2F;结果为102，字符数字当作数字select 1+&amp;#x27;a&amp;#x27;   from dual;  &#x2F;&#x2F;结果为1，把字符当作0select 100+">
+<meta property="og:description" content="1.基本结构123456select 字段1，字段2 from 表名；select 1+1,2*3；select 1,2 from dual; &#x2F;&#x2F;dual伪表select * from emp；   &#x2F;&#x2F;*代表所有列  2.列的别名12345678列的别名有三种方式1.select emp_id eId from emp； &#x2F;&#x2F;2.select emp_id as eId from emp；3.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/img/20230523-1.png">
-<meta property="og:image" content="http://example.com/img/20230524-1.png">
 <meta property="article:published_time" content="2023-05-12T01:15:03.000Z">
-<meta property="article:modified_time" content="2023-05-25T07:14:45.496Z">
+<meta property="article:modified_time" content="2023-05-24T02:36:20.402Z">
 <meta property="article:author" content="Xi">
 <meta property="article:tag" content="日常">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img/20230523-1.png">
   
     <link rel="alternative" href="/atom.xml" title="Xi的精神家园" type="application/atom+xml">
   
@@ -62,6 +59,8 @@
 			<ul>
 			
 				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/categories/gyw">公考</a></li>
 	        
 			</ul>
 		</nav>
@@ -103,6 +102,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -117,7 +118,9 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 100%"><a href="/">主页</a></li>
+					<li style="width: 50%"><a href="/">主页</a></li>
+		        
+					<li style="width: 50%"><a href="/categories/gyw">公考</a></li>
 		        
 				</ul>
 			</nav>
@@ -132,19 +135,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-(二)Mysql运算符" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-尚硅谷的mysql/(一)Mysql查询" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      (二)Mysql运算符
+      (一)Mysql查询
     </h1>
   
 
         
-        <a href="/2023/05/12/(%E4%BA%8C)Mysql%E8%BF%90%E7%AE%97%E7%AC%A6/" class="archive-article-date">
+        <a href="/2023/05/12/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E4%B8%80)Mysql%E6%9F%A5%E8%AF%A2/" class="archive-article-date">
   	<time datetime="2023-05-12T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-12</time>
 </a>
         
@@ -152,24 +155,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-运算符"><a href="#1-运算符" class="headerlink" title="1.运算符"></a>1.运算符</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">+  -  *  / %  mysql运算基本没出现浮点数精度问题</span><br><span class="line"></span><br><span class="line">select 1,1+1,1-1,2*5,10/2 from dual;</span><br><span class="line"></span><br><span class="line">select 1+&#x27;101&#x27; from dual;  //结果为102，字符数字当作数字</span><br><span class="line">select 1+&#x27;a&#x27;   from dual;  //结果为1，把字符当作0</span><br><span class="line">select 100+null from dual;  //结果为null</span><br><span class="line">select 10/0 from dual;  //结果为null</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        <h2 id="1-基本结构"><a href="#1-基本结构" class="headerlink" title="1.基本结构"></a>1.基本结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select 字段1，字段2 from 表名；</span><br><span class="line"></span><br><span class="line">select 1+1,2*3；</span><br><span class="line">select 1,2 from dual; //dual伪表</span><br><span class="line">select * from emp；   //*代表所有列</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="2-比较运算符"><a href="#2-比较运算符" class="headerlink" title="2.比较运算符"></a>2.比较运算符</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">=  &lt;=&gt;  &lt;&gt;  !=  &lt; &lt;=  &gt;  &gt;=</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2.1 =使用 相等返回1，否则返回0。</span><br><span class="line"></span><br><span class="line">select 1=1, 1=&#x27;1&#x27;,1=&#x27;a&#x27;,0=&#x27;a&#x27; from dual;  //左边数字右边字符，会将字符看作0</span><br><span class="line">select &#x27;a&#x27;=&#x27;a&#x27;,&#x27;avc&#x27;=&#x27;acv&#x27;,&#x27;a&#x27;=&#x27;b&#x27; //字符比较字符的ansi码</span><br><span class="line">select null=null from dual;  //返回null</span><br><span class="line"></span><br><span class="line">select emp_name</span><br><span class="line">from emp</span><br><span class="line">where emp_name=null  //返回结果为null,因为null参与运算都为null,select在where过滤时候会把结果等于1的返回,由于是null，结果则为null</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2.2 &lt;=&gt; 安全等于，专门用来判断null情况，效果跟=类似</span><br><span class="line"></span><br><span class="line">select 1&lt;=&gt;null, null&lt;=&gt; null ;  //结果是0，1</span><br><span class="line">//&lt;=&gt;两边都是null则为1，只有一边null参与判断则为0，其他情况跟=作用相同</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2.3不等于</span><br><span class="line">&lt;&gt;和!= 功能一样</span><br><span class="line"></span><br><span class="line">select 1&lt;&gt;2, 2!=2, 1!=2 from dual;</span><br><span class="line"></span><br><span class="line">2.3</span><br><span class="line">&gt; &gt;= 大于，大于等于</span><br><span class="line">&lt; &lt;= 小于，小于等于</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="2-列的别名"><a href="#2-列的别名" class="headerlink" title="2.列的别名"></a>2.列的别名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">列的别名有三种方式</span><br><span class="line">1.select emp_id eId from emp； //</span><br><span class="line"></span><br><span class="line">2.select emp_id as eId from emp；</span><br><span class="line"></span><br><span class="line">3.select emp_id &quot;eId&quot; from emp； //使用双引号，不要使用单引号</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="3-关键字运算符"><a href="#3-关键字运算符" class="headerlink" title="3.关键字运算符"></a>3.关键字运算符</h2><p><img src="/img/20230523-1.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">3.1</span><br><span class="line">#is null/is not null/isnull</span><br><span class="line"></span><br><span class="line">select * from emp where emp.id is null;</span><br><span class="line">select * from emp where emp.name is not null</span><br><span class="line">select * from emp where isnull(emp.name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3.2</span><br><span class="line">select LEAST(1,123),GREATEST(1,233) from dual;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3.3模糊查询like</span><br><span class="line"></span><br><span class="line">select * from emp where name like &#x27;%a%&#x27;;  //查询name包含a的结果</span><br><span class="line">select * from emp where name like &#x27;_a%&#x27;;  //查询name中第二个字符为a的结果</span><br><span class="line">select * from emp where name like &#x27;_\_a%&#x27;;  //查询name中第二个字符为_且第三个字符为a的结果</span><br><span class="line">select * from emp where name like &#x27;%a%&#x27; and name like &#x27;%e%&#x27;; //查询name中既包含a又包含e的结果</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="3-去重"><a href="#3-去重" class="headerlink" title="3.去重"></a>3.去重</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">使用distinct关键字</span><br><span class="line"></span><br><span class="line">select distinct emp_name from emp; //去除emp_name重复值</span><br><span class="line"></span><br><span class="line">select emp_id,distinct emp_name from emp; //会报错，前后数量不同</span><br><span class="line"></span><br><span class="line">select distinct emp_id,emp_name from emp; //emp_id,emp_name两者有一个不同就会返回结果，都相同则会去掉。</span><br></pre></td></tr></table></figure>
 
-<h2 id="4-逻辑运算符"><a href="#4-逻辑运算符" class="headerlink" title="4.逻辑运算符"></a>4.逻辑运算符</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">4.1 逻辑非</span><br><span class="line">select not A;</span><br><span class="line">SELECT !A  </span><br><span class="line"></span><br><span class="line">4.2逻辑与</span><br><span class="line">select a and b;</span><br><span class="line">select a&amp;&amp;b;</span><br><span class="line"></span><br><span class="line">4.3逻辑或</span><br><span class="line">select a||b </span><br><span class="line">select a or b</span><br><span class="line"></span><br><span class="line">4.4逻辑异或</span><br><span class="line">selct a xor b</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line">and 和 or 能同时使用 但是and的优先级高</span><br><span class="line">xxxx and</span><br><span class="line">or </span><br><span class="line">xxx and   //会先把and处理最后处理or</span><br><span class="line"></span><br><span class="line">select * from emp where name=0 and age=18 or title=24 and handle=&#x27;11&#x27; or dept_name=&#x27;oooo&#x27;</span><br><span class="line">//它的意思是选择名字为0且年龄为18，或者职称为24且句柄为&#x27;11&#x27;，或者部门名称为&#x27;oooo&#x27;的员工信息。</span><br><span class="line">查询语句中使用了逻辑运算符（AND 和 OR）来组合多个条件。根据优先级规则，AND 运算符的优先级高于 OR 运算符，所以它会先计算 name=0 and age=18 or title=24 and handle=&#x27;11&#x27; 的结果，然后再与 dept_name=&#x27;oooo&#x27; 进行 OR 运算。</span><br><span class="line">如果这个查询语句符合您的预期，它将返回符合以下任一条件的员工信息：</span><br><span class="line">名字为0且年龄为18的员工；</span><br><span class="line">职称为24且句柄为&#x27;11&#x27;的员工；</span><br><span class="line">部门名称为&#x27;oooo&#x27;的员工。</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="4-NULL值参与运算"><a href="#4-NULL值参与运算" class="headerlink" title="4.NULL值参与运算"></a>4.NULL值参与运算</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">空值参与运算</span><br><span class="line">#1.NULL不等同于0,&#x27;&#x27;,&#x27;null&#x27;</span><br><span class="line">#2.null值参与运算结果一定也为null</span><br><span class="line">#3.可以用IFNULL()去替换</span><br></pre></td></tr></table></figure>
 
+<h2 id="5-着重号"><a href="#5-着重号" class="headerlink" title="5.着重号"></a>5.着重号</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">着重号在键盘1左边</span><br><span class="line">当出现数据表名或者字段与mysql关键字冲突时候，使用着重号标识</span><br><span class="line">select * from `order`；</span><br></pre></td></tr></table></figure>
 
+<h2 id="6-显示表结构"><a href="#6-显示表结构" class="headerlink" title="6.显示表结构"></a>6.显示表结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#显示数据表字段，结构</span><br><span class="line">describe table;</span><br><span class="line">desc table;</span><br></pre></td></tr></table></figure>
 
-<h2 id="5-位运算符"><a href="#5-位运算符" class="headerlink" title="5.位运算符"></a>5.位运算符</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&amp; | ~ ^ &gt;&gt; &lt;&lt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select 1&amp;2   //与</span><br><span class="line">select 1|2   //或</span><br><span class="line">select ~2 //取反</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#在一定范围内，左移相当于*2，右移相当于/2，无限制左移，右移最终都会变为0</span><br><span class="line">select 10&gt;&gt;2 //右移两位</span><br><span class="line">select 10&lt;&lt;2  //左移两位</span><br></pre></td></tr></table></figure>
+<h2 id="7-where查询"><a href="#7-where查询" class="headerlink" title="7.where查询"></a>7.where查询</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#1.where跟在from 后面</span><br><span class="line">#2.where查询时,注意mysql传参数的大写问题</span><br><span class="line"></span><br><span class="line">select * from emp where emp_name=&#x27;king&#x27;</span><br><span class="line">select * from emp where emp_name=&#x27;King&#x27; //在mysql可能一样，但是orcale</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-
-
-
-
-<p>运算符的优先级<br><img src="/img/20230524-1.png"></p>
 
       
 
@@ -250,7 +249,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/05/12/(%E4%BA%8C)Mysql%E8%BF%90%E7%AE%97%E7%AC%A6/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/05/12/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E4%B8%80)Mysql%E6%9F%A5%E8%AF%A2/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -264,18 +263,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2023/05/12/(%E4%B8%80)Mysql%E6%9F%A5%E8%AF%A2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2023/05/18/MySQL%E4%B8%AD%E5%88%A4%E6%96%AD%E5%AD%97%E6%AE%B5a%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E5%AD%97%E6%AE%B5b/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          (一)Mysql查询
+          MySQL中判断字段a是否包含字段b
         
       </div>
     </a>
   
   
-    <a href="/2023/04/20/%E5%85%B3%E4%BA%8E%E7%88%AC%E8%99%AB%E9%81%87%E5%88%B0https%E9%9C%80%E8%A6%81%E8%AF%81%E4%B9%A6%E6%A0%A1%E9%AA%8C%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">关于爬虫遇到https需要证书校验的问题</div>
+    <a href="/2023/05/12/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E4%BA%8C)Mysql%E8%BF%90%E7%AE%97%E7%AC%A6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">(二)Mysql运算符</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -385,11 +384,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+                <a href="javascript:void(0)" class="js-tag color4">bug</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">资料分析</a>
               </li>
             
             <div class="clearfix"></div>
