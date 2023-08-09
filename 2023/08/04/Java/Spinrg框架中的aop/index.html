@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>MySQL中判断字段a是否包含字段b | Xi的精神家园</title>
+  <title>Spinrg框架中的aop | Xi的精神家园</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="MySQL中判断字段a是否包含字段b今天在写sql,由于业务需要查询，出现情况表中字段a是否出现在新查询别名字段中，如果是标记为Y，否则为N 百度一下找不到自己想要的答案 于是求助ChatGpt 他给出一个例子 12UPDATE your_tableSET result &#x3D; IF(b LIKE CONCAT(&amp;#x27;%&amp;#x27;, a, &amp;#x27;%&amp;#x27;), &amp;#x27;Y&amp;#x2">
+  <meta name="description" content="以前在做一个需求的时候，需要在插入的时候新增一个节点操作，由于Java本身就很繁琐，当时我在新增的时候发现一个问题，就是这个东西他偶尔会在不同地方用到，而且关键是他污染了逻辑。 就比如 1234567public void add(Object object)&amp;#123;		&#x2F;&#x2F;object的insert				&#x2F;&#x2F;Node的insert		&amp;#125;本来这个方法职能就是单纯的object操作i">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL中判断字段a是否包含字段b">
-<meta property="og:url" content="http://example.com/2023/05/18/MySQL%E4%B8%AD%E5%88%A4%E6%96%AD%E5%AD%97%E6%AE%B5a%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E5%AD%97%E6%AE%B5b/index.html">
+<meta property="og:title" content="Spinrg框架中的aop">
+<meta property="og:url" content="http://example.com/2023/08/04/Java/Spinrg%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%9A%84aop/index.html">
 <meta property="og:site_name" content="Xi的精神家园">
-<meta property="og:description" content="MySQL中判断字段a是否包含字段b今天在写sql,由于业务需要查询，出现情况表中字段a是否出现在新查询别名字段中，如果是标记为Y，否则为N 百度一下找不到自己想要的答案 于是求助ChatGpt 他给出一个例子 12UPDATE your_tableSET result &#x3D; IF(b LIKE CONCAT(&amp;#x27;%&amp;#x27;, a, &amp;#x27;%&amp;#x27;), &amp;#x27;Y&amp;#x2">
+<meta property="og:description" content="以前在做一个需求的时候，需要在插入的时候新增一个节点操作，由于Java本身就很繁琐，当时我在新增的时候发现一个问题，就是这个东西他偶尔会在不同地方用到，而且关键是他污染了逻辑。 就比如 1234567public void add(Object object)&amp;#123;		&#x2F;&#x2F;object的insert				&#x2F;&#x2F;Node的insert		&amp;#125;本来这个方法职能就是单纯的object操作i">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-05-18T02:25:32.000Z">
-<meta property="article:modified_time" content="2023-06-15T07:30:20.884Z">
+<meta property="article:published_time" content="2023-08-04T01:15:03.000Z">
+<meta property="article:modified_time" content="2023-08-04T12:35:14.824Z">
 <meta property="article:author" content="Xi">
-<meta property="article:tag" content="bug">
+<meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Xi的精神家园" type="application/atom+xml">
@@ -147,42 +147,45 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-MySQL中判断字段a是否包含字段b" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java/Spinrg框架中的aop" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      MySQL中判断字段a是否包含字段b
+      Spinrg框架中的aop
     </h1>
   
 
         
-        <a href="/2023/05/18/MySQL%E4%B8%AD%E5%88%A4%E6%96%AD%E5%AD%97%E6%AE%B5a%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E5%AD%97%E6%AE%B5b/" class="archive-article-date">
-  	<time datetime="2023-05-18T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-18</time>
+        <a href="/2023/08/04/Java/Spinrg%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%9A%84aop/" class="archive-article-date">
+  	<time datetime="2023-08-04T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-08-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="MySQL中判断字段a是否包含字段b"><a href="#MySQL中判断字段a是否包含字段b" class="headerlink" title="MySQL中判断字段a是否包含字段b"></a>MySQL中判断字段a是否包含字段b</h1><p>今天在写sql,由于业务需要查询，出现情况表中字段a是否出现在新查询别名字段中，如果是标记为Y，否则为N</p>
-<p>百度一下找不到自己想要的答案</p>
-<p>于是求助ChatGpt</p>
-<p>他给出一个例子</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE your_table</span><br><span class="line">SET result = IF(b LIKE CONCAT(&#x27;%&#x27;, a, &#x27;%&#x27;), &#x27;Y&#x27;, &#x27;N&#x27;);</span><br></pre></td></tr></table></figure>
+        <p>以前在做一个需求的时候，需要在插入的时候新增一个节点操作，由于Java本身就很繁琐，当时我在新增的时候发现一个问题，就是这个东西他偶尔会在不同地方用到，而且关键是他污染了逻辑。</p>
+<p>就比如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public void add(Object object)&#123;</span><br><span class="line">		//object的insert</span><br><span class="line">		</span><br><span class="line">		//Node的insert</span><br><span class="line">		</span><br><span class="line">&#125;</span><br><span class="line">本来这个方法职能就是单纯的object操作insert，现在多加了代码就会有问题。</span><br></pre></td></tr></table></figure>
 
-<p>参考这种写法</p>
-<p>我写下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">IF(DATE_FORMAT(t.pay_date,&#x27;%Y-%m&#x27;) LIKE CONCAT(&#x27;%&#x27;, pro.pDate, &#x27;%&#x27;), &#x27;Y&#x27;, &#x27;N&#x27;) as isDiZeng</span><br><span class="line"></span><br><span class="line">.....</span><br><span class="line">LEFT JOIN (</span><br><span class="line">        SELECT</span><br><span class="line">        rent.contract_id AS rId,</span><br><span class="line">        GROUP_CONCAT(DATE_FORMAT(rent.begintime,&#x27;%Y-%m&#x27;)) as pDate</span><br><span class="line">        FROM</span><br><span class="line">        wuye_rent_type rent</span><br><span class="line">        GROUP BY rent.contract_id</span><br><span class="line">        ) pro on pro.rId=c.id</span><br></pre></td></tr></table></figure>
+<p>spring是Java的主心骨，感觉没了spring，Java也少了存在的意义一般。一直都说什么aop和ioc，没试过aop编程。突发奇想今天试了下，真的挺不错的。</p>
+<h2 id="什么是aop"><a href="#什么是aop" class="headerlink" title="什么是aop"></a>什么是aop</h2><p>我觉得我自己的感觉就像是针对方法的加强，一个方法我们希望更灵活，不再单一职责，但是又不能污染本身自己的逻辑。这个时候用aop就非常好，aop我觉得最核心的就是切面和切点</p>
+<p><strong>切面</strong>：需要加强的逻辑</p>
+<p><strong>切点：</strong>在哪个方法加入</p>
+<p>由于springboot自带aop，所以很多配置都省去了</p>
+<p>我们关注核心部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#首先需要定义一个切面类</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">package com.bys.project.company.domain;</span><br><span class="line"></span><br><span class="line">import org.aspectj.lang.JoinPoint;</span><br><span class="line">import org.aspectj.lang.annotation.After;</span><br><span class="line">import org.aspectj.lang.annotation.Aspect;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">@Aspect  //声明这个是切面</span><br><span class="line">@Component  //这个是Spring管理标志</span><br><span class="line">public class MyAspect &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	//@After注解表示在insertCompanyEconomy执行之后</span><br><span class="line">    @After(&quot;execution(*com.bys.project.company.service.</span><br><span class="line">    impl.CompanyEconomyServiceImpl.insertCompanyEconomy(..))&quot;)</span><br><span class="line">    public void addAfter(JoinPoint joinPoint)&#123;</span><br><span class="line">        Object[] args = joinPoint.getArgs();</span><br><span class="line">        CompanyEconomy util=(CompanyEconomy)args[0];</span><br><span class="line">        System.err.println(&quot;切面工作了&quot;+&quot;参数是&quot;+util.getCreateTime());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">我们用JoinPoint joinPoint可以接收原本方法的参数</span><br></pre></td></tr></table></figure>
 
-<p>其实直接用find_in_set就好了。</p>
-<p>但是很快出现另外一个问题，新起别名的字段如何作为查询字段使用，于是再次求助chatgpt</p>
-<p>它的回答</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">在MySQL中，您无法在WHERE子句中直接使用字段别名，因为WHERE子句是在执行查询之前进行条件筛选的阶段。别名是在查询结果返回后才生成的。</span><br><span class="line"></span><br><span class="line">但是，您可以使用派生表（Derived Table）或子查询（Subquery）来解决这个问题。您可以将带有别名的字段作为内部查询的结果，并在外部查询中使用该字段。</span><br><span class="line"></span><br><span class="line">下面是一个示例，演示如何在WHERE子句中使用字段别名</span><br><span class="line">SELECT *</span><br><span class="line">FROM (</span><br><span class="line">  SELECT column_name AS alias_name</span><br><span class="line">  FROM table_name</span><br><span class="line">) AS derived_table</span><br><span class="line">WHERE alias_name = &#x27;some_value&#x27;;</span><br><span class="line"></span><br><span class="line">在上面的示例中，内部查询使用AS关键字将column_name字段命名为alias_name。然后，将内部查询作为派生表（Derived Table）使用，并在外部查询中将其命名为derived_table。在外部查询的WHERE子句中，您可以使用alias_name作为条件进行筛选。</span><br><span class="line"></span><br><span class="line">请注意，上述示例中的*表示选择所有字段。您可以根据需要替换为特定的字段列表。</span><br><span class="line"></span><br><span class="line">使用派生表或子查询可以让您在查询过程中使用字段别名，并对其进行条件筛选。</span><br></pre></td></tr></table></figure>
+<p>当我们的切面逻辑需要在两个以上方法时候，可以在execution添加||，如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@After(&quot;execution(* com.yourpackage.YourService.add(..)) || execution(* com.yourpackage.AnotherService.add(..))&quot;)</span><br><span class="line">   public void afterAddMethod() &#123;</span><br><span class="line">       commonAfterAdvice();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
-<p>其实在派生表中别出来后，在主表就可以使用了</p>
+<p>当我们遇到方法A需要增强，方法B增强，A,B增强之后又公共增强逻辑时候可以通过@pointcut管理切点</p>
+<p>然后用他来继续增强。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import org.aspectj.lang.annotation.After;</span><br><span class="line">import org.aspectj.lang.annotation.Aspect;</span><br><span class="line">import org.aspectj.lang.annotation.Pointcut;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">@Aspect</span><br><span class="line">@Component</span><br><span class="line">public class MyAspect &#123;</span><br><span class="line"></span><br><span class="line">    @Pointcut(&quot;execution(* com.yourpackage.YourService.add(..))&quot;)</span><br><span class="line">    public void addMethod() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Pointcut(&quot;execution(* com.yourpackage.AnotherService.add(..))&quot;)</span><br><span class="line">    public void anotherAddMethod() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @After(&quot;addMethod()&quot;)</span><br><span class="line">    public void afterAddMethod() &#123;</span><br><span class="line">        // 在add方法执行后执行的操作</span><br><span class="line">        System.out.println(&quot;After add method&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -196,7 +199,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
@@ -208,7 +211,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/MySQL//" class="article-tag-list-link color1">MySQL</a>
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
         		</li>
       		
 		</ul>
@@ -263,7 +266,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/05/18/MySQL%E4%B8%AD%E5%88%A4%E6%96%AD%E5%AD%97%E6%AE%B5a%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E5%AD%97%E6%AE%B5b/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/08/04/Java/Spinrg%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%9A%84aop/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -277,18 +280,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2023/05/25/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E5%9B%9B)Mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2023/08/09/develop/%E5%85%B3%E4%BA%8EMySQL%E6%9F%A5%E8%AF%A2%E5%A4%9A%E8%A1%A8/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          (四)Mysql多表查询
+          关于MySQL查询多表
         
       </div>
     </a>
   
   
-    <a href="/2023/05/12/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E4%B8%80)Mysql%E6%9F%A5%E8%AF%A2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">(一)Mysql查询</div>
+    <a href="/2023/08/01/develop/%E5%85%B3%E4%BA%8EMybatis%E4%B8%ADif%E6%A0%87%E7%AD%BE%E7%9A%84==%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于Mybatis中==判断问题</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -398,7 +401,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">bug</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -414,15 +425,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数量关系</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数字推理</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">资料分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数量关系</a>
               </li>
             
             <div class="clearfix"></div>

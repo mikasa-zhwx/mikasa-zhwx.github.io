@@ -6,23 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>把本地项目推送到gitLab | Xi的精神家园</title>
+  <title>MySQL中判断字段a是否包含字段b | Xi的精神家园</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="把本地项目推送到gitLab1.首先进入项目文件，执行 1git init    这时候产生一个隐藏文件夹.git这个文件夹主要存储未来一些git仓库的基本信息 2.执行命令 1git add .  3.执行提交命令    1git commit -a -m &quot;提交内容&quot;  4.执行命令，管理仓库，这个项目地址指的是gitlab仓库地址    12git remote add">
+  <meta name="description" content="MySQL中判断字段a是否包含字段b今天在写sql,由于业务需要查询，出现情况表中字段a是否出现在新查询别名字段中，如果是标记为Y，否则为N 百度一下找不到自己想要的答案 于是求助ChatGpt 他给出一个例子 12UPDATE your_tableSET result &#x3D; IF(b LIKE CONCAT(&amp;#x27;%&amp;#x27;, a, &amp;#x27;%&amp;#x27;), &amp;#x27;Y&amp;#x2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="把本地项目推送到gitLab">
-<meta property="og:url" content="http://example.com/2023/04/12/%E6%8A%8A%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E6%8E%A8%E9%80%81%E5%88%B0gitLab/index.html">
+<meta property="og:title" content="MySQL中判断字段a是否包含字段b">
+<meta property="og:url" content="http://example.com/2023/05/18/develop/MySQL%E4%B8%AD%E5%88%A4%E6%96%AD%E5%AD%97%E6%AE%B5a%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E5%AD%97%E6%AE%B5b/index.html">
 <meta property="og:site_name" content="Xi的精神家园">
-<meta property="og:description" content="把本地项目推送到gitLab1.首先进入项目文件，执行 1git init    这时候产生一个隐藏文件夹.git这个文件夹主要存储未来一些git仓库的基本信息 2.执行命令 1git add .  3.执行提交命令    1git commit -a -m &quot;提交内容&quot;  4.执行命令，管理仓库，这个项目地址指的是gitlab仓库地址    12git remote add">
+<meta property="og:description" content="MySQL中判断字段a是否包含字段b今天在写sql,由于业务需要查询，出现情况表中字段a是否出现在新查询别名字段中，如果是标记为Y，否则为N 百度一下找不到自己想要的答案 于是求助ChatGpt 他给出一个例子 12UPDATE your_tableSET result &#x3D; IF(b LIKE CONCAT(&amp;#x27;%&amp;#x27;, a, &amp;#x27;%&amp;#x27;), &amp;#x27;Y&amp;#x2">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/img/20230412-1.png">
-<meta property="og:image" content="http://example.com/img/20230412-2.png">
-<meta property="article:published_time" content="2023-04-12T01:15:03.000Z">
-<meta property="article:modified_time" content="2023-04-13T02:20:03.276Z">
+<meta property="article:published_time" content="2023-05-18T02:25:32.000Z">
+<meta property="article:modified_time" content="2023-06-15T07:30:20.884Z">
 <meta property="article:author" content="Xi">
-<meta property="article:tag" content="日常">
+<meta property="article:tag" content="bug">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img/20230412-1.png">
   
     <link rel="alternative" href="/atom.xml" title="Xi的精神家园" type="application/atom+xml">
   
@@ -150,45 +147,42 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-把本地项目推送到gitLab" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-develop/MySQL中判断字段a是否包含字段b" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      把本地项目推送到gitLab
+      MySQL中判断字段a是否包含字段b
     </h1>
   
 
         
-        <a href="/2023/04/12/%E6%8A%8A%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E6%8E%A8%E9%80%81%E5%88%B0gitLab/" class="archive-article-date">
-  	<time datetime="2023-04-12T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-12</time>
+        <a href="/2023/05/18/develop/MySQL%E4%B8%AD%E5%88%A4%E6%96%AD%E5%AD%97%E6%AE%B5a%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E5%AD%97%E6%AE%B5b/" class="archive-article-date">
+  	<time datetime="2023-05-18T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="把本地项目推送到gitLab"><a href="#把本地项目推送到gitLab" class="headerlink" title="把本地项目推送到gitLab"></a>把本地项目推送到gitLab</h1><p>1.首先进入项目文件，执行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+        <h1 id="MySQL中判断字段a是否包含字段b"><a href="#MySQL中判断字段a是否包含字段b" class="headerlink" title="MySQL中判断字段a是否包含字段b"></a>MySQL中判断字段a是否包含字段b</h1><p>今天在写sql,由于业务需要查询，出现情况表中字段a是否出现在新查询别名字段中，如果是标记为Y，否则为N</p>
+<p>百度一下找不到自己想要的答案</p>
+<p>于是求助ChatGpt</p>
+<p>他给出一个例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE your_table</span><br><span class="line">SET result = IF(b LIKE CONCAT(&#x27;%&#x27;, a, &#x27;%&#x27;), &#x27;Y&#x27;, &#x27;N&#x27;);</span><br></pre></td></tr></table></figure>
 
-<p><img src="/img/20230412-1.png"></p>
-<p><img src="/img/20230412-2.png"></p>
-<p>这时候产生一个隐藏文件夹.git这个文件夹主要存储未来一些git仓库的基本信息</p>
-<p>2.执行命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure>
+<p>参考这种写法</p>
+<p>我写下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">IF(DATE_FORMAT(t.pay_date,&#x27;%Y-%m&#x27;) LIKE CONCAT(&#x27;%&#x27;, pro.pDate, &#x27;%&#x27;), &#x27;Y&#x27;, &#x27;N&#x27;) as isDiZeng</span><br><span class="line"></span><br><span class="line">.....</span><br><span class="line">LEFT JOIN (</span><br><span class="line">        SELECT</span><br><span class="line">        rent.contract_id AS rId,</span><br><span class="line">        GROUP_CONCAT(DATE_FORMAT(rent.begintime,&#x27;%Y-%m&#x27;)) as pDate</span><br><span class="line">        FROM</span><br><span class="line">        wuye_rent_type rent</span><br><span class="line">        GROUP BY rent.contract_id</span><br><span class="line">        ) pro on pro.rId=c.id</span><br></pre></td></tr></table></figure>
 
-<p>3.执行提交命令</p>
-   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -a -m &quot;提交内容&quot;</span><br></pre></td></tr></table></figure>
+<p>其实直接用find_in_set就好了。</p>
+<p>但是很快出现另外一个问题，新起别名的字段如何作为查询字段使用，于是再次求助chatgpt</p>
+<p>它的回答</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">在MySQL中，您无法在WHERE子句中直接使用字段别名，因为WHERE子句是在执行查询之前进行条件筛选的阶段。别名是在查询结果返回后才生成的。</span><br><span class="line"></span><br><span class="line">但是，您可以使用派生表（Derived Table）或子查询（Subquery）来解决这个问题。您可以将带有别名的字段作为内部查询的结果，并在外部查询中使用该字段。</span><br><span class="line"></span><br><span class="line">下面是一个示例，演示如何在WHERE子句中使用字段别名</span><br><span class="line">SELECT *</span><br><span class="line">FROM (</span><br><span class="line">  SELECT column_name AS alias_name</span><br><span class="line">  FROM table_name</span><br><span class="line">) AS derived_table</span><br><span class="line">WHERE alias_name = &#x27;some_value&#x27;;</span><br><span class="line"></span><br><span class="line">在上面的示例中，内部查询使用AS关键字将column_name字段命名为alias_name。然后，将内部查询作为派生表（Derived Table）使用，并在外部查询中将其命名为derived_table。在外部查询的WHERE子句中，您可以使用alias_name作为条件进行筛选。</span><br><span class="line"></span><br><span class="line">请注意，上述示例中的*表示选择所有字段。您可以根据需要替换为特定的字段列表。</span><br><span class="line"></span><br><span class="line">使用派生表或子查询可以让您在查询过程中使用字段别名，并对其进行条件筛选。</span><br></pre></td></tr></table></figure>
 
-<p>4.执行命令，管理仓库，这个项目地址指的是gitlab仓库地址</p>
-   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 项目地址</span><br><span class="line">例如：git remote add origin http://xx/xxxxxxi/RuoYi.git</span><br></pre></td></tr></table></figure>
-
-<p>5.执行命令 maste指的是分支名称，你当可以指定其他分支</p>
-   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin 分支名</span><br><span class="line">例如：git push -u origin master </span><br></pre></td></tr></table></figure>
-
-<p>接着输入账号密码即可。</p>
+<p>其实在派生表中别出来后，在主表就可以使用了</p>
 
       
 
@@ -202,7 +196,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
         		</li>
       		
 		</ul>
@@ -214,7 +208,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Git//" class="article-tag-list-link color4">Git</a>
+        			<a href="/categories/MySQL//" class="article-tag-list-link color1">MySQL</a>
         		</li>
       		
 		</ul>
@@ -269,7 +263,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/04/12/%E6%8A%8A%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E6%8E%A8%E9%80%81%E5%88%B0gitLab/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/05/18/develop/MySQL%E4%B8%AD%E5%88%A4%E6%96%AD%E5%AD%97%E6%AE%B5a%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E5%AD%97%E6%AE%B5b/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -283,18 +277,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB%E8%A7%A3%E9%A2%98%E5%85%AC%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2023/05/25/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E5%9B%9B)Mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          数量关系解题公式
+          (四)Mysql多表查询
         
       </div>
     </a>
   
   
-    <a href="/2023/04/12/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E4%B8%89)Mysql-%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%A1%B5/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">(三)Mysql-排序和分页</div>
+    <a href="/2023/05/12/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E4%B8%80)Mysql%E6%9F%A5%E8%AF%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">(一)Mysql查询</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -404,7 +398,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">bug</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -420,15 +422,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数量关系</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数字推理</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">资料分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数量关系</a>
               </li>
             
             <div class="clearfix"></div>
