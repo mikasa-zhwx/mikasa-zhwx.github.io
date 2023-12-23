@@ -166,7 +166,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/30/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E4%BA%94)MySql%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/12/22/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E4%BA%94)MySql%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/">展开全文 >></a>
         </p>
       
 
@@ -203,13 +203,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/30/develop/hello-world/">Hello World</a>
+      <a class="article-title" href="/2023/12/22/develop/hello-world/">Hello World</a>
     </h1>
   
 
         
-        <a href="/2023/11/30/develop/hello-world/" class="archive-article-date">
-  	<time datetime="2023-11-30T09:05:33.553Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-30</time>
+        <a href="/2023/12/22/develop/hello-world/" class="archive-article-date">
+  	<time datetime="2023-12-22T04:15:35.079Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-22</time>
 </a>
         
       </header>
@@ -242,7 +242,267 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/30/develop/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/12/22/develop/hello-world/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-develop/关于idea文件标黄,git无法提交的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/12/21/develop/%E5%85%B3%E4%BA%8Eidea%E6%96%87%E4%BB%B6%E6%A0%87%E9%BB%84,git%E6%97%A0%E6%B3%95%E6%8F%90%E4%BA%A4%E7%9A%84%E9%97%AE%E9%A2%98/">关于idea文件标黄,git无法提交的问题</a>
+    </h1>
+  
+
+        
+        <a href="/2023/12/21/develop/%E5%85%B3%E4%BA%8Eidea%E6%96%87%E4%BB%B6%E6%A0%87%E9%BB%84,git%E6%97%A0%E6%B3%95%E6%8F%90%E4%BA%A4%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2023-12-21T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在提交git时候，同事发现有些文件缺失，打开我本地的文件夹，发现文件标黄，Google一下，发现是在.gitignore文件配置了忽略，因为我本身的文件夹名字取名叫做target，与idea编译器产生的classes文件也是target，在.gitignore中配置了target开头的文件夹不予提交，导致了我的代码没提交到git上。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.gitignore文件部分内容</span><br><span class="line"></span><br><span class="line">######################################################################</span><br><span class="line"># Build Tools</span><br><span class="line"></span><br><span class="line">.gradle</span><br><span class="line">/build/</span><br><span class="line">!gradle/wrapper/gradle-wrapper.jar</span><br><span class="line"></span><br><span class="line">target/</span><br><span class="line">!.mvn/wrapper/maven-wrapper.jar</span><br><span class="line"></span><br><span class="line">######################################################################</span><br></pre></td></tr></table></figure>
+
+<p>解决方法，更改本地文件夹名字，我把target改成targetSubject以此解决本地冲突。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/develop//" class="article-tag-list-link color3">develop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/12/21/develop/%E5%85%B3%E4%BA%8Eidea%E6%96%87%E4%BB%B6%E6%A0%87%E9%BB%84,git%E6%97%A0%E6%B3%95%E6%8F%90%E4%BA%A4%E7%9A%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-gyw/行测/判断推理/图形推理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/12/06/gyw/%E8%A1%8C%E6%B5%8B/%E5%88%A4%E6%96%AD%E6%8E%A8%E7%90%86/%E5%9B%BE%E5%BD%A2%E6%8E%A8%E7%90%86/">图形推理</a>
+    </h1>
+  
+
+        
+        <a href="/2023/12/06/gyw/%E8%A1%8C%E6%B5%8B/%E5%88%A4%E6%96%AD%E6%8E%A8%E7%90%86/%E5%9B%BE%E5%BD%A2%E6%8E%A8%E7%90%86/" class="archive-article-date">
+  	<time datetime="2023-12-06T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>图推主打就是一个感觉，只能靠大量的练习，寻求眼缘。</p>
+<h2 id="一笔画"><a href="#一笔画" class="headerlink" title="一笔画"></a>一笔画</h2><p>判断一个图形是否可以一笔画，用去框法最好，去框去的是<strong>封闭图形</strong>，去框的时候，线也去掉了，</p>
+<p>这里特别注意要是封闭图形，像一个圆相切一条线，我们去掉的是圆，而不能是圆加线。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">判断推理</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/12/06/gyw/%E8%A1%8C%E6%B5%8B/%E5%88%A4%E6%96%AD%E6%8E%A8%E7%90%86/%E5%9B%BE%E5%BD%A2%E6%8E%A8%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-gyw/行测/常识判断/常识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E5%B8%B8%E8%AF%86%E5%88%A4%E6%96%AD/%E5%B8%B8%E8%AF%86/">常识</a>
+    </h1>
+  
+
+        
+        <a href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E5%B8%B8%E8%AF%86%E5%88%A4%E6%96%AD/%E5%B8%B8%E8%AF%86/" class="archive-article-date">
+  	<time datetime="2023-11-29T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="生活常识"><a href="#生活常识" class="headerlink" title="生活常识"></a>生活常识</h1><p>1.冰雹是在气流强烈升降的条件下发生，多发生于夏季或者春夏之交的雷暴天气。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">常识判断</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E5%B8%B8%E8%AF%86%E5%88%A4%E6%96%AD/%E5%B8%B8%E8%AF%86/">展开全文 >></a>
         </p>
       
 
@@ -292,14 +552,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id=""><a href="#" class="headerlink" title=""></a></h2><h3 id="1-向心力问题"><a href="#1-向心力问题" class="headerlink" title="1.向心力问题"></a>1.向心力问题</h3><p>​		F向&#x3D;mv²&#x2F;r</p>
-<p>1.判断好提供向心力，水平圆周一般是摩擦力提供向心力，当向心力&gt;最大摩擦力时候，会发生侧滑；</p>
-<p>​	轨道转弯，一般是支持力作为向心力。</p>
-<h1 id="电学"><a href="#电学" class="headerlink" title="电学"></a>电学</h1><h2 id="并联电路"><a href="#并联电路" class="headerlink" title="并联电路"></a>并联电路</h2><p>并联电路，一条旁路电阻变小，总电阻变小。</p>
-<h2 id="血型问题"><a href="#血型问题" class="headerlink" title="血型问题"></a>血型问题</h2><p>人类血型ABO，共有4种血型：A,B,AB,O<br>$$<br>A:I^AI^i<br>$$</p>
-<p>$$<br>B:I^BI^i<br>$$</p>
-<p>$$<br>AB:I^AI^B<br>$$</p>
-<p>$$<br>O:I^iI^i<br>$$</p>
+        <h1 id="电学"><a href="#电学" class="headerlink" title="电学"></a>电学</h1><h2 id="并联电路"><a href="#并联电路" class="headerlink" title="并联电路"></a>并联电路</h2><p>并联电路，一条旁路电阻变小，总电阻变小。</p>
 
       
 
@@ -335,6 +588,108 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%94%B5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-gyw/行测/言语理解/言语理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E8%A8%80%E8%AF%AD%E7%90%86%E8%A7%A3/%E8%A8%80%E8%AF%AD%E7%90%86%E8%A7%A3/">言语理解</a>
+    </h1>
+  
+
+        
+        <a href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E8%A8%80%E8%AF%AD%E7%90%86%E8%A7%A3/%E8%A8%80%E8%AF%AD%E7%90%86%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2023-11-29T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>涸辙之鲋：比喻在困境中急需救援的人。</p>
+</li>
+<li><p>李代桃僵：互相顶替或待人受过。</p>
+</li>
+<li><p>越俎代庖：超出自己职能范围去管理别人管理的事。</p>
+</li>
+<li><p>萧规曹随：后人沿袭前人遗制。</p>
+</li>
+<li><p>管中窥豹：指所见不全或略有所得</p>
+</li>
+<li><p>洞若观火：观察事物非常清晰</p>
+</li>
+<li><p>一叶知秋：通过个别迹象，可以得到整个形式发展趋向，侧重规律性</p>
+</li>
+<li><p>见微知著：见到事物微小苗头，就知道实质和发展趋势。</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">言语理解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E8%A8%80%E8%AF%AD%E7%90%86%E8%A7%A3/%E8%A8%80%E8%AF%AD%E7%90%86%E8%A7%A3/">展开全文 >></a>
         </p>
       
 
@@ -406,10 +761,12 @@
 <p><img src="/img/gyw/20231128-11.png"></p>
 <p>（利用光路可逆性，假设右边同等位置也射入一条光源，那么就会跟左边光路重合）</p>
 <h2 id="5-光的色散"><a href="#5-光的色散" class="headerlink" title="5.光的色散"></a>5.光的色散</h2><p><img src="/img/gyw/20231128-12.png"></p>
+<p>红光波长最长，偏折最小。</p>
 <h2 id="6-凸透镜，凹透镜"><a href="#6-凸透镜，凹透镜" class="headerlink" title="6.凸透镜，凹透镜"></a>6.凸透镜，凹透镜</h2><p><img src="/img/gyw/20231128-13.png"></p>
 <p><img src="/img/gyw/20231128-14.png"></p>
 <p>（近凹远凸，近视看不清远，远视眼看不清近）</p>
 <h1 id="2-声"><a href="#2-声" class="headerlink" title="2.声"></a>2.声</h1><h2 id="1-声音产生与传播"><a href="#1-声音产生与传播" class="headerlink" title="1.声音产生与传播"></a>1.声音产生与传播</h2><p><img src="/img/gyw/20231128-15.png"></p>
+<p>声音在固体传播最快，液体次之，气体最慢。</p>
 <h2 id="2-声音的特征"><a href="#2-声音的特征" class="headerlink" title="2.声音的特征"></a>2.声音的特征</h2><p><img src="/img/gyw/20231128-16.png"></p>
 <p><img src="/img/gyw/20231128-17.png"></p>
 <p><img src="/img/gyw/20231128-18.png"></p>
@@ -676,408 +1033,6 @@
 
 
   
-    <article id="post-develop/关于MySQL将查询结果插入表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/09/01/develop/%E5%85%B3%E4%BA%8EMySQL%E5%B0%86%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8F%92%E5%85%A5%E8%A1%A8/">关于MySQL将查询结果插入表</a>
-    </h1>
-  
-
-        
-        <a href="/2023/09/01/develop/%E5%85%B3%E4%BA%8EMySQL%E5%B0%86%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8F%92%E5%85%A5%E8%A1%A8/" class="archive-article-date">
-  	<time datetime="2023-09-01T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天做字典管理时候，发现导出的一个字典类型刚好是表中数据库的名字,想着直接把数据库中查询的用到结果直接插入到字典表中。</p>
-<p>因为数据库中的表里面的字段备注是存储在information_schema。</p>
-<p>所以我们可以通过查询来获得,下面这个例子就是以company_sun_project这张表来查询他的列以及列的备注。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line"> COLUMN_COMMENT,  </span><br><span class="line"> COLUMN_Name,</span><br><span class="line"> FROM information_schema.COLUMNS </span><br><span class="line"> WHERE TABLE_NAME=&#x27;company_sun_project&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>下面将查询结果作为结果集，插入到数据字典中，因为sys_dict_data这张表在数据库company中，所以我们通过xx.表名的方法来使用。这里其实区别普通的插入是没有values。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO company.sys_dict_data(</span><br><span class="line">dict_sort,</span><br><span class="line">dict_label,</span><br><span class="line">dict_value,</span><br><span class="line">dict_type,</span><br><span class="line">STATUS,</span><br><span class="line">create_by,</span><br><span class="line">create_time,</span><br><span class="line">update_by,</span><br><span class="line">update_time,</span><br><span class="line">remark</span><br><span class="line">)</span><br><span class="line">(</span><br><span class="line">SELECT</span><br><span class="line"> 1,</span><br><span class="line"> COLUMN_COMMENT,</span><br><span class="line"> COLUMN_Name,</span><br><span class="line"> &#x27;company_sun_project_field&#x27;,</span><br><span class="line"> &#x27;0&#x27;,</span><br><span class="line"> &#x27;admin&#x27;,</span><br><span class="line"> NOW(),</span><br><span class="line"> &#x27;admin&#x27;,</span><br><span class="line"> NOW(),</span><br><span class="line"> &#x27;阳光政务导出&#x27;</span><br><span class="line"> FROM information_schema.COLUMNS </span><br><span class="line"> WHERE  TABLE_NAME=&#x27;company_sun_project&#x27;</span><br><span class="line"> )</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> //普通插入</span><br><span class="line"> insert into xxxx(</span><br><span class="line"> xxx,</span><br><span class="line"> xxx</span><br><span class="line"> )values(</span><br><span class="line"> 	xx,</span><br><span class="line"> 	xx</span><br><span class="line"> )</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/develop//" class="article-tag-list-link color3">develop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/09/01/develop/%E5%85%B3%E4%BA%8EMySQL%E5%B0%86%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8F%92%E5%85%A5%E8%A1%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-develop/关于MySQL导入出现离线问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/08/31/develop/%E5%85%B3%E4%BA%8EMySQL%E5%AF%BC%E5%85%A5%E5%87%BA%E7%8E%B0%E7%A6%BB%E7%BA%BF%E9%97%AE%E9%A2%98/">关于MySQL导入出现离线问题</a>
-    </h1>
-  
-
-        
-        <a href="/2023/08/31/develop/%E5%85%B3%E4%BA%8EMySQL%E5%AF%BC%E5%85%A5%E5%87%BA%E7%8E%B0%E7%A6%BB%E7%BA%BF%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2023-08-31T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-08-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在导入大文件sql文件时候，经常出现MySQL离线的问题，以前是修改配置文件，但是找不到那篇博客了，修改的是MySQL本身的配置文件，好像是my.inf.</p>
-<p>下面是即时设置的参数方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">选择mysql数据库</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#添加下面命令</span><br><span class="line">SET GLOBAL max_allowed_packet=30000000;</span><br><span class="line">SET GLOBAL net_buffer_length=300000;</span><br><span class="line">SET GLOBAL interactive_timeout=35900000;</span><br><span class="line">SET GLOBAL wait_timeout=3590000;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/develop//" class="article-tag-list-link color3">develop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/08/31/develop/%E5%85%B3%E4%BA%8EMySQL%E5%AF%BC%E5%85%A5%E5%87%BA%E7%8E%B0%E7%A6%BB%E7%BA%BF%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gyw/行测/资料分析/资料分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/08/23/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/">资料分析</a>
-    </h1>
-  
-
-        
-        <a href="/2023/08/23/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2023-08-23T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="求增长量"><a href="#求增长量" class="headerlink" title="求增长量"></a>求增长量</h2><p>1.现期-基期&#x3D;增长量(考虑截位法，尾数法)</p>
-<p>2.百化分<br>$$<br>\frac{现期量}{1+增长率}*增长率&#x3D;增长量<br>$$</p>
-<p>速算的话：如果增长率是可以化成几分之一，例如1&#x2F;3，那么相当于现期量&#x2F;4，其他都约分了。</p>
-<p>常用的分数,感觉1&#x2F;16之前可以记一下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1/2=50%             1/11=9.1%</span><br><span class="line">1/3=33%             1/12=8.3%</span><br><span class="line">1/4=25%             1/13=7.7%</span><br><span class="line">1/5=20%             1/14=7.1%</span><br><span class="line">1/6=16.7%           1/15=6.7%</span><br><span class="line">1/7=14.3%           1/16=6.25%</span><br><span class="line">1/8=12.5%           1/17=5.9%</span><br><span class="line">1/9=11.1%           1/18=5.5%</span><br><span class="line">1/10=10%            1/19=5.3%</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="求基期"><a href="#求基期" class="headerlink" title="求基期"></a>求基期</h2><ol>
-<li>$$<br>\frac{现期}{1+r}&#x3D;基期<br>$$<br><em>这里r是增长率，r是带符号的，这里有小技巧，当|r|&lt;&#x3D;5%,可以化除为乘<br>$$<br>\frac{现期}{1+r}&#x3D;现期</em>(1-r)<br>$$</li>
-</ol>
-<p>$$<br>\frac{现期}{1-r}&#x3D;现期*(1+r)<br>$$</p>
-<h2 id="增长量比大小"><a href="#增长量比大小" class="headerlink" title="增长量比大小"></a>增长量比大小</h2><ol>
-<li><p>注意题目问的方法，变化量问的是绝对值。</p>
-</li>
-<li><p>大大为大（现期大，增长率大，总体大）；</p>
-</li>
-<li><p>一大一小：看倍数关系</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">220*5.6%                          22*65%</span><br><span class="line">220是22的10倍，65%是5.6%10+倍</span><br><span class="line">220*5.6%              &lt;            22*65%</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>​	</p>
-<h2 id="增长率比大小"><a href="#增长率比大小" class="headerlink" title="增长率比大小"></a>增长率比大小</h2><p>①当现期与基期小于2倍，用它比大小<br>$$<br>\frac{增长量}{基期量}<br>$$<br>②当现期与基期大于2倍，直接用倍数大小</p>
-<h2 id="隔年增长率"><a href="#隔年增长率" class="headerlink" title="隔年增长率"></a>隔年增长率</h2><p>1.2016年，2017年增长率r1,2018年增长率r2</p>
-<p>求2018相比2016年增长率：r</p>
-<p>r&#x3D;r1+r2+r1*r2   (r1,r2都小于10%，可以忽略乘积)</p>
-<h2 id="隔年基期与隔年倍数"><a href="#隔年基期与隔年倍数" class="headerlink" title="隔年基期与隔年倍数"></a>隔年基期与隔年倍数</h2><p>1.是多少倍：n</p>
-<p>2.多多少倍：n-1</p>
-<p>3.隔年基期<br>$$<br>\frac{现期}{1+r隔}&#x3D;隔年基期<br>$$<br>4.隔年倍数<br>$$<br>1+r1+r2+r1*r2<br>$$</p>
-<h2 id="基期比重"><a href="#基期比重" class="headerlink" title="基期比重"></a>基期比重</h2><p>1.现期A,增长率a</p>
-<p>现期B，增长率b<br>$$<br>\frac{A}{B}*\frac{1+b}{1+a}<br>$$</p>
-<p>2.求基期倍数等价于等价于求基期比重</p>
-<h2 id="两期变化"><a href="#两期变化" class="headerlink" title="两期变化"></a>两期变化</h2><p>部分现期A,增长率a</p>
-<p>整体现期B，增长率b</p>
-<p>1.当a&gt;b,两期比值比原来上升</p>
-<p>2.当a&lt;b两期比值比原来下降</p>
-<h2 id="两期比重差"><a href="#两期比重差" class="headerlink" title="两期比重差"></a>两期比重差</h2><p>现期A，增长率a</p>
-<p>现期B，增长率b</p>
-<p>1.题目问的是两期比重上升几个百分点，重点是求得<strong>百分点</strong><br>$$<br>\frac{A}{B}*\frac{a-b}{1+a}&lt;|a-b|<br>$$</p>
-<h2 id="平均数增长率"><a href="#平均数增长率" class="headerlink" title="平均数增长率"></a>平均数增长率</h2><p>现期A，增长率a</p>
-<p>现期B，增长率b</p>
-<p>求A&#x2F;B的增长率，题目问题是增长百分之多少<br>$$<br>\frac{a-b}{1+b}<br>$$</p>
-<h2 id="混合增长率"><a href="#混合增长率" class="headerlink" title="混合增长率"></a>混合增长率</h2><p>求两部分混合之后的增长率,</p>
-<p>部分现期A，增值率a；部分现期B，增长率b<br>$$<br>总体&#x3D;部分A+部分B<br>$$<br>①混合增长率居中不正中，偏向现期大的</p>
-<p>②距离（增速之差）与基期量之比成反比<br>$$<br>\frac{A}{B}&#x3D;\frac{rb-r混}{r混-ra}<br>$$</p>
-<p>③在数轴标号增长率大小，把对应基期写在下面，然后运用公式②</p>
-<p>pis:这里有个技巧是假设基期比都是1：1情况下，混合增长率刚好是居中的，用于判断一些临界问题。</p>
-<h2 id="乘积增长率"><a href="#乘积增长率" class="headerlink" title="乘积增长率"></a>乘积增长率</h2><p>求两部分乘积之后的增长率,</p>
-<p>部分现期A，增值率a；部分现期B，增长率b<br>$$<br>总体&#x3D;部分A*部分B<br>$$</p>
-<p>$$<br>r混&#x3D;ra+rb+ra*rb<br>$$</p>
-<h2 id="特殊考点"><a href="#特殊考点" class="headerlink" title="特殊考点"></a>特殊考点</h2><p>①“十五”时期：2001-2005年</p>
-<p>②1亿&#x3D;1万万</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">资料分析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/08/23/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-develop/关于MySQL中左联on条件判断问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/08/09/develop/%E5%85%B3%E4%BA%8EMySQL%E4%B8%AD%E5%B7%A6%E8%81%94on%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E9%97%AE%E9%A2%98/">关于MySQL中左联on条件判断问题</a>
-    </h1>
-  
-
-        
-        <a href="/2023/08/09/develop/%E5%85%B3%E4%BA%8EMySQL%E4%B8%AD%E5%B7%A6%E8%81%94on%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2023-08-09T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-08-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>统计接口在写的时候发现一个知识</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">select *</span><br><span class="line">from a</span><br><span class="line">left join b on a.id=b.id</span><br><span class="line"></span><br><span class="line">通常左连接会返回左表本身所有记录以及a,b匹配记录，这出现一个问题，如果如果a-&gt;b是一对多的话，需要对b表过滤</span><br><span class="line">这个时候</span><br><span class="line"></span><br><span class="line">select *</span><br><span class="line">from a</span><br><span class="line">left join b on a.id=b.id and a.del_flag=0(这里and a.del_flag=0对b表不起作用)</span><br><span class="line"></span><br><span class="line">select *</span><br><span class="line">from a</span><br><span class="line">left join b on a.id=b.id and b.del_flag=0(这里and b.del_flag=0对b表起作用)</span><br><span class="line"></span><br><span class="line">还需注意的是如果左联多张表，如1对多对多</span><br><span class="line">则需要在最后where加上过滤</span><br><span class="line">否则还是回出现笛卡尔积的情况</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select *</span><br><span class="line">from a</span><br><span class="line">left join b on a.id=b.id </span><br><span class="line">left join c on c.id=b.dept_id</span><br><span class="line">where </span><br><span class="line">a.xxx</span><br><span class="line">and b.xxx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/develop//" class="article-tag-list-link color3">develop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/08/09/develop/%E5%85%B3%E4%BA%8EMySQL%E4%B8%AD%E5%B7%A6%E8%81%94on%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1180,6 +1135,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
@@ -1192,11 +1151,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color3">复盘</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1208,11 +1167,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数量关系</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">复盘</a>
+                <a href="javascript:void(0)" class="js-tag color5">常识判断</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1220,7 +1175,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数量关系</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数字推理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">言语理解</a>
               </li>
              
               <li class="article-tag-list-item">

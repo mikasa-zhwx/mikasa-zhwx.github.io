@@ -147,6 +147,321 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-develop/关于MySQL将查询结果插入表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/09/01/develop/%E5%85%B3%E4%BA%8EMySQL%E5%B0%86%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8F%92%E5%85%A5%E8%A1%A8/">关于MySQL将查询结果插入表</a>
+    </h1>
+  
+
+        
+        <a href="/2023/09/01/develop/%E5%85%B3%E4%BA%8EMySQL%E5%B0%86%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8F%92%E5%85%A5%E8%A1%A8/" class="archive-article-date">
+  	<time datetime="2023-09-01T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天做字典管理时候，发现导出的一个字典类型刚好是表中数据库的名字,想着直接把数据库中查询的用到结果直接插入到字典表中。</p>
+<p>因为数据库中的表里面的字段备注是存储在information_schema。</p>
+<p>所以我们可以通过查询来获得,下面这个例子就是以company_sun_project这张表来查询他的列以及列的备注。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line"> COLUMN_COMMENT,  </span><br><span class="line"> COLUMN_Name,</span><br><span class="line"> FROM information_schema.COLUMNS </span><br><span class="line"> WHERE TABLE_NAME=&#x27;company_sun_project&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>下面将查询结果作为结果集，插入到数据字典中，因为sys_dict_data这张表在数据库company中，所以我们通过xx.表名的方法来使用。这里其实区别普通的插入是没有values。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO company.sys_dict_data(</span><br><span class="line">dict_sort,</span><br><span class="line">dict_label,</span><br><span class="line">dict_value,</span><br><span class="line">dict_type,</span><br><span class="line">STATUS,</span><br><span class="line">create_by,</span><br><span class="line">create_time,</span><br><span class="line">update_by,</span><br><span class="line">update_time,</span><br><span class="line">remark</span><br><span class="line">)</span><br><span class="line">(</span><br><span class="line">SELECT</span><br><span class="line"> 1,</span><br><span class="line"> COLUMN_COMMENT,</span><br><span class="line"> COLUMN_Name,</span><br><span class="line"> &#x27;company_sun_project_field&#x27;,</span><br><span class="line"> &#x27;0&#x27;,</span><br><span class="line"> &#x27;admin&#x27;,</span><br><span class="line"> NOW(),</span><br><span class="line"> &#x27;admin&#x27;,</span><br><span class="line"> NOW(),</span><br><span class="line"> &#x27;阳光政务导出&#x27;</span><br><span class="line"> FROM information_schema.COLUMNS </span><br><span class="line"> WHERE  TABLE_NAME=&#x27;company_sun_project&#x27;</span><br><span class="line"> )</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> //普通插入</span><br><span class="line"> insert into xxxx(</span><br><span class="line"> xxx,</span><br><span class="line"> xxx</span><br><span class="line"> )values(</span><br><span class="line"> 	xx,</span><br><span class="line"> 	xx</span><br><span class="line"> )</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/develop//" class="article-tag-list-link color3">develop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/09/01/develop/%E5%85%B3%E4%BA%8EMySQL%E5%B0%86%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8F%92%E5%85%A5%E8%A1%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-develop/关于MySQL导入出现离线问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/08/31/develop/%E5%85%B3%E4%BA%8EMySQL%E5%AF%BC%E5%85%A5%E5%87%BA%E7%8E%B0%E7%A6%BB%E7%BA%BF%E9%97%AE%E9%A2%98/">关于MySQL导入出现离线问题</a>
+    </h1>
+  
+
+        
+        <a href="/2023/08/31/develop/%E5%85%B3%E4%BA%8EMySQL%E5%AF%BC%E5%85%A5%E5%87%BA%E7%8E%B0%E7%A6%BB%E7%BA%BF%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2023-08-31T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-08-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在导入大文件sql文件时候，经常出现MySQL离线的问题，以前是修改配置文件，但是找不到那篇博客了，修改的是MySQL本身的配置文件，好像是my.inf.</p>
+<p>下面是即时设置的参数方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">选择mysql数据库</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#添加下面命令</span><br><span class="line">SET GLOBAL max_allowed_packet=30000000;</span><br><span class="line">SET GLOBAL net_buffer_length=300000;</span><br><span class="line">SET GLOBAL interactive_timeout=35900000;</span><br><span class="line">SET GLOBAL wait_timeout=3590000;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/develop//" class="article-tag-list-link color3">develop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/08/31/develop/%E5%85%B3%E4%BA%8EMySQL%E5%AF%BC%E5%85%A5%E5%87%BA%E7%8E%B0%E7%A6%BB%E7%BA%BF%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-gyw/行测/资料分析/资料分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/08/23/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/">资料分析</a>
+    </h1>
+  
+
+        
+        <a href="/2023/08/23/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2023-08-23T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-08-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="求增长量"><a href="#求增长量" class="headerlink" title="求增长量"></a>求增长量</h2><p>1.现期-基期&#x3D;增长量(考虑截位法，尾数法)</p>
+<p>2.百化分<br>$$<br>\frac{现期量}{1+增长率}*增长率&#x3D;增长量<br>$$</p>
+<p>速算的话：如果增长率是可以化成几分之一，例如1&#x2F;3，那么相当于现期量&#x2F;4，其他都约分了。</p>
+<p>常用的分数,感觉1&#x2F;16之前可以记一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1/2=50%             1/11=9.1%</span><br><span class="line">1/3=33%             1/12=8.3%</span><br><span class="line">1/4=25%             1/13=7.7%</span><br><span class="line">1/5=20%             1/14=7.1%</span><br><span class="line">1/6=16.7%           1/15=6.7%</span><br><span class="line">1/7=14.3%           1/16=6.25%</span><br><span class="line">1/8=12.5%           1/17=5.9%</span><br><span class="line">1/9=11.1%           1/18=5.5%</span><br><span class="line">1/10=10%            1/19=5.3%</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="求基期"><a href="#求基期" class="headerlink" title="求基期"></a>求基期</h2><ol>
+<li>$$<br>\frac{现期}{1+r}&#x3D;基期<br>$$<br><em>这里r是增长率，r是带符号的，这里有小技巧，当|r|&lt;&#x3D;5%,可以化除为乘<br>$$<br>\frac{现期}{1+r}&#x3D;现期</em>(1-r)<br>$$</li>
+</ol>
+<p>$$<br>\frac{现期}{1-r}&#x3D;现期*(1+r)<br>$$</p>
+<h2 id="增长量比大小"><a href="#增长量比大小" class="headerlink" title="增长量比大小"></a>增长量比大小</h2><ol>
+<li><p>注意题目问的方法，变化量问的是绝对值。</p>
+</li>
+<li><p>大大为大（现期大，增长率大，总体大）；</p>
+</li>
+<li><p>一大一小：看倍数关系</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">220*5.6%                          22*65%</span><br><span class="line">220是22的10倍，65%是5.6%10+倍</span><br><span class="line">220*5.6%              &lt;            22*65%</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>​	</p>
+<h2 id="增长率比大小"><a href="#增长率比大小" class="headerlink" title="增长率比大小"></a>增长率比大小</h2><p>①当现期与基期小于2倍，用它比大小<br>$$<br>\frac{增长量}{基期量}<br>$$<br>②当现期与基期大于2倍，直接用倍数大小</p>
+<h2 id="隔年增长率"><a href="#隔年增长率" class="headerlink" title="隔年增长率"></a>隔年增长率</h2><p>1.2016年，2017年增长率r1,2018年增长率r2</p>
+<p>求2018相比2016年增长率：r</p>
+<p>r&#x3D;r1+r2+r1*r2   (r1,r2都小于10%，可以忽略乘积)</p>
+<h2 id="隔年基期与隔年倍数"><a href="#隔年基期与隔年倍数" class="headerlink" title="隔年基期与隔年倍数"></a>隔年基期与隔年倍数</h2><p>1.是多少倍：n</p>
+<p>2.多多少倍：n-1</p>
+<p>3.隔年基期<br>$$<br>\frac{现期}{1+r隔}&#x3D;隔年基期<br>$$<br>4.隔年倍数<br>$$<br>1+r1+r2+r1*r2<br>$$</p>
+<h2 id="基期比重"><a href="#基期比重" class="headerlink" title="基期比重"></a>基期比重</h2><p>1.现期A,增长率a</p>
+<p>现期B，增长率b<br>$$<br>\frac{A}{B}*\frac{1+b}{1+a}<br>$$</p>
+<p>2.求基期倍数等价于等价于求基期比重</p>
+<h2 id="两期变化"><a href="#两期变化" class="headerlink" title="两期变化"></a>两期变化</h2><p>部分现期A,增长率a</p>
+<p>整体现期B，增长率b</p>
+<p>1.当a&gt;b,两期比值比原来上升</p>
+<p>2.当a&lt;b两期比值比原来下降</p>
+<h2 id="两期比重差"><a href="#两期比重差" class="headerlink" title="两期比重差"></a>两期比重差</h2><p>现期A，增长率a</p>
+<p>现期B，增长率b</p>
+<p>1.题目问的是两期比重上升几个百分点，重点是求得<strong>百分点</strong><br>$$<br>\frac{A}{B}*\frac{a-b}{1+a}&lt;|a-b|<br>$$</p>
+<h2 id="平均数增长率"><a href="#平均数增长率" class="headerlink" title="平均数增长率"></a>平均数增长率</h2><p>现期A，增长率a</p>
+<p>现期B，增长率b</p>
+<p>求A&#x2F;B的增长率，题目问题是增长百分之多少<br>$$<br>\frac{a-b}{1+b}<br>$$</p>
+<h2 id="混合增长率"><a href="#混合增长率" class="headerlink" title="混合增长率"></a>混合增长率</h2><p>求两部分混合之后的增长率,</p>
+<p>部分现期A，增值率a；部分现期B，增长率b<br>$$<br>总体&#x3D;部分A+部分B<br>$$<br>①混合增长率居中不正中，偏向现期大的</p>
+<p>②距离（增速之差）与基期量之比成反比<br>$$<br>\frac{A}{B}&#x3D;\frac{rb-r混}{r混-ra}<br>$$</p>
+<p>③在数轴标号增长率大小，把对应基期写在下面，然后运用公式②</p>
+<p>pis:这里有个技巧是假设基期比都是1：1情况下，混合增长率刚好是居中的，用于判断一些临界问题。</p>
+<h2 id="乘积增长率"><a href="#乘积增长率" class="headerlink" title="乘积增长率"></a>乘积增长率</h2><p>求两部分乘积之后的增长率,</p>
+<p>部分现期A，增值率a；部分现期B，增长率b<br>$$<br>总体&#x3D;部分A*部分B<br>$$</p>
+<p>$$<br>r混&#x3D;ra+rb+ra*rb<br>$$</p>
+<h2 id="特殊考点"><a href="#特殊考点" class="headerlink" title="特殊考点"></a>特殊考点</h2><p>①“十五”时期：2001-2005年</p>
+<p>②1亿&#x3D;1万万</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">资料分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/08/23/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-develop/关于MySQL查询多表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -205,6 +520,93 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/08/09/develop/%E5%85%B3%E4%BA%8EMySQL%E6%9F%A5%E8%AF%A2%E5%A4%9A%E8%A1%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-develop/关于MySQL中左联on条件判断问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/08/09/develop/%E5%85%B3%E4%BA%8EMySQL%E4%B8%AD%E5%B7%A6%E8%81%94on%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E9%97%AE%E9%A2%98/">关于MySQL中左联on条件判断问题</a>
+    </h1>
+  
+
+        
+        <a href="/2023/08/09/develop/%E5%85%B3%E4%BA%8EMySQL%E4%B8%AD%E5%B7%A6%E8%81%94on%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2023-08-09T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-08-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>统计接口在写的时候发现一个知识</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">select *</span><br><span class="line">from a</span><br><span class="line">left join b on a.id=b.id</span><br><span class="line"></span><br><span class="line">通常左连接会返回左表本身所有记录以及a,b匹配记录，这出现一个问题，如果如果a-&gt;b是一对多的话，需要对b表过滤</span><br><span class="line">这个时候</span><br><span class="line"></span><br><span class="line">select *</span><br><span class="line">from a</span><br><span class="line">left join b on a.id=b.id and a.del_flag=0(这里and a.del_flag=0对b表不起作用)</span><br><span class="line"></span><br><span class="line">select *</span><br><span class="line">from a</span><br><span class="line">left join b on a.id=b.id and b.del_flag=0(这里and b.del_flag=0对b表起作用)</span><br><span class="line"></span><br><span class="line">还需注意的是如果左联多张表，如1对多对多</span><br><span class="line">则需要在最后where加上过滤</span><br><span class="line">否则还是回出现笛卡尔积的情况</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select *</span><br><span class="line">from a</span><br><span class="line">left join b on a.id=b.id </span><br><span class="line">left join c on c.id=b.dept_id</span><br><span class="line">where </span><br><span class="line">a.xxx</span><br><span class="line">and b.xxx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/develop//" class="article-tag-list-link color3">develop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/08/09/develop/%E5%85%B3%E4%BA%8EMySQL%E4%B8%AD%E5%B7%A6%E8%81%94on%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E9%97%AE%E9%A2%98/">展开全文 >></a>
         </p>
       
 
@@ -680,92 +1082,6 @@
 
 
   
-    <article id="post-diary/chatgpt你问我答" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/06/29/diary/chatgpt%E4%BD%A0%E9%97%AE%E6%88%91%E7%AD%94/">chatgpt你问我答</a>
-    </h1>
-  
-
-        
-        <a href="/2023/06/29/diary/chatgpt%E4%BD%A0%E9%97%AE%E6%88%91%E7%AD%94/" class="archive-article-date">
-  	<time datetime="2023-06-29T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">20230906：讨论的是爬虫python处理json数据的问题，以及将json数据写入excel的操作</span><br><span class="line">不得不说padas工具库有点优雅</span><br><span class="line">https://chat.openai.com/share/597efdf9-e3f9-4802-8617-4a62447ada95</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/diary//" class="article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/06/29/diary/chatgpt%E4%BD%A0%E9%97%AE%E6%88%91%E7%AD%94/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-diary/随记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -834,328 +1150,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/06/29/diary/%E9%9A%8F%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-爬虫/项目/红人点集网爬虫（js逆向）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/06/28/%E7%88%AC%E8%99%AB/%E9%A1%B9%E7%9B%AE/%E7%BA%A2%E4%BA%BA%E7%82%B9%E9%9B%86%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88js%E9%80%86%E5%90%91%EF%BC%89/">红人点集网爬虫（js逆向）</a>
-    </h1>
-  
-
-        
-        <a href="/2023/06/28/%E7%88%AC%E8%99%AB/%E9%A1%B9%E7%9B%AE/%E7%BA%A2%E4%BA%BA%E7%82%B9%E9%9B%86%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88js%E9%80%86%E5%90%91%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2023-06-28T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-md5加密"><a href="#1-md5加密" class="headerlink" title="1.md5加密"></a>1.md5加密</h2><p><img src="/img/%E7%88%AC%E8%99%AB/20230628-1.png"></p>
-<p>这里登录请求涉及到几个参数，其中pwd使用了加密，还有个莫名奇妙参数sig，以及t跟tenant;多次请求发现sig是动态的，tenant是不变的，t更像是时间戳。</p>
-<p>所以pwd使用什么了加密?通常普通加密方法如md5，sha-1等加密之后长度固定，所以老师给的方法通过加密长度来反推加密。</p>
-<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-2.png"></p>
-<p>这里可以用浏览器方便知道pwd长度,通过字符串的length方法来知道长度，从而估计是什么加密方式。</p>
-<p>32位一般是md5，40位一般是sha-1.其中md5是可以逆向破解的，所以红人点集这里还是。。抖音的抖查查网用的是40位，我把密码用sha-1加密之后，得出跟网站一样的结果，所以碰巧学以致用，sha-1加密一般是40位，一般来说网站都不会太变态的加密，sha-1应该绰绰有余。</p>
-<p>当然你应该根据结果再进行一次加密解密来确保是什么加密。</p>
-<h2 id="2-寻找sig"><a href="#2-寻找sig" class="headerlink" title="2.寻找sig"></a>2.寻找sig</h2><p>sig长度也是32位，但是由于我们不知道原本是什么，不好确定是md5。所以要尝试在源码中找到sig</p>
-<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-4.png"></p>
-<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-5.png"></p>
-<p>这里的括号是格式化js的按钮</p>
-<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-6.png"></p>
-<p>可以看到是sig是由l变量得来</p>
-<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-7.jpg"></p>
-<h2 id="3-断点"><a href="#3-断点" class="headerlink" title="3.断点"></a>3.断点</h2><p>给代码左边打上断点 重新登陆 就会在此处暂停，断点的好处可以清晰看到变量的值，鼠标悬停变量e可以清楚看到S（e）e在作为参数时候的值是什么，也可以选中变量，查看值，这里我们查看P（S（e））之后的值是什么</p>
-<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-8.png"></p>
-<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-9.png"></p>
-<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-10.png"></p>
-<p>下一步我们关心下变量</p>
-<p>15975772859e10adc3949ba59abbe56e057f20f883e16879195782991JzyqgcoojMiQNuQoTlbR5EBT8TsqzJ</p>
-<p>后面的zyqgcoojMiQNuQoTlbR5EBT8TsqzJ是什么，于是点进去P（）函数</p>
-<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-11.png"></p>
-<p>所以p函数起到作用是返回一个字符串</p>
-<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-12.png"></p>
-<p>账号+密码的md5加密+时间戳*1000+1+JzyqgcoojMiQNuQoTlbR5EBT8TsqzJ</p>
-<p>上文提到过l变量长度也是32，推测也是md5加密，所以我们把p函数结果去用md5加密得到的如果md5加密一样即可。</p>
-<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4.代码"></a>4.代码</h2><p>请求头这里的格式化有个方便的网站<a target="_blank" rel="noopener" href="https://spidertools.cn/#/formatJSON%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%AF%B7%E6%B1%82%E5%A4%B4">https://spidertools.cn/#/formatJSON格式化请求头</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#pwd:a1328044392-abc</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#1.因为登陆是pos请求,需要请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;Accept&quot;</span>: <span class="string">&quot;application/json, text/plain, */*&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate, br&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Accept-Language&quot;</span>: <span class="string">&quot;zh-CN,zh;q=0.9&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Connection&quot;</span>: <span class="string">&quot;keep-alive&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Content-Length&quot;</span>: <span class="string">&quot;137&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Host&quot;</span>: <span class="string">&quot;user.hrdjyun.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Origin&quot;</span>: <span class="string">&quot;http://www.hh1024.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Sec-Fetch-Dest&quot;</span>: <span class="string">&quot;empty&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Sec-Fetch-Mode&quot;</span>: <span class="string">&quot;cors&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Sec-Fetch-Site&quot;</span>: <span class="string">&quot;cross-site&quot;</span>,</span><br><span class="line">    <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#2.带上session可以方便后面请求，他会自动处理cookie</span></span><br><span class="line">session = requests.session()</span><br><span class="line">session.headers = headers</span><br><span class="line"></span><br><span class="line"><span class="comment">#3.md5加密</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sign</span>(<span class="params">content</span>):</span><br><span class="line">    m = hashlib.md5()</span><br><span class="line">    m.update(content.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">    <span class="keyword">return</span> m.hexdigest()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#4.登陆函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">    <span class="comment">#时间戳*1000</span></span><br><span class="line">    times=<span class="built_in">str</span>(<span class="built_in">int</span>(time.time())*<span class="number">1000</span>)</span><br><span class="line">    <span class="comment">#登陆接口</span></span><br><span class="line">    url=<span class="string">&#x27;https://user.hrdjyun.com/wechat/phonePwdLogin&#x27;</span></span><br><span class="line">    pwd=sign(<span class="string">&quot;a1328044392-abc&quot;</span>)</span><br><span class="line">    <span class="comment">#加密sig</span></span><br><span class="line">    sig = sign(<span class="string">&#x27;13537849025&#x27;</span>+pwd+times+<span class="string">&#x27;1&#x27;</span>+<span class="string">&#x27;JzyqgcoojMiQNuQoTlbR5EBT8TsqzJ&#x27;</span>)</span><br><span class="line">    <span class="comment">#data</span></span><br><span class="line">    data=&#123;</span><br><span class="line">        <span class="string">&#x27;phoneNum&#x27;</span>: <span class="string">&quot;13537849025&quot;</span>,</span><br><span class="line">        <span class="string">&#x27;pwd&#x27;</span>: pwd,</span><br><span class="line">        <span class="string">&#x27;sig&#x27;</span>: sig,</span><br><span class="line">        <span class="string">&#x27;t&#x27;</span>: times,</span><br><span class="line">        <span class="string">&#x27;tenant&#x27;</span>: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">#注意要序列化data</span></span><br><span class="line">    data_json = json.dumps(data)</span><br><span class="line">    <span class="comment">#print(data_json)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#请求</span></span><br><span class="line">    res =  session.post(url,headers=headers,data=data_json)</span><br><span class="line">    <span class="built_in">print</span>(res.json())</span><br><span class="line">    <span class="comment">#拿token</span></span><br><span class="line">    <span class="comment">#token是后台给与的令牌，拿到令牌，客户端只要携带令牌来请求即可，不需要带上用户名和密码</span></span><br><span class="line">    <span class="keyword">if</span> res.json().get(<span class="string">&#x27;status&#x27;</span>)==<span class="number">0</span>:</span><br><span class="line">        token = res.json().get(<span class="string">&#x27;data&#x27;</span>)[<span class="string">&#x27;token&#x27;</span>]</span><br><span class="line">        <span class="built_in">print</span>(token)</span><br><span class="line">        <span class="comment">#写入文件</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;token.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(token)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">login()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="5-练习及总结"><a href="#5-练习及总结" class="headerlink" title="5.练习及总结"></a>5.练习及总结</h2><p>其实拿到token之后，很多东西都可以拿了，可以试试拿一下网页里面的数据，分析过程大同小异</p>
-<p>分析抓包-分析参数-编写代码</p>
-<p>这种算是我们遇到一种反爬的手段，js逆向。</p>
-<p>爬虫咋说其实破解之后就很无聊的，而且代码结构千变万化，终究是个业务型的工具。</p>
-<p>当作一种技能吧。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/06/28/%E7%88%AC%E8%99%AB/%E9%A1%B9%E7%9B%AE/%E7%BA%A2%E4%BA%BA%E7%82%B9%E9%9B%86%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88js%E9%80%86%E5%90%91%EF%BC%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gyw/行测/资料分析/资料分析技巧篇-除法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/06/12/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90%E6%8A%80%E5%B7%A7%E7%AF%87-%E9%99%A4%E6%B3%95/">资料分析技巧篇-除法</a>
-    </h1>
-  
-
-        
-        <a href="/2023/06/12/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90%E6%8A%80%E5%B7%A7%E7%AF%87-%E9%99%A4%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2023-06-12T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>大前提：所有技巧都源于选项</p>
-<p>总结：除法一般是无可奈何的时候才考虑，能做乘法其实优先乘法.</p>
-<h1 id="1-直除法"><a href="#1-直除法" class="headerlink" title="1.直除法"></a>1.直除法</h1><p>直除法，其实就是跟直接除，区别在于:</p>
-<ol>
-<li>分子不变</li>
-<li>看选项首位，首位不同，分母截两位，首位有相同，分母截三位，按照四舍五入去截。</li>
-</ol>
-<p>直除法比较适合下面这种选项数字多，但首位比较区分</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">22706.22÷1.1167=</span><br><span class="line"></span><br><span class="line">A.15247.11  B.17354.03  C.19642.37 D.19407.03</span><br><span class="line"></span><br><span class="line">22706.22÷117≈194...</span><br><span class="line"></span><br><span class="line">所以选择D</span><br></pre></td></tr></table></figure>
-
-<p>但其实有时候，直接拿选项去乘以更快</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">71885.6÷0.217</span><br><span class="line"></span><br><span class="line">A.28w   B.33W   C.40W  D.75W</span><br><span class="line"></span><br><span class="line">拿b 33去×21 约等于66多很接近，直接就可以选b，其他要么不够，要么远超首位</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这也是为什么能做乘法，比作除法好。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">资料分析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/06/12/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90%E6%8A%80%E5%B7%A7%E7%AF%87-%E9%99%A4%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-爬虫/爬虫Scrapy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/06/02/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%ABScrapy/">爬虫Scrapy</a>
-    </h1>
-  
-
-        
-        <a href="/2023/06/02/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%ABScrapy/" class="archive-article-date">
-  	<time datetime="2023-06-02T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>企业级应用比较广泛的一个框架</p>
-<h2 id="1-安装Scrapy"><a href="#1-安装Scrapy" class="headerlink" title="1.安装Scrapy"></a>1.安装Scrapy</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#1.终端运行（后面豆瓣源方便国内访问，单纯下载外国源太慢了）</span><br><span class="line">pip install scrapy -i https://pypi.douban.com/simple </span><br></pre></td></tr></table></figure>
-
-<h2 id="2-创建项目"><a href="#2-创建项目" class="headerlink" title="2.创建项目"></a>2.创建项目</h2><p>一般来说可以在pycharm终端运行，也可以在命令行运行，下面以pycharm终端操作运行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#1.创建项目：项目名称不以数字开头，不要包含中文</span><br><span class="line">scrapy startproject 项目名称</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#2.创建爬虫文件：</span><br><span class="line">scrapy genspider 爬虫文件的名字 要爬取的地址</span><br></pre></td></tr></table></figure>
-
-<p>进入到spider目录执行上述命令</p>
-<p><img src="/img/20230602-2.jpg"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#3.运行爬虫</span><br><span class="line">scrapy crawl 爬虫文件</span><br></pre></td></tr></table></figure>
-
-<p><img src="/img/20230602-3.png"></p>
-<h2 id="3-爬虫文件结构"><a href="#3-爬虫文件结构" class="headerlink" title="3.爬虫文件结构"></a>3.爬虫文件结构</h2><p><img src="/img/20230602-4.jpg"></p>
-<h2 id="4-运行项目"><a href="#4-运行项目" class="headerlink" title="4.运行项目"></a>4.运行项目</h2><p>在运行项目时候，发现了一个robots.txt文件，这是一个<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/Robots.txt">爬虫协议</a>，是我们在日常爬虫时候，应该遵循一定的规范（当然你不遵守也是可以的，你就要综合考虑一下）</p>
-<p><img src="/img/20230602-5.png"></p>
-<p>可以看下百度的robots.txt,只需要在主页末端url加上&#x2F;robots.txt(可以看下百度的robots.txt)</p>
-<p><img src="/img/20230602-6.png"></p>
-<p>在scrpay框架中setting文件注释掉遵循robots.txt协议，我们就可以看到返回内容</p>
-<p><img src="/img/20230602-7.png"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/06/02/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%ABScrapy/">展开全文 >></a>
         </p>
       
 
@@ -1287,6 +1281,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
@@ -1299,11 +1297,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color3">复盘</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1315,11 +1313,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数量关系</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">复盘</a>
+                <a href="javascript:void(0)" class="js-tag color5">常识判断</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1327,7 +1321,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数量关系</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数字推理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">言语理解</a>
               </li>
              
               <li class="article-tag-list-item">

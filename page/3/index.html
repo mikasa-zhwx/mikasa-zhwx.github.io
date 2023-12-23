@@ -147,6 +147,414 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-diary/chatgpt你问我答" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/29/diary/chatgpt%E4%BD%A0%E9%97%AE%E6%88%91%E7%AD%94/">chatgpt你问我答</a>
+    </h1>
+  
+
+        
+        <a href="/2023/06/29/diary/chatgpt%E4%BD%A0%E9%97%AE%E6%88%91%E7%AD%94/" class="archive-article-date">
+  	<time datetime="2023-06-29T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">20230906：讨论的是爬虫python处理json数据的问题，以及将json数据写入excel的操作</span><br><span class="line">不得不说padas工具库有点优雅</span><br><span class="line">https://chat.openai.com/share/597efdf9-e3f9-4802-8617-4a62447ada95</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/diary//" class="article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/29/diary/chatgpt%E4%BD%A0%E9%97%AE%E6%88%91%E7%AD%94/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-爬虫/项目/红人点集网爬虫（js逆向）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/28/%E7%88%AC%E8%99%AB/%E9%A1%B9%E7%9B%AE/%E7%BA%A2%E4%BA%BA%E7%82%B9%E9%9B%86%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88js%E9%80%86%E5%90%91%EF%BC%89/">红人点集网爬虫（js逆向）</a>
+    </h1>
+  
+
+        
+        <a href="/2023/06/28/%E7%88%AC%E8%99%AB/%E9%A1%B9%E7%9B%AE/%E7%BA%A2%E4%BA%BA%E7%82%B9%E9%9B%86%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88js%E9%80%86%E5%90%91%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2023-06-28T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-md5加密"><a href="#1-md5加密" class="headerlink" title="1.md5加密"></a>1.md5加密</h2><p><img src="/img/%E7%88%AC%E8%99%AB/20230628-1.png"></p>
+<p>这里登录请求涉及到几个参数，其中pwd使用了加密，还有个莫名奇妙参数sig，以及t跟tenant;多次请求发现sig是动态的，tenant是不变的，t更像是时间戳。</p>
+<p>所以pwd使用什么了加密?通常普通加密方法如md5，sha-1等加密之后长度固定，所以老师给的方法通过加密长度来反推加密。</p>
+<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-2.png"></p>
+<p>这里可以用浏览器方便知道pwd长度,通过字符串的length方法来知道长度，从而估计是什么加密方式。</p>
+<p>32位一般是md5，40位一般是sha-1.其中md5是可以逆向破解的，所以红人点集这里还是。。抖音的抖查查网用的是40位，我把密码用sha-1加密之后，得出跟网站一样的结果，所以碰巧学以致用，sha-1加密一般是40位，一般来说网站都不会太变态的加密，sha-1应该绰绰有余。</p>
+<p>当然你应该根据结果再进行一次加密解密来确保是什么加密。</p>
+<h2 id="2-寻找sig"><a href="#2-寻找sig" class="headerlink" title="2.寻找sig"></a>2.寻找sig</h2><p>sig长度也是32位，但是由于我们不知道原本是什么，不好确定是md5。所以要尝试在源码中找到sig</p>
+<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-4.png"></p>
+<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-5.png"></p>
+<p>这里的括号是格式化js的按钮</p>
+<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-6.png"></p>
+<p>可以看到是sig是由l变量得来</p>
+<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-7.jpg"></p>
+<h2 id="3-断点"><a href="#3-断点" class="headerlink" title="3.断点"></a>3.断点</h2><p>给代码左边打上断点 重新登陆 就会在此处暂停，断点的好处可以清晰看到变量的值，鼠标悬停变量e可以清楚看到S（e）e在作为参数时候的值是什么，也可以选中变量，查看值，这里我们查看P（S（e））之后的值是什么</p>
+<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-8.png"></p>
+<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-9.png"></p>
+<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-10.png"></p>
+<p>下一步我们关心下变量</p>
+<p>15975772859e10adc3949ba59abbe56e057f20f883e16879195782991JzyqgcoojMiQNuQoTlbR5EBT8TsqzJ</p>
+<p>后面的zyqgcoojMiQNuQoTlbR5EBT8TsqzJ是什么，于是点进去P（）函数</p>
+<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-11.png"></p>
+<p>所以p函数起到作用是返回一个字符串</p>
+<p><img src="/img/%E7%88%AC%E8%99%AB/20230628-12.png"></p>
+<p>账号+密码的md5加密+时间戳*1000+1+JzyqgcoojMiQNuQoTlbR5EBT8TsqzJ</p>
+<p>上文提到过l变量长度也是32，推测也是md5加密，所以我们把p函数结果去用md5加密得到的如果md5加密一样即可。</p>
+<h2 id="4-代码"><a href="#4-代码" class="headerlink" title="4.代码"></a>4.代码</h2><p>请求头这里的格式化有个方便的网站<a target="_blank" rel="noopener" href="https://spidertools.cn/#/formatJSON%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%AF%B7%E6%B1%82%E5%A4%B4">https://spidertools.cn/#/formatJSON格式化请求头</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#pwd:a1328044392-abc</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#1.因为登陆是pos请求,需要请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;Accept&quot;</span>: <span class="string">&quot;application/json, text/plain, */*&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate, br&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Accept-Language&quot;</span>: <span class="string">&quot;zh-CN,zh;q=0.9&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Connection&quot;</span>: <span class="string">&quot;keep-alive&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Content-Length&quot;</span>: <span class="string">&quot;137&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Host&quot;</span>: <span class="string">&quot;user.hrdjyun.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Origin&quot;</span>: <span class="string">&quot;http://www.hh1024.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Sec-Fetch-Dest&quot;</span>: <span class="string">&quot;empty&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Sec-Fetch-Mode&quot;</span>: <span class="string">&quot;cors&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Sec-Fetch-Site&quot;</span>: <span class="string">&quot;cross-site&quot;</span>,</span><br><span class="line">    <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#2.带上session可以方便后面请求，他会自动处理cookie</span></span><br><span class="line">session = requests.session()</span><br><span class="line">session.headers = headers</span><br><span class="line"></span><br><span class="line"><span class="comment">#3.md5加密</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sign</span>(<span class="params">content</span>):</span><br><span class="line">    m = hashlib.md5()</span><br><span class="line">    m.update(content.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line">    <span class="keyword">return</span> m.hexdigest()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#4.登陆函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">    <span class="comment">#时间戳*1000</span></span><br><span class="line">    times=<span class="built_in">str</span>(<span class="built_in">int</span>(time.time())*<span class="number">1000</span>)</span><br><span class="line">    <span class="comment">#登陆接口</span></span><br><span class="line">    url=<span class="string">&#x27;https://user.hrdjyun.com/wechat/phonePwdLogin&#x27;</span></span><br><span class="line">    pwd=sign(<span class="string">&quot;a1328044392-abc&quot;</span>)</span><br><span class="line">    <span class="comment">#加密sig</span></span><br><span class="line">    sig = sign(<span class="string">&#x27;13537849025&#x27;</span>+pwd+times+<span class="string">&#x27;1&#x27;</span>+<span class="string">&#x27;JzyqgcoojMiQNuQoTlbR5EBT8TsqzJ&#x27;</span>)</span><br><span class="line">    <span class="comment">#data</span></span><br><span class="line">    data=&#123;</span><br><span class="line">        <span class="string">&#x27;phoneNum&#x27;</span>: <span class="string">&quot;13537849025&quot;</span>,</span><br><span class="line">        <span class="string">&#x27;pwd&#x27;</span>: pwd,</span><br><span class="line">        <span class="string">&#x27;sig&#x27;</span>: sig,</span><br><span class="line">        <span class="string">&#x27;t&#x27;</span>: times,</span><br><span class="line">        <span class="string">&#x27;tenant&#x27;</span>: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">#注意要序列化data</span></span><br><span class="line">    data_json = json.dumps(data)</span><br><span class="line">    <span class="comment">#print(data_json)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#请求</span></span><br><span class="line">    res =  session.post(url,headers=headers,data=data_json)</span><br><span class="line">    <span class="built_in">print</span>(res.json())</span><br><span class="line">    <span class="comment">#拿token</span></span><br><span class="line">    <span class="comment">#token是后台给与的令牌，拿到令牌，客户端只要携带令牌来请求即可，不需要带上用户名和密码</span></span><br><span class="line">    <span class="keyword">if</span> res.json().get(<span class="string">&#x27;status&#x27;</span>)==<span class="number">0</span>:</span><br><span class="line">        token = res.json().get(<span class="string">&#x27;data&#x27;</span>)[<span class="string">&#x27;token&#x27;</span>]</span><br><span class="line">        <span class="built_in">print</span>(token)</span><br><span class="line">        <span class="comment">#写入文件</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;token.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(token)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">login()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-练习及总结"><a href="#5-练习及总结" class="headerlink" title="5.练习及总结"></a>5.练习及总结</h2><p>其实拿到token之后，很多东西都可以拿了，可以试试拿一下网页里面的数据，分析过程大同小异</p>
+<p>分析抓包-分析参数-编写代码</p>
+<p>这种算是我们遇到一种反爬的手段，js逆向。</p>
+<p>爬虫咋说其实破解之后就很无聊的，而且代码结构千变万化，终究是个业务型的工具。</p>
+<p>当作一种技能吧。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/28/%E7%88%AC%E8%99%AB/%E9%A1%B9%E7%9B%AE/%E7%BA%A2%E4%BA%BA%E7%82%B9%E9%9B%86%E7%BD%91%E7%88%AC%E8%99%AB%EF%BC%88js%E9%80%86%E5%90%91%EF%BC%89/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-gyw/行测/资料分析/资料分析技巧篇-除法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/12/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90%E6%8A%80%E5%B7%A7%E7%AF%87-%E9%99%A4%E6%B3%95/">资料分析技巧篇-除法</a>
+    </h1>
+  
+
+        
+        <a href="/2023/06/12/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90%E6%8A%80%E5%B7%A7%E7%AF%87-%E9%99%A4%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2023-06-12T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大前提：所有技巧都源于选项</p>
+<p>总结：除法一般是无可奈何的时候才考虑，能做乘法其实优先乘法.</p>
+<h1 id="1-直除法"><a href="#1-直除法" class="headerlink" title="1.直除法"></a>1.直除法</h1><p>直除法，其实就是跟直接除，区别在于:</p>
+<ol>
+<li>分子不变</li>
+<li>看选项首位，首位不同，分母截两位，首位有相同，分母截三位，按照四舍五入去截。</li>
+</ol>
+<p>直除法比较适合下面这种选项数字多，但首位比较区分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">22706.22÷1.1167=</span><br><span class="line"></span><br><span class="line">A.15247.11  B.17354.03  C.19642.37 D.19407.03</span><br><span class="line"></span><br><span class="line">22706.22÷117≈194...</span><br><span class="line"></span><br><span class="line">所以选择D</span><br></pre></td></tr></table></figure>
+
+<p>但其实有时候，直接拿选项去乘以更快</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">71885.6÷0.217</span><br><span class="line"></span><br><span class="line">A.28w   B.33W   C.40W  D.75W</span><br><span class="line"></span><br><span class="line">拿b 33去×21 约等于66多很接近，直接就可以选b，其他要么不够，要么远超首位</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这也是为什么能做乘法，比作除法好。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">资料分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/12/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90%E6%8A%80%E5%B7%A7%E7%AF%87-%E9%99%A4%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-爬虫/爬虫Scrapy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/02/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%ABScrapy/">爬虫Scrapy</a>
+    </h1>
+  
+
+        
+        <a href="/2023/06/02/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%ABScrapy/" class="archive-article-date">
+  	<time datetime="2023-06-02T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>企业级应用比较广泛的一个框架</p>
+<h2 id="1-安装Scrapy"><a href="#1-安装Scrapy" class="headerlink" title="1.安装Scrapy"></a>1.安装Scrapy</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#1.终端运行（后面豆瓣源方便国内访问，单纯下载外国源太慢了）</span><br><span class="line">pip install scrapy -i https://pypi.douban.com/simple </span><br></pre></td></tr></table></figure>
+
+<h2 id="2-创建项目"><a href="#2-创建项目" class="headerlink" title="2.创建项目"></a>2.创建项目</h2><p>一般来说可以在pycharm终端运行，也可以在命令行运行，下面以pycharm终端操作运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#1.创建项目：项目名称不以数字开头，不要包含中文</span><br><span class="line">scrapy startproject 项目名称</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#2.创建爬虫文件：</span><br><span class="line">scrapy genspider 爬虫文件的名字 要爬取的地址</span><br></pre></td></tr></table></figure>
+
+<p>进入到spider目录执行上述命令</p>
+<p><img src="/img/20230602-2.jpg"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#3.运行爬虫</span><br><span class="line">scrapy crawl 爬虫文件</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/20230602-3.png"></p>
+<h2 id="3-爬虫文件结构"><a href="#3-爬虫文件结构" class="headerlink" title="3.爬虫文件结构"></a>3.爬虫文件结构</h2><p><img src="/img/20230602-4.jpg"></p>
+<h2 id="4-运行项目"><a href="#4-运行项目" class="headerlink" title="4.运行项目"></a>4.运行项目</h2><p>在运行项目时候，发现了一个robots.txt文件，这是一个<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/Robots.txt">爬虫协议</a>，是我们在日常爬虫时候，应该遵循一定的规范（当然你不遵守也是可以的，你就要综合考虑一下）</p>
+<p><img src="/img/20230602-5.png"></p>
+<p>可以看下百度的robots.txt,只需要在主页末端url加上&#x2F;robots.txt(可以看下百度的robots.txt)</p>
+<p><img src="/img/20230602-6.png"></p>
+<p>在scrpay框架中setting文件注释掉遵循robots.txt协议，我们就可以看到返回内容</p>
+<p><img src="/img/20230602-7.png"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/02/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%ABScrapy/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-gyw/行测/资料分析/资料分析技巧篇-加法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -735,367 +1143,6 @@
 
 
   
-    <article id="post-develop/hexo常用命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/04/13/develop/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">hexo常用命令</a>
-    </h1>
-  
-
-        
-        <a href="/2023/04/13/develop/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="archive-article-date">
-  	<time datetime="2023-04-13T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>由于使用hexo经常忘记命令，现在把他写下来。</p>
-<p>首先cmd进入到你的blog目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd e:/blog</span><br></pre></td></tr></table></figure>
-
-<p>常用命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo new xxx  //生成文章</span><br><span class="line">hexo clean  //清除缓存</span><br><span class="line">hexo g //生成</span><br><span class="line">hexo s //本地在端口4000部署</span><br><span class="line">hexo g //推送到你之前关联的的服务，例如github,gitee等</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/04/13/develop/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gyw/行测/数量关系/数量关系-30-牛吃草问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB-30-%E7%89%9B%E5%90%83%E8%8D%89%E9%97%AE%E9%A2%98/">数量关系30-牛吃草问题</a>
-    </h1>
-  
-
-        
-        <a href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB-30-%E7%89%9B%E5%90%83%E8%8D%89%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2023-04-13T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>牛吃草问题,简单来说就是消耗问题,存在草不断长出的现象,假设牛吃草单位份数不变，则有下列公式：<br>$$<br>Y&#x3D;(N-X)T<br>$$<br>其中Y代表原本的牧草量，N代表牛的个数,X代表草生长速度,T代表时间。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数量关系</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB-30-%E7%89%9B%E5%90%83%E8%8D%89%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gyw/行测/数量关系/数量关系解题公式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB%E8%A7%A3%E9%A2%98%E5%85%AC%E5%BC%8F/">数量关系解题公式</a>
-    </h1>
-  
-
-        
-        <a href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB%E8%A7%A3%E9%A2%98%E5%85%AC%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2023-04-13T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-错位排列"><a href="#1-错位排列" class="headerlink" title="1.错位排列"></a>1.错位排列</h2><p>错位全排列问题？其实很简单，在生活中可能都会遇到：</p>
-<blockquote>
-<p>“装错信封问题”是由当时最有名的数学家约翰·伯努利(Johann Bernoulli，1667－1748)的儿子丹尼尔·伯努利(Danid Bernoulli，1700－1782)提出来的，大意如下：<br>一个人写了 � 封不同的信及相应的 � 个不同的信封，他把这 � 封信都装错了信封，问都装错信封的装法有多少种？</p>
-</blockquote>
-<p>为了解决这个看似简单的问题，这种即为错位排列，其中涉及到容斥原理，想了想也是比较冷门考法，直接记公式吧。记D为排列方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">D1=0；//1个信封1个信箱，没办法错误摆放</span><br><span class="line">D2=1;</span><br><span class="line">D3=2;</span><br><span class="line">D4=9; //感觉记住D4=9就好了</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>递推公式<br>$$<br>Dn&#x3D;nDn−1+(−1)^n<br>$$</p>
-<h2 id="2-等比例关系"><a href="#2-等比例关系" class="headerlink" title="2.等比例关系"></a>2.等比例关系</h2><p>$$<br>  \frac{a}{b}&#x3D;\frac{c}{d}&#x3D;\frac{a+c}{b+d}&#x3D;\frac{a-c}{b-d}<br>$$</p>
-<p>这个在牛吃草那里可能稍微用到。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数量关系</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB%E8%A7%A3%E9%A2%98%E5%85%AC%E5%BC%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gyw/行测/科学推理/物理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%89%A9%E7%90%86/">物理</a>
-    </h1>
-  
-
-        
-        <a href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%89%A9%E7%90%86/" class="archive-article-date">
-  	<time datetime="2023-04-13T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="圆周运动"><a href="#圆周运动" class="headerlink" title="圆周运动"></a>圆周运动</h2><h3 id="1-向心力问题"><a href="#1-向心力问题" class="headerlink" title="1.向心力问题"></a>1.向心力问题</h3><p>​		F向&#x3D;mv²&#x2F;r</p>
-<p>1.判断好提供向心力，水平圆周一般是摩擦力提供向心力，当向心力&gt;最大摩擦力时候，会发生侧滑；</p>
-<p>​	轨道转弯，一般是支持力作为向心力。</p>
-<h1 id="电学"><a href="#电学" class="headerlink" title="电学"></a>电学</h1><h2 id="血型问题"><a href="#血型问题" class="headerlink" title="血型问题"></a>血型问题</h2><p>人类血型ABO，共有4种血型：A,B,AB,O<br>$$<br>A:I^AI^i<br>$$</p>
-<p>$$<br>B:I^BI^i<br>$$</p>
-<p>$$<br>AB:I^AI^B<br>$$</p>
-<p>$$<br>O:I^iI^i<br>$$</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">科学推理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%89%A9%E7%90%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1198,6 +1245,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
@@ -1210,11 +1261,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color3">复盘</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1226,11 +1277,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数量关系</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">复盘</a>
+                <a href="javascript:void(0)" class="js-tag color5">常识判断</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1238,7 +1285,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数量关系</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数字推理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">言语理解</a>
               </li>
              
               <li class="article-tag-list-item">
