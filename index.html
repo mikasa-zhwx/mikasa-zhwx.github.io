@@ -147,6 +147,222 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-develop/关于小程序推送消息问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/02/01/develop/%E5%85%B3%E4%BA%8E%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF%E9%97%AE%E9%A2%98/">关于小程序推送消息</a>
+    </h1>
+  
+
+        
+        <a href="/2024/02/01/develop/%E5%85%B3%E4%BA%8E%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2024-02-01T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>周二时候去演示系统时候，甲方提出要发送消息，是要在小程序发消息，之前没对接过。之前就搞过微信公众号的消息对接，还是外包弄的，但是这次外包也没弄过，要我们自己弄，听上去好像很难，实际上就花了一天的时间。</p>
+<p>（题外话，微信的小程序给的demo是错的，微信还贴心给了一种付费的托管平台，真是醉了，花了很多时间在研究它的文档）</p>
+<p>下面配置的大概步骤：</p>
+<ol>
+<li><p>配置：<br>需要在微信小程序后台配置一些基本的配置，这些可以参照官方文档。<br><img src="/img/20240201-1.png">。<br>这里的url是要验证的，只是需要验证一次即可；这里token可以理解成密钥，随意；这个EncodingAESKey，用小程序后台随机生成的吧，刚好也满足43位要求；消息加密一般选安全，格式通常用json吧；</p>
+</li>
+<li><p>验证：<br>一旦确定之后，微信会发送一个请求给你填写的url，来验证服务器支持响应<br>这里涉及第一个坑：文档写需要校验三个参数，实际上只需要校验三个。里面的Java的demo需要修改部分代码，首先要修改它的SHA1，它的encrypt参数不需要参与解密。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * SHA1 class</span><br><span class="line"> *</span><br><span class="line"> * 计算公众平台的消息签名接口.</span><br><span class="line"> */</span><br><span class="line">class SHA1 &#123;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * 用SHA1算法生成安全签名</span><br><span class="line">	 * @param token 票据</span><br><span class="line">	 * @param timestamp 时间戳</span><br><span class="line">	 * @param nonce 随机字符串</span><br><span class="line">	 * @param encrypt 密文</span><br><span class="line">	 * @return 安全签名</span><br><span class="line">	 * @throws AesException </span><br><span class="line">	 */</span><br><span class="line">	public static String getSHA1(String token, String timestamp, String nonce, String encrypt) throws AesException</span><br><span class="line">			  &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			String[] array = new String[] &#123; token, timestamp, nonce &#125;;</span><br><span class="line">			StringBuffer sb = new StringBuffer();</span><br><span class="line">			// 字符串排序</span><br><span class="line">			Arrays.sort(array);</span><br><span class="line">			for (int i = 0; i &lt;3; i++) &#123;</span><br><span class="line">				sb.append(array[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			String str = sb.toString();</span><br><span class="line">			// SHA1签名生成</span><br><span class="line">			MessageDigest md = MessageDigest.getInstance(&quot;SHA-1&quot;);</span><br><span class="line">			md.update(str.getBytes());</span><br><span class="line">			byte[] digest = md.digest();</span><br><span class="line"></span><br><span class="line">			StringBuffer hexstr = new StringBuffer();</span><br><span class="line">			String shaHex = &quot;&quot;;</span><br><span class="line">			for (int i = 0; i &lt; digest.length; i++) &#123;</span><br><span class="line">				shaHex = Integer.toHexString(digest[i] &amp; 0xFF);</span><br><span class="line">				if (shaHex.length() &lt; 2) &#123;</span><br><span class="line">					hexstr.append(0);</span><br><span class="line">				&#125;</span><br><span class="line">				hexstr.append(shaHex);</span><br><span class="line">			&#125;</span><br><span class="line">			return hexstr.toString();</span><br><span class="line">		&#125; catch (Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">			throw new AesException(AesException.ComputeSignatureError);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其次就是第二个坑，就是获取微信的请求参数，一开始我以为它是直接拼接在url里面的，其实它发送是在data里面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">     *  验证小程序url</span><br><span class="line">     */</span><br><span class="line">    @GetMapping(&quot;sendMessage&quot;)</span><br><span class="line">    public String sendMessgeToMinProgram(@RequestParam Map&lt;String,String&gt; param) throws AesException &#123;</span><br><span class="line"></span><br><span class="line">        String token = &quot;xxxxx&quot;; //这里填写小程序配置token</span><br><span class="line">        String encodingAesKey = &quot;xxx&quot;;这里填写小程序配置encodingAesKey</span><br><span class="line">        String appId = WechatConfig.MP_APPID;  //配置小程序的mp_appid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        String msgSignature = param.get(&quot;signature&quot;);  //小程序携带的参数</span><br><span class="line">        String timeStamp = param.get(&quot;timestamp&quot;);</span><br><span class="line">        String nonce = param.get(&quot;nonce&quot;);</span><br><span class="line">        String echoStr = param.get(&quot;echostr&quot;);</span><br><span class="line"></span><br><span class="line">		//WXBizMsgCrypt是demo验证类，里面的verifyUrl就是验证方法</span><br><span class="line">       	WXBizMsgCrypt wxBizMsgCrypt =new WXBizMsgCrypt(token,encodingAesKey,appId);</span><br><span class="line">        String result=wxBizMsgCrypt.verifyUrl(msgSignature,timeStamp,nonce,echoStr);</span><br><span class="line"></span><br><span class="line">        System.err.println(&quot;result=&quot;+result);</span><br><span class="line"></span><br><span class="line">        System.err.println(&quot;验证成功&quot;);</span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">WXBizMsgCrypt类：</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">	 * 验证URL</span><br><span class="line">	 * @param msgSignature 签名串，对应URL参数的msg_signature</span><br><span class="line">	 * @param timeStamp 时间戳，对应URL参数的timestamp</span><br><span class="line">	 * @param nonce 随机串，对应URL参数的nonce</span><br><span class="line">	 * @param echoStr 随机串，对应URL参数的echostr</span><br><span class="line">	 * </span><br><span class="line">	 * @return 解密之后的echostr</span><br><span class="line">	 * @throws AesException 执行失败，请查看该异常的错误码和具体的错误信息</span><br><span class="line">	 */</span><br><span class="line">	public String verifyUrl(String msgSignature, String timeStamp, String nonce, String echoStr)</span><br><span class="line">			throws AesException &#123;</span><br><span class="line">		String signature = SHA1.getSHA1(token, timeStamp, nonce, echoStr);</span><br><span class="line"></span><br><span class="line">		if (!signature.equals(msgSignature)) &#123;</span><br><span class="line">			throw new AesException(AesException.ValidateSignatureError);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		//String result = decrypt(echoStr);</span><br><span class="line">		return echoStr;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实就是WXBizMsgCrypt类的verifyUrl里面的signature跟微信请求一致的话，我们原路返回微信请求的echostr，说明成功，微信会把服务器标识通过，即可进入下一步了。</p>
+<p>（题外话，如果解密过程出现base64:Last encoded character (before the paddings if any…))的错误，这多半是下面这个依赖没引入。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;commons-codec&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;commons-codec&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.9&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>模板申请：<br><img src="/img/20240201-2.png"></p>
+</li>
+<li><p>用户授权:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">需要小程序调起授权接口</span><br><span class="line">//uniapp封装了wx.requestSubscribeMessage接口</span><br><span class="line">uni.requestSubscribeMessage(&#123;</span><br><span class="line"> tmplIds: [&#x27;4ondVRxk4L20ihrJ3iI15BDK72XatGPxE0MeCVwHasQ&#x27;],</span><br><span class="line">  success (res) &#123;</span><br><span class="line">	  console.log(res);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>消息推送实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 小程序发送通知工具类</span><br><span class="line"> */</span><br><span class="line">public class WeChatMiniProgramSendUtil &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static final String API_URL = &quot;https://api.weixin.qq.com/cgi-bin/message/subscribe/send&quot;;</span><br><span class="line"></span><br><span class="line">    public static void sendSubscribeMessage(String accessToken, String openid, String templateId, String page, String data) throws Exception &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            String url = API_URL + &quot;?access_token=&quot; + accessToken;</span><br><span class="line"></span><br><span class="line">            URL apiUrl = new URL(url);</span><br><span class="line">            HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();</span><br><span class="line">            connection.setRequestMethod(&quot;POST&quot;);</span><br><span class="line">            connection.setRequestProperty(&quot;Content-Type&quot;, &quot;application/json;charset=UTF-8&quot;);</span><br><span class="line">            connection.setDoOutput(true);</span><br><span class="line"></span><br><span class="line">            // 构建请求体</span><br><span class="line">            String body = buildRequestBody(openid, templateId, page, data);</span><br><span class="line">            byte[] requestBodyBytes = body.getBytes(StandardCharsets.UTF_8);</span><br><span class="line"></span><br><span class="line">            // 发送请求</span><br><span class="line">            connection.getOutputStream().write(requestBodyBytes);</span><br><span class="line"></span><br><span class="line">            // 读取响应</span><br><span class="line">            int responseCode = connection.getResponseCode();</span><br><span class="line">            BufferedReader reader = new BufferedReader(new 		  InputStreamReader(connection.getInputStream()));</span><br><span class="line">            StringBuilder response = new StringBuilder();</span><br><span class="line">            String line;</span><br><span class="line">            while ((line = reader.readLine()) != null) &#123;</span><br><span class="line">                response.append(line);</span><br><span class="line">            &#125;</span><br><span class="line">            reader.close();</span><br><span class="line"></span><br><span class="line">            if (responseCode == HttpURLConnection.HTTP_OK) &#123;</span><br><span class="line">                // 请求成功处理逻辑</span><br><span class="line">                System.out.println(&quot;发送订阅消息成功&quot;);</span><br><span class="line">                System.out.println(response.toString());</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 请求失败处理逻辑</span><br><span class="line">                System.out.println(&quot;发送订阅消息失败&quot;);</span><br><span class="line">                System.out.println(&quot;响应码：&quot; + responseCode);</span><br><span class="line">                System.out.println(response.toString());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            connection.disconnect();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            // 异常处理逻辑</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static String buildRequestBody(String openid, String templateId, String page, String data) &#123;</span><br><span class="line">        // 构建请求体的JSON字符串</span><br><span class="line">//        return String.format(</span><br><span class="line">//                &quot;&#123;\&quot;touser\&quot;:\&quot;%s\&quot;,\&quot;template_id\&quot;:\&quot;%s\&quot;,\&quot;page\&quot;:\&quot;%s\&quot;,\&quot;data\&quot;:%s&#125;&quot;,</span><br><span class="line">//                openid, templateId, page, data);</span><br><span class="line"></span><br><span class="line">        // 构建请求体的JSON字符串</span><br><span class="line">        return String.format(</span><br><span class="line">                &quot;&#123;\&quot;touser\&quot;:\&quot;%s\&quot;,\&quot;template_id\&quot;:\&quot;%s\&quot;,\&quot;page\&quot;:\&quot;%s\&quot;,\&quot;data\&quot;:&#123;\&quot;number2\&quot;:&#123;\&quot;value\&quot;:\&quot;11\&quot;&#125;,\&quot;amount3\&quot;:&#123;\&quot;value\&quot;:\&quot;101\&quot;&#125;,\&quot;time5\&quot;:&#123;\&quot;value\&quot;:\&quot;2024-01-31\&quot;&#125;,\&quot;thing4\&quot;:&#123;\&quot;value\&quot;:\&quot;芙宁娜\&quot;&#125;&#125;&#125;&quot;,</span><br><span class="line">                openid, templateId, page);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //推送消息的时候需要accessToken，这里是获取token的方法，在实际环境中，一般是定时刷新，两个小时内有效，获取accesstoken时需要appid和secret信息，一般是后台参数或常量进行配置。</span><br><span class="line">    //获取accessToken的请求接口</span><br><span class="line">    private final static String GetAccessToken = &quot;https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=&#123;appid&#125;&amp;secret=&#123;secret&#125;&quot;;</span><br><span class="line"></span><br><span class="line">    public static String refreshAccessToken(String appid, String secret) throws Exception &#123;</span><br><span class="line">        if(StringUtils.isEmpty(appid) || StringUtils.isEmpty(secret))&#123;</span><br><span class="line">            //logger.error(&quot;刷新微信AccessToken时，缺少appid或secret参数！&quot;);</span><br><span class="line">            throw new Exception(&quot;刷新微信AccessToken时，缺少appid或secret参数！&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        Map&lt;String, Object&gt; param = new HashMap&lt;&gt;();</span><br><span class="line">        param.put(&quot;appid&quot;,appid);</span><br><span class="line">        param.put(&quot;secret&quot;,secret);</span><br><span class="line">        RestTemplate restTemplate =new RestTemplate();</span><br><span class="line">        ResponseEntity&lt;JSONObject&gt; resp = restTemplate.getForEntity(GetAccessToken, JSONObject.class,param);</span><br><span class="line">        JSONObject jsonObj = resp.getBody();</span><br><span class="line">        String accessToken = null;</span><br><span class="line">        if(jsonObj != null)&#123;</span><br><span class="line">            accessToken = jsonObj.getString(&quot;access_token&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return accessToken;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>controller实现的方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value = &quot;sendMsg&quot;)</span><br><span class="line">       @ResponseBody</span><br><span class="line">       public String sendMsg(HttpServletRequest request) throws Exception &#123;</span><br><span class="line">           //String token = request.getParameter(&quot;token&quot;);</span><br><span class="line">           //请求 微信接口 获取 accessToken</span><br><span class="line">           String accessToken = WeChatMiniProgramSendUtil.refreshAccessToken(&quot;你的appid&quot;,&quot;你的小程序密钥&quot;);</span><br><span class="line">           String openid = &quot;xxxxx&quot;;  //用户微信小程序openid</span><br><span class="line">           String templateId = &quot;xxxxxxxxxxx&quot;; //微信小程序模板的id</span><br><span class="line">           String page = &quot;&quot;;</span><br><span class="line">           // 构建订阅消息内容的JSON对象</span><br><span class="line">           // 构建订阅消息内容的JSON对象</span><br><span class="line">           JSONObject messageData = new JSONObject();</span><br><span class="line">           JSONObject data = new JSONObject();</span><br><span class="line">           JSONObject number2 =new  JSONObject();</span><br><span class="line">           number2.put(&quot;value&quot;,&quot;test11&quot;);</span><br><span class="line">           JSONObject amount3 =new  JSONObject();</span><br><span class="line">           amount3.put(&quot;value&quot;,&quot;100&quot;);</span><br><span class="line">           JSONObject time5 =new  JSONObject();</span><br><span class="line">           time5.put(&quot;value&quot;,&quot;2023-06-30&quot;);</span><br><span class="line">           JSONObject thing4 =new  JSONObject();</span><br><span class="line">           thing4.put(&quot;value&quot;,&quot;芙宁娜&quot;);</span><br><span class="line">           messageData.put(&quot;number2&quot;,number2);</span><br><span class="line">           messageData.put(&quot;amount3&quot;,amount3);</span><br><span class="line">           messageData.put(&quot;time5&quot;,time5);</span><br><span class="line">           messageData.put(&quot;thing4&quot;,thing4);</span><br><span class="line">           // 将订阅消息内容转换为JSON字符串</span><br><span class="line">           String jsonData = JSONUtils.toJSONString(messageData);</span><br><span class="line">           System.err.println(jsonData);</span><br><span class="line">           WeChatMiniProgramSendUtil.sendSubscribeMessage(accessToken,openid,templateId,page,jsonData);</span><br><span class="line">           return null;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的坑主要是data格式，里面的格式必须要按照下面这种编排，传统的JSON.toString（）还不行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private static String buildRequestBody(String openid, String templateId, String page, String data) &#123;</span><br><span class="line">      // 构建请求体的JSON字符串</span><br><span class="line">      return String.format(</span><br><span class="line">              &quot;&#123;\&quot;touser\&quot;:\&quot;%s\&quot;,\&quot;template_id\&quot;:\&quot;%s\&quot;,\&quot;page\&quot;:\&quot;%s\&quot;,\&quot;data\&quot;:&#123;\&quot;number2\&quot;:&#123;\&quot;value\&quot;:\&quot;11\&quot;&#125;,\&quot;amount3\&quot;:&#123;\&quot;value\&quot;:\&quot;101\&quot;&#125;,\&quot;time5\&quot;:&#123;\&quot;value\&quot;:\&quot;2024-01-31\&quot;&#125;,\&quot;thing4\&quot;:&#123;\&quot;value\&quot;:\&quot;芙宁娜\&quot;&#125;&#125;&#125;&quot;,</span><br><span class="line">              openid, templateId, page);</span><br><span class="line">   </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里要对应小程序模板的data内容，要注意是data.thing4.value才是属性值。<br><img src="/img/20240201-3.png"></p>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/develop//" class="article-tag-list-link color3">develop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/02/01/develop/%E5%85%B3%E4%BA%8E%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-gyw/行测/数量关系/数量关系-空瓶换酒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/01/19/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB-%E7%A9%BA%E7%93%B6%E6%8D%A2%E9%85%92/">（非重点）数量关系-空瓶换酒</a>
+    </h1>
+  
+
+        
+        <a href="/2024/01/19/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB-%E7%A9%BA%E7%93%B6%E6%8D%A2%E9%85%92/" class="archive-article-date">
+  	<time datetime="2024-01-19T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这属于低频考点，考的频率不高。抓住主要矛盾</p>
+<p>例如N个空瓶,换1瓶酒</p>
+<p>等价于</p>
+<p>N个空瓶&#x3D;1份酒+1个空瓶</p>
+<p>等于</p>
+<p>(N-1)个空瓶&#x3D;1份酒</p>
+<p>这里注意一个前提，剩下的空瓶可以满足N个空瓶换一瓶酒的问题</p>
+<p>例如6个空瓶换一瓶酒，共有35个空瓶，可以换多少瓶？</p>
+<p>35&#x2F;（6-1）&#x3D;35&#x2F;5&#x3D;7</p>
+<p>这里7要减1，也就是6瓶，也就是出现整除的时候要减去1.</p>
+<p>如果是36个空瓶，则可以换36&#x2F;5&#x3D;7….1 ,也就是7个空瓶，出现余数则不需要减1.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数字推理</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/01/19/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB-%E7%A9%BA%E7%93%B6%E6%8D%A2%E9%85%92/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-gyw/复盘/2023年深圳市考" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -626,91 +842,6 @@
 
 
   
-    <article id="post-gyw/行测/科学推理/电" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%94%B5/">电</a>
-    </h1>
-  
-
-        
-        <a href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%94%B5/" class="archive-article-date">
-  	<time datetime="2023-11-29T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="电学"><a href="#电学" class="headerlink" title="电学"></a>电学</h1><h2 id="并联电路"><a href="#并联电路" class="headerlink" title="并联电路"></a>并联电路</h2><p>并联电路，一条旁路电阻变小，总电阻变小。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">科学推理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%94%B5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-gyw/行测/言语理解/言语理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -813,66 +944,28 @@
 
 
   
-    <article id="post-gyw/行测/科学推理/光，声" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-gyw/行测/科学推理/地理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/28/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E5%85%89%EF%BC%8C%E5%A3%B0/">光,声</a>
+      <a class="article-title" href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E5%9C%B0%E7%90%86/">地理</a>
     </h1>
   
 
         
-        <a href="/2023/11/28/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E5%85%89%EF%BC%8C%E5%A3%B0/" class="archive-article-date">
-  	<time datetime="2023-11-28T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-28</time>
+        <a href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E5%9C%B0%E7%90%86/" class="archive-article-date">
+  	<time datetime="2023-11-29T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="光"><a href="#光" class="headerlink" title="光"></a>光</h1><h2 id="1-光的直线传播"><a href="#1-光的直线传播" class="headerlink" title="1.光的直线传播"></a>1.光的直线传播</h2><p>光在<strong>真空</strong>或者<strong>同种均匀</strong>的介质中沿直线传播。</p>
-<p>实例：小孔成像（倒立实像），日月食，影子形成。</p>
-<p>光速约为3*10^8次方米每秒。</p>
-<h2 id="2-光的反射"><a href="#2-光的反射" class="headerlink" title="2.光的反射"></a>2.光的反射</h2><p><img src="/img/gyw/20231128-1.png"></p>
-<p><img src="/img/gyw/20231128-2.png"></p>
-<p><img src="/img/gyw/20231128-3.png"></p>
-<p>（角反射器的原理）</p>
-<h2 id="3-平面镜成像"><a href="#3-平面镜成像" class="headerlink" title="3.平面镜成像"></a>3.平面镜成像</h2><p><img src="/img/gyw/20231128-4.png"></p>
-<p>（平面镜成像上下一致，左右相反）</p>
-<p>拓展：</p>
-<p>凸透镜成像：</p>
-<p><img src="/img/gyw/20240103-1.png"></p>
-<h2 id="4-光的折射"><a href="#4-光的折射" class="headerlink" title="4.光的折射"></a>4.光的折射</h2><p><img src="/img/gyw/20231128-5.png"></p>
-<p><img src="/img/gyw/20231128-6.png"></p>
-<p>（日出也是光的折射，我们看的日出是椭圆形并非圆形，这是光的折射原因）</p>
-<p><img src="/img/gyw/20231128-7.png"></p>
-<p>（高速公路的海市蜃楼）</p>
-<p><img src="/img/gyw/20231128-8.png"></p>
-<p>（岸高水浅）（水里的人看岸上的东西比实际高，岸上的人看水里的东西比实际浅）</p>
-<p><img src="/img/gyw/20231128-9.png"></p>
-<p>（谁去看，光线进入谁的眼睛）</p>
-<p><img src="/img/gyw/20231128-10.png"></p>
-<p><img src="/img/gyw/20231128-11.png"></p>
-<p>（利用光路可逆性，假设右边同等位置也射入一条光源，那么就会跟左边光路重合）</p>
-<h2 id="5-光的色散"><a href="#5-光的色散" class="headerlink" title="5.光的色散"></a>5.光的色散</h2><p><img src="/img/gyw/20231128-12.png"></p>
-<p>红光波长最长，偏折最小。</p>
-<h2 id="6-凸透镜，凹透镜"><a href="#6-凸透镜，凹透镜" class="headerlink" title="6.凸透镜，凹透镜"></a>6.凸透镜，凹透镜</h2><p><img src="/img/gyw/20231128-13.png"></p>
-<p><img src="/img/gyw/20231128-14.png"></p>
-<p>（近凹远凸，近视看不清远，远视眼看不清近）</p>
-<h1 id="2-声"><a href="#2-声" class="headerlink" title="2.声"></a>2.声</h1><h2 id="1-声音产生与传播"><a href="#1-声音产生与传播" class="headerlink" title="1.声音产生与传播"></a>1.声音产生与传播</h2><p><img src="/img/gyw/20231128-15.png"></p>
-<p>声音在固体传播最快，液体次之，气体最慢。</p>
-<h2 id="2-声音的特征"><a href="#2-声音的特征" class="headerlink" title="2.声音的特征"></a>2.声音的特征</h2><p><img src="/img/gyw/20231128-16.png"></p>
-<p><img src="/img/gyw/20231128-17.png"></p>
-<p><img src="/img/gyw/20231128-18.png"></p>
-<p>（敲和吹的区别）</p>
-<p><img src="/img/gyw/20231128-19.png"></p>
-<p><img src="/img/gyw/20231128-20.png"></p>
-<h2 id="3-超声和次声"><a href="#3-超声和次声" class="headerlink" title="3.超声和次声"></a>3.超声和次声</h2><p><img src="/img/gyw/20231128-21.png"></p>
-<h2 id="4-声音的利用"><a href="#4-声音的利用" class="headerlink" title="4.声音的利用"></a>4.声音的利用</h2><p><img src="/img/gyw/20231128-22.png"></p>
-<h2 id="5-噪声的防止"><a href="#5-噪声的防止" class="headerlink" title="5.噪声的防止"></a>5.噪声的防止</h2><p><img src="/img/gyw/20231128-23.png"></p>
+        <h1 id="地理部分"><a href="#地理部分" class="headerlink" title="地理部分"></a>地理部分</h1><h2 id="地转偏向力："><a href="#地转偏向力：" class="headerlink" title="地转偏向力："></a>地转偏向力：</h2><p>地球自转产生的一种偏向力，能使北半球的水平运动的风，水流<strong>向右偏转</strong>，南半球则<strong>相反</strong>。（这里我觉得要注意低压气旋问题，低压气旋是指中心低压，周围高压，所以气体从四周流向中间）</p>
+<h2 id="并联电路"><a href="#并联电路" class="headerlink" title="并联电路"></a>并联电路</h2><p>并联电路，一条旁路电阻变小，总电阻变小。</p>
 
       
 
@@ -907,103 +1000,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/28/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E5%85%89%EF%BC%8C%E5%A3%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gyw/申论/大作文" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/09/06/gyw/%E7%94%B3%E8%AE%BA/%E5%A4%A7%E4%BD%9C%E6%96%87/">大作文</a>
-    </h1>
-  
-
-        
-        <a href="/2023/09/06/gyw/%E7%94%B3%E8%AE%BA/%E5%A4%A7%E4%BD%9C%E6%96%87/" class="archive-article-date">
-  	<time datetime="2023-09-06T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="策论文"><a href="#策论文" class="headerlink" title="策论文"></a>策论文</h2><p>策论文的观点基本从材料抄，一般观点在5点左右，需要整合所给材料。其实文章总体写起来有种八股文的味道</p>
-<p>从</p>
-<p>1.提出问题（提出观点）</p>
-<p>2.分析问题（分析背景，分析不足）</p>
-<p>3.整合材料观点（一般5个方面）</p>
-<p>4.结尾点题</p>
-<p>其实不足就是观点需要加强的地方，把5个观点转换为不足，基本可以组成这一段了；</p>
-<p>整合材料观点这里，一般我们用第一，第二，第三，第四，第五，这样开头去写。最好不要用1.2.3.4这样写，基本上申论除了小题才能用1，2，3，4</p>
-<h2 id="议论文"><a href="#议论文" class="headerlink" title="议论文"></a>议论文</h2><p>归纳分论点，一般在3点左右；其实分论点有机会从小题归纳出来；</p>
-<p>开头写一段总结</p>
-<p>中间3个点，其中论点写出来，外加材料的举例论证可以构成一个段落</p>
-<p>结尾写一段总结。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">申论</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/09/06/gyw/%E7%94%B3%E8%AE%BA/%E5%A4%A7%E4%BD%9C%E6%96%87/">展开全文 >></a>
+          <a class="article-more-a" href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E5%9C%B0%E7%90%86/">展开全文 >></a>
         </p>
       
 
@@ -1135,10 +1132,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日常</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
@@ -1151,6 +1144,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
@@ -1159,11 +1156,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">判断推理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">申论</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">判断推理</a>
+                <a href="javascript:void(0)" class="js-tag color5">科学推理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1171,7 +1172,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">科学推理</a>
+                <a href="javascript:void(0)" class="js-tag color5">言语理解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1180,10 +1181,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数字推理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">言语理解</a>
               </li>
              
               <li class="article-tag-list-item">
