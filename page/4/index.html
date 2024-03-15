@@ -147,6 +147,311 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-爬虫/爬虫Scrapy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/02/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%ABScrapy/">爬虫Scrapy</a>
+    </h1>
+  
+
+        
+        <a href="/2023/06/02/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%ABScrapy/" class="archive-article-date">
+  	<time datetime="2023-06-02T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>企业级应用比较广泛的一个框架</p>
+<h2 id="1-安装Scrapy"><a href="#1-安装Scrapy" class="headerlink" title="1.安装Scrapy"></a>1.安装Scrapy</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#1.终端运行（后面豆瓣源方便国内访问，单纯下载外国源太慢了）</span><br><span class="line">pip install scrapy -i https://pypi.douban.com/simple </span><br></pre></td></tr></table></figure>
+
+<h2 id="2-创建项目"><a href="#2-创建项目" class="headerlink" title="2.创建项目"></a>2.创建项目</h2><p>一般来说可以在pycharm终端运行，也可以在命令行运行，下面以pycharm终端操作运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#1.创建项目：项目名称不以数字开头，不要包含中文</span><br><span class="line">scrapy startproject 项目名称</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#2.创建爬虫文件：</span><br><span class="line">scrapy genspider 爬虫文件的名字 要爬取的地址</span><br></pre></td></tr></table></figure>
+
+<p>进入到spider目录执行上述命令</p>
+<p><img src="/img/20230602-2.jpg"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#3.运行爬虫</span><br><span class="line">scrapy crawl 爬虫文件</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/20230602-3.png"></p>
+<h2 id="3-爬虫文件结构"><a href="#3-爬虫文件结构" class="headerlink" title="3.爬虫文件结构"></a>3.爬虫文件结构</h2><p><img src="/img/20230602-4.jpg"></p>
+<h2 id="4-运行项目"><a href="#4-运行项目" class="headerlink" title="4.运行项目"></a>4.运行项目</h2><p>在运行项目时候，发现了一个robots.txt文件，这是一个<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/Robots.txt">爬虫协议</a>，是我们在日常爬虫时候，应该遵循一定的规范（当然你不遵守也是可以的，你就要综合考虑一下）</p>
+<p><img src="/img/20230602-5.png"></p>
+<p>可以看下百度的robots.txt,只需要在主页末端url加上&#x2F;robots.txt(可以看下百度的robots.txt)</p>
+<p><img src="/img/20230602-6.png"></p>
+<p>在scrpay框架中setting文件注释掉遵循robots.txt协议，我们就可以看到返回内容</p>
+<p><img src="/img/20230602-7.png"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/02/%E7%88%AC%E8%99%AB/%E7%88%AC%E8%99%ABScrapy/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-gyw/行测/资料分析/资料分析技巧篇-加法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/06/02/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90%E6%8A%80%E5%B7%A7%E7%AF%87-%E5%8A%A0%E6%B3%95/">资料分析技巧篇-加法</a>
+    </h1>
+  
+
+        
+        <a href="/2023/06/02/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90%E6%8A%80%E5%B7%A7%E7%AF%87-%E5%8A%A0%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2023-06-02T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-06-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大前提：所有技巧都源于选项</p>
+<h2 id="1-尾数法"><a href="#1-尾数法" class="headerlink" title="1.尾数法"></a>1.尾数法</h2><p>这个应该最先考虑，这种情况一般是选项没带单位，且尾数各不相同，那么我们直接算出尾数即可，没有必要算出每个选项。</p>
+<h2 id="2-从头算起"><a href="#2-从头算起" class="headerlink" title="2.从头算起"></a>2.从头算起</h2><p>对于普遍的加法而言，公考更关心的是它的首位，比如99+48，小学加法是从后往前算，如果我们从前往后算，则会快一点，例如1245874+45784125这种，我们可以大概估算出12+45&#x3D;57也就是答案肯定在57或者58（要看又没进位）开头，这样则可以快速锁定答案，因为我并不关心具体多少。</p>
+<h2 id="常识加法"><a href="#常识加法" class="headerlink" title=".*常识加法"></a>.*常识加法</h2><p>说起这个，不得不回忆起23广东省考的第一题，简直就是噩梦，当时就是卡住了，事后一看答案分析，运用到常识加法。什么意思？举个例子，人口&#x3D;男+女。不管什么统计，哪个国家，人口都可以这样算。放到资料分析就有点玄乎。</p>
+<p>以23广东省考为例：</p>
+<p><img src="/img/gyw/20230607-1.png"></p>
+<p><img src="/img/gyw/20230607-2.png"></p>
+<p>粉笔参考答案</p>
+<p>定位表1，可知2020年广东省各经济区域财政科学技术支出情况。根据<strong>省本级&#x3D;全省-珠江三角洲核心区-沿海经济带东翼地区-沿海经济带西翼地区-北部生态发展区</strong>，可得：<strong>2020年广东省省本级财政科学技术支出&#x3D;955.73-823.41-12.98-8.69-26.69&#x3D;83.96亿元</strong>。</p>
+<p>故正确答案为A。</p>
+<p>注：根据文字和表1材料中2021年的财政科学技术支出数据，可推算出省本级（102.05）&#x3D;全省（982.76）-珠江三角洲核心区（845.09）-沿海经济带东翼地区（15.22）-沿海经济带西翼地区（5.52）-北部生态发展区（14.88）</p>
+<p>不考这道题我都不知道省本级的概念：<strong>省本级通常指省级政府本身有权限管辖的行政区域，而全省则指省级政府本身管辖的所有行政区域，包括省本级及其他地方政府管辖的地区</strong>。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">资料分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/06/02/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90%E6%8A%80%E5%B7%A7%E7%AF%87-%E5%8A%A0%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-尚硅谷的mysql/(四)Mysql多表查询" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/05/25/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E5%9B%9B)Mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">(四)Mysql多表查询</a>
+    </h1>
+  
+
+        
+        <a href="/2023/05/25/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E5%9B%9B)Mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/" class="archive-article-date">
+  	<time datetime="2023-05-25T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h1><p>实际开发中经常出现的是多表查询，多表查询容易出现的一个问题是出现笛卡尔积，所谓笛卡尔积是指</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">当集合A(a,b,c)和集合B（x,y）连表查询时</span><br><span class="line">出现</span><br><span class="line">2*3=6条结果时，即为笛卡尔积，也就是ax,ay,bx,by,cx,cy</span><br><span class="line"></span><br><span class="line">select *</span><br><span class="line">from A,B;   //不加链接条件就容易出现笛卡尔积</span><br></pre></td></tr></table></figure>
+
+<p>所以应该加上多表之间的关联条件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">*</span><br><span class="line">from A,B</span><br><span class="line">where A.id=B.id  //这样会匹配特定记录，但如果出现A.id=null或者A.id跟B无法匹配时，这样记录则不会返					回</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="一-链接方式"><a href="#一-链接方式" class="headerlink" title="一.链接方式"></a>一.链接方式</h2><h3 id="1-等值链接和非等值连接"><a href="#1-等值链接和非等值连接" class="headerlink" title="1.等值链接和非等值连接"></a>1.等值链接和非等值连接</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select emp.id,emp.dept_id,dept.dept_id</span><br><span class="line">from emp,dept</span><br><span class="line">where emp.dept_id=dept.dept_id  //等值链接</span><br><span class="line"></span><br><span class="line">select emp.id,emp.dept_id,job.greed</span><br><span class="line">from emp,job</span><br><span class="line">where emp.salary between job.low_salart and job.high_salary   //非等值链接</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-自链接和非自链接"><a href="#2-自链接和非自链接" class="headerlink" title="2.自链接和非自链接"></a>2.自链接和非自链接</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">与自己相连-自链接</span><br><span class="line">不与自己相连-非自链接</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">select emp.id,emp.dept_id,mgr.id</span><br><span class="line">from emp,emp as mgr</span><br><span class="line">where emp.manage_id=mgr.id  //自链接</span><br><span class="line"></span><br><span class="line">select emp.id,emp.dept_id,dept.dept_id</span><br><span class="line">from emp,dept</span><br><span class="line">where emp.dept_id=dept.dept_id  //非自链接</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-内链接和外链接"><a href="#3-内链接和外链接" class="headerlink" title="3.内链接和外链接"></a>3.内链接和外链接</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#内链接</span><br><span class="line">只查询满足两张表满足条件的数据</span><br><span class="line">select </span><br><span class="line">*</span><br><span class="line">from A,B</span><br><span class="line">where A.id=B.id</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#外链接：除了满足条件的数据，还包括左表或者右表，或者全部的数据</span><br><span class="line">	#左连接:除了满足条件的数据，还包括左表不满足条件的数据</span><br><span class="line">        select </span><br><span class="line">        *</span><br><span class="line">        from A</span><br><span class="line">        left join B on  A.id=B.id</span><br><span class="line">    #右连接:除了满足条件的数据，还包括右表不满足条件的数据</span><br><span class="line">        select </span><br><span class="line">        *</span><br><span class="line">        from A</span><br><span class="line">        right join B on A.id=B.id</span><br><span class="line">        </span><br><span class="line">    #全连接</span><br><span class="line">    	select </span><br><span class="line">        *</span><br><span class="line">        from A</span><br><span class="line">        full join B on A.id=B.id   //orcale支持这些写法，mysql不支持</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+<h2 id="二-UNION和UNION-ALL"><a href="#二-UNION和UNION-ALL" class="headerlink" title="二.UNION和UNION ALL"></a>二.UNION和UNION ALL</h2><p>此关键字可以将两张表链接起来，使用此关键字必须保证两表的列数和列相同</p>
+<p>union会去除重复数据，union all则不会；所以能用union all尽量使用union all节省效率。</p>
+<h2 id="三-7种链接方式"><a href="#三-7种链接方式" class="headerlink" title="三.7种链接方式"></a>三.7种链接方式</h2><p><img src="/img/20230525-1.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">#左上角:左连接</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">left join departments d on e.department_id=d.department_id</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#右上角:右连接</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line"></span><br><span class="line">#左中</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line">where d.department_id is null</span><br><span class="line"></span><br><span class="line">#中：内链接</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">join departments d on e.department_id=d.department_id</span><br><span class="line"></span><br><span class="line">#右中</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line">where e.department_id is null;</span><br><span class="line"></span><br><span class="line">#左下</span><br><span class="line">#方式1：左上+右中</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">left join departments d on e.department_id=d.department_id</span><br><span class="line">union all</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line">where e.department_id is null;</span><br><span class="line">#方式2：左中+右上</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line">where d.department_id is null</span><br><span class="line">union all</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#右下</span><br><span class="line">#左中+右中</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line">where d.department_id is null</span><br><span class="line">union all</span><br><span class="line">select employee_id,department_name </span><br><span class="line">from employees e </span><br><span class="line">right join departments d on e.department_id=d.department_id</span><br><span class="line">where e.department_id is null;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="四-SQL99新特性（了解即可）"><a href="#四-SQL99新特性（了解即可）" class="headerlink" title="四.SQL99新特性（了解即可）"></a>四.SQL99新特性（了解即可）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#natural join </span><br><span class="line">#自然链接本质上是等值链接，他会自动帮你查找两张表中所有相同的字段</span><br><span class="line"></span><br><span class="line">select emp.id,emp.dept_id,dept.dept_id</span><br><span class="line">from emp </span><br><span class="line">join dept on emp.dept_id=dept.dept_id</span><br><span class="line">and emp.location_id=dept.location_id</span><br><span class="line"></span><br><span class="line">等价于</span><br><span class="line">select emp.id,emp.dept_id,dept.dept_id</span><br><span class="line">from emp </span><br><span class="line">natural join dept </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#USING</span><br><span class="line">#使用using表示两张表共同的字段来作为链接条件</span><br><span class="line"></span><br><span class="line">select emp.id,emp.dept_id,dept.dept_id</span><br><span class="line">from emp </span><br><span class="line">join dept </span><br><span class="line">using(deparment_id)</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日常</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/MySQL//" class="article-tag-list-link color1">MySQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/05/25/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E5%9B%9B)Mysql%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-develop/MySQL中判断字段a是否包含字段b" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -727,189 +1032,6 @@
 
 
   
-    <article id="post-gyw/行测/科学推理/物理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%89%A9%E7%90%86/">物理部分补充</a>
-    </h1>
-  
-
-        
-        <a href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%89%A9%E7%90%86/" class="archive-article-date">
-  	<time datetime="2023-04-13T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="位移："><a href="#位移：" class="headerlink" title="位移："></a>位移：</h2><p>从a到b的有向线段，既有大小，也有方向，比较位移的大小用绝对值比较。</p>
-<h2 id="圆周运动"><a href="#圆周运动" class="headerlink" title="圆周运动"></a>圆周运动</h2><h3 id="1-向心力问题"><a href="#1-向心力问题" class="headerlink" title="1.向心力问题"></a>1.向心力问题</h3><p>​		F向&#x3D;mv²&#x2F;r</p>
-<p>1.判断好提供向心力，水平圆周一般是摩擦力提供向心力，当向心力&gt;最大摩擦力时候，会发生侧滑；</p>
-<p>​	轨道转弯，一般是支持力作为向心力。</p>
-<h1 id="动量和动能"><a href="#动量和动能" class="headerlink" title="动量和动能"></a>动量和动能</h1><p><img src="/img/gyw/20231223-1.png"></p>
-<h2 id="血型问题"><a href="#血型问题" class="headerlink" title="血型问题"></a>血型问题</h2><p>人类血型ABO，共有4种血型：A,B,AB,O<br>$$<br>A:I^AI^i<br>$$</p>
-<p>$$<br>B:I^BI^i<br>$$</p>
-<p>$$<br>AB:I^AI^B<br>$$</p>
-<p>$$<br>O:I^iI^i<br>$$</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">科学推理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%89%A9%E7%90%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gyw/行测/科学推理/生物" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%94%9F%E7%89%A9/">生物</a>
-    </h1>
-  
-
-        
-        <a href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%94%9F%E7%89%A9/" class="archive-article-date">
-  	<time datetime="2023-04-13T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="血型问题"><a href="#血型问题" class="headerlink" title="血型问题"></a>血型问题</h2><p>人类血型ABO，共有4种血型：A,B,AB,O<br>$$<br>A:I^AI^i<br>$$</p>
-<p>$$<br>B:I^BI^i<br>$$</p>
-<p>$$<br>AB:I^AI^B<br>$$</p>
-<p>$$<br>O:I^iI^i<br>$$</p>
-<h2 id="植物光合作用，呼吸作用，蒸腾作用"><a href="#植物光合作用，呼吸作用，蒸腾作用" class="headerlink" title="植物光合作用，呼吸作用，蒸腾作用"></a>植物光合作用，呼吸作用，蒸腾作用</h2><p>蒸腾作用</p>
-<p>​	蒸腾作用（transpiration）是水分从活的植物体<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%A1%A8%E9%9D%A2/32942?fromModule=lemma_inlink">表面</a>（主要是叶子）以<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%B0%B4%E8%92%B8%E6%B1%BD/2644128?fromModule=lemma_inlink">水蒸汽</a>状态散失到大气中的过程，蒸腾作用为大气提供大量的水蒸汽，使当地的空气保持湿润，使气温降低，让当地的雨水充沛，形成良性循环。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">科学推理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%94%9F%E7%89%A9/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-gyw/行测/数量关系/数量关系-30-牛吃草问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -966,109 +1088,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB-30-%E7%89%9B%E5%90%83%E8%8D%89%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gyw/行测/数量关系/数量关系33-40" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB33-40/">数量关系(33-40)</a>
-    </h1>
-  
-
-        
-        <a href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB33-40/" class="archive-article-date">
-  	<time datetime="2023-04-13T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-04-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="33-不利构造"><a href="#33-不利构造" class="headerlink" title="33.不利构造"></a>33.不利构造</h1><p>这种其实就是考虑极端情况，然后+1，这种题目需要清楚题意，把极端情况理解清楚。</p>
-<p><img src="/img/20230815-1.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">这里3种颜色组合共有</span><br><span class="line">1.同色：3种</span><br><span class="line">2.两个同色：6种</span><br><span class="line">3.三个不同：1种</span><br><span class="line"></span><br><span class="line">所以极端情况，6+1+3=10把所有情况都选了一遍。</span><br><span class="line">答案：10+1=11</span><br></pre></td></tr></table></figure>
-
-<h1 id="34-构造数列-考频高"><a href="#34-构造数列-考频高" class="headerlink" title="34.构造数列(*考频高)"></a>34.构造数列(*考频高)</h1><p>这类问题特征是，总和一定，存在特殊关系，求某个量最多最少的问题，两道经典例题</p>
-<h2 id="1-整数型"><a href="#1-整数型" class="headerlink" title="1.整数型"></a>1.整数型</h2><p><img src="/img/20230815-2.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.总和一定：115*5=575</span><br><span class="line">2.要求第三名尽可能少，分给别人尽可能多,且分数都不相同</span><br><span class="line">所以第一名最多120分，依次119</span><br><span class="line">120  119  x x-1  x-2 </span><br><span class="line"></span><br><span class="line">3.</span><br><span class="line">120+119+3x-4=575  </span><br><span class="line">	x=113</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-出现小数"><a href="#2-出现小数" class="headerlink" title="2.出现小数"></a>2.出现小数</h2><p>出现小数时候，采用反向选取法，题目最少，选比他大1；题目问最多，选比他小</p>
-<p><img src="/img/20230815-3.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.总和65</span><br><span class="line">2.设行政部门x，要求x最少，其他应该分多，最多x-1，由于没说各不相同，所以假设都是x-1</span><br><span class="line">3.  x+6(x-1)=65</span><br><span class="line">		x=10.1</span><br><span class="line">		</span><br><span class="line">4.出现小数时候，采用反向选取法，</span><br><span class="line">  题目最少，选比他大，即11</span><br><span class="line">  题目问最多，选比他小，即10</span><br></pre></td></tr></table></figure>
-
-<h1 id="35-多集合反向构造"><a href="#35-多集合反向构造" class="headerlink" title="35.多集合反向构造"></a>35.多集合反向构造</h1><p>这种不是很重点，可能会出的很难，把两道经典例题学会即可，</p>
-<p><img src="/img/20230816-1.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">这种题正向思考麻烦，采用反向考虑</span><br><span class="line">三个都借阅过的书-----&gt;反面是至少有一本不是都借阅</span><br><span class="line">小赵：100-75=25本</span><br><span class="line">小王：100-70=30本</span><br><span class="line">小刘：100-60=40本</span><br><span class="line">当小赵，小王，小刘之间没交叉时候，三人都借阅的最少</span><br><span class="line">100-95=5</span><br></pre></td></tr></table></figure>
-
-<p><img src="/img/20230816-2.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">跟上题目同样的思路</span><br><span class="line">甲：100%-68%=32%</span><br><span class="line">乙：100-87=23%</span><br><span class="line">丙：100-75=25%</span><br><span class="line">丁：100-82=18%</span><br><span class="line"></span><br><span class="line">所以100-32-23-18-25=12%</span><br><span class="line">1000*12%=1200</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数量关系</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/04/13/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB33-40/">展开全文 >></a>
         </p>
       
 
@@ -1200,15 +1219,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">bug</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1224,23 +1243,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">判断推理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">申论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">科学推理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常识判断</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">言语理解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1248,11 +1251,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常识判断</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">判断推理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数字推理</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">言语理解</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">资料分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">科学推理</a>
               </li>
             
             <div class="clearfix"></div>
