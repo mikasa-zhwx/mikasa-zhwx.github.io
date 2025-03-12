@@ -64,6 +64,8 @@
 	        
 				<li><a href="/categories/develop">开发</a></li>
 	        
+				<li><a href="/categories/runHealth">健身</a></li>
+	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -110,6 +112,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -124,13 +128,15 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 25%"><a href="/">主页</a></li>
+					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 25%"><a href="/categories/gyw">公考</a></li>
+					<li style="width: 20%"><a href="/categories/gyw">公考</a></li>
 		        
-					<li style="width: 25%"><a href="/categories/diary">Diary</a></li>
+					<li style="width: 20%"><a href="/categories/diary">Diary</a></li>
 		        
-					<li style="width: 25%"><a href="/categories/develop">开发</a></li>
+					<li style="width: 20%"><a href="/categories/develop">开发</a></li>
+		        
+					<li style="width: 20%"><a href="/categories/runHealth">健身</a></li>
 		        
 				</ul>
 			</nav>
@@ -147,27 +153,40 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-gyw/行测/常识判断/常识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-develop/关于实现上传文件功能" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E5%B8%B8%E8%AF%86%E5%88%A4%E6%96%AD/%E5%B8%B8%E8%AF%86/">常识</a>
+      <a class="article-title" href="/2024/02/07/develop/%E5%85%B3%E4%BA%8E%E5%AE%9E%E7%8E%B0%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E5%8A%9F%E8%83%BD/">关于实现上传文件的功能</a>
     </h1>
   
 
         
-        <a href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E5%B8%B8%E8%AF%86%E5%88%A4%E6%96%AD/%E5%B8%B8%E8%AF%86/" class="archive-article-date">
-  	<time datetime="2023-11-29T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-29</time>
+        <a href="/2024/02/07/develop/%E5%85%B3%E4%BA%8E%E5%AE%9E%E7%8E%B0%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E5%8A%9F%E8%83%BD/" class="archive-article-date">
+  	<time datetime="2024-02-07T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="生活常识"><a href="#生活常识" class="headerlink" title="生活常识"></a>生活常识</h1><p>1.冰雹是在气流强烈升降的条件下发生，多发生于夏季或者春夏之交的雷暴天气。</p>
+        <p>要实现一个文件夹上传的功能，因为前端框架用的是element-ui,目前的版本是没有实现文件夹上传，但是input标签有原生属性webkitdirectory，是可以实现文件夹上传的功能。</p>
+<p>于是有两种思路：1.在element-ui组件加载的时候。给input组件加上属性webkitdirectory。2.是自己写个原生input。第1种我找了其他人的博客，发现不管用，没记录。所以说说第二种。</p>
+<p>前端部分：</p>
+<p>遇到了几个问题：1.本来是用axios交互后端的，但是不知道为什么使用若依框架添加axios组件会报错，所以使用原生的XMLHttpRequest发送请求。2.用什么封装数据，找了一圈，可以用const formData &#x3D; new FormData();这种方式存放数据。3.其实所谓的上传文件夹的功能，其实也是遍历了里面的所有文件，生成fileList。4.对于files多数据，使用FormData不能直接放一个数组进去，要使用append方法，例如 formData.append(‘files’,files[i]);其实也就是把多个文件放入一个数组里面了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line">/**前端vue部分**/</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">   &lt;!-- 标的图片表导入对话框 --&gt;</span><br><span class="line">   &lt;el-dialog :title=&quot;upload.title&quot; :visible.sync=&quot;upload.open&quot; v-if=&quot;upload.open&quot; width=&quot;480px&quot; append-to-body&gt;</span><br><span class="line">     &lt;el-form  label-width=&quot;auto&quot;&gt;</span><br><span class="line">       &lt;el-card&gt;</span><br><span class="line">         &lt;el-form-item label=&quot;公告id&quot; prop=&quot;annoId&quot;&gt;</span><br><span class="line">           &lt;el-input-number v-model=&quot;upload.annoId&quot;&gt;&lt;/el-input-number&gt;</span><br><span class="line">         &lt;/el-form-item&gt;</span><br><span class="line">       &lt;/el-card&gt;</span><br><span class="line">     &lt;/el-form&gt;</span><br><span class="line">     &lt;div slot=&quot;footer&quot; class=&quot;dialog-footer&quot;&gt;</span><br><span class="line">       &lt;el-button type=&quot;primary&quot; @click=&quot;onAddFolder&quot;&gt;选择文件夹并导入&lt;/el-button&gt;&lt;!----&gt;</span><br><span class="line">       &lt;el-button @click=&quot;upload.open = false&quot;&gt;取 消&lt;/el-button&gt;</span><br><span class="line">     &lt;/div&gt;</span><br><span class="line">   &lt;/el-dialog&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import &#123; getToken &#125; from &quot;@/utils/auth&quot;;</span><br><span class="line"></span><br><span class="line">  export default&#123;</span><br><span class="line">      name : &#x27;index&#x27;,</span><br><span class="line">      components : &#123;&#125;,</span><br><span class="line">      props : &#123;</span><br><span class="line">          //上传属性</span><br><span class="line">          upload : &#123;</span><br><span class="line">            type: Object,</span><br><span class="line">            default: null</span><br><span class="line">          &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">      data() &#123;</span><br><span class="line">          return&#123;</span><br><span class="line">              subjectTypeOptions:[],</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      created()&#123;</span><br><span class="line">        this.getDicts(&quot;target_subject_type&quot;).then(res=&gt;&#123;</span><br><span class="line">              this.subjectTypeOptions=res.data;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;,</span><br><span class="line">     mounted() &#123;</span><br><span class="line"></span><br><span class="line">       &#125;,</span><br><span class="line">      methods:&#123;</span><br><span class="line">           onAddFolder() &#123;</span><br><span class="line">              const upload = this.upload;</span><br><span class="line">              console.log(upload.annoId);</span><br><span class="line">              if(upload.annoId==undefined)&#123;</span><br><span class="line">                this.msgError(&quot;请先填入公告&quot;);</span><br><span class="line">                return;</span><br><span class="line">              &#125;</span><br><span class="line"></span><br><span class="line">              const input = document.createElement(&quot;input&quot;);</span><br><span class="line">              // input[&quot;style&quot;] = &quot;background: rgba(255, 255, 255, 0);overflow: hidden;position: fixed;width: 1px;height: 1px;z-index: -1;opacity: 0;&quot;;</span><br><span class="line">              input.type = &quot;file&quot;;</span><br><span class="line">              input.setAttribute(&quot;allowdirs&quot;, &quot;true&quot;);</span><br><span class="line">              input.setAttribute(&quot;directory&quot;, &quot;true&quot;);</span><br><span class="line">              input.setAttribute(&quot;webkitdirectory&quot;, &quot;true&quot;);</span><br><span class="line">              input.multiple = true;</span><br><span class="line">              document.querySelector(&quot;body&quot;).appendChild(input);</span><br><span class="line">              // todo 这里增加了input标签，可以给它删掉</span><br><span class="line">              input.click();</span><br><span class="line">              //const _this = this;</span><br><span class="line">              input.onchange = async function(e) &#123;</span><br><span class="line">                const formData = new FormData();</span><br><span class="line">                const files = e.target[&quot;files&quot;];</span><br><span class="line"></span><br><span class="line">                for (let i = 0; i &lt; files.length; i++) &#123;</span><br><span class="line">                  const a = new FileReader();</span><br><span class="line">                  // a.readAsDataURL(file);</span><br><span class="line">                  // a.onload = (e) =&gt; &#123;</span><br><span class="line">                  // 	const base64 = e.target.result</span><br><span class="line">                  // &#125;</span><br><span class="line">                  formData.append(&#x27;files&#x27;,files[i]);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                formData.append(&quot;annoId&quot;,upload.annoId);</span><br><span class="line"></span><br><span class="line">                 // 创建一个新的 XMLHttpRequest 对象</span><br><span class="line">                 var xhr = new XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">                 // 设置请求方法和请求地址</span><br><span class="line">                 xhr.open(&#x27;POST&#x27;,upload.url, true);</span><br><span class="line">                // 设置请求头</span><br><span class="line">                 //xhr.setRequestHeader(&#x27;Content-Type&#x27;, &#x27;multipart/form-data&#x27;);</span><br><span class="line"></span><br><span class="line">                 xhr.setRequestHeader(&#x27;Authorization&#x27;, &quot;Bearer &quot; + getToken());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                // 发送请求</span><br><span class="line">                 xhr.send(formData);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                 // 定义请求完成时的回调函数</span><br><span class="line">                 xhr.onreadystatechange = function () &#123;</span><br><span class="line">                   if (xhr.readyState === XMLHttpRequest.DONE) &#123;</span><br><span class="line">                     let result = JSON.parse(xhr.responseText);</span><br><span class="line">                     if(result.code ===200)&#123;</span><br><span class="line">                        upload.open=false;</span><br><span class="line">                        alert(&quot;上传成功&quot;);</span><br><span class="line">                     &#125;else&#123;</span><br><span class="line">                        upload.open=false;</span><br><span class="line">                        alert(&quot;上传失败&quot;+result.msg);</span><br><span class="line">                     &#125;</span><br><span class="line"></span><br><span class="line">                   &#125;</span><br><span class="line">                 &#125;;</span><br><span class="line"></span><br><span class="line">             &#125;;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>后端部分：也遇到几个问题</p>
+<p>1.由于上传文件，请求头一般要设置成&#x2F;&#x2F;xhr.setRequestHeader(‘Content-Type’, ‘multipart&#x2F;form-data’);但其实后台如果用MultipartFile接收的话，就不用设置请求头。2.由于上传的文件夹，要用MultipartFile[ ]数组方式接收方式接收。3.由于我的项目场景是多个文件，并且上面的前端组件我还需要传多一个参数annoId，这导致了后台会把MultipartFile Json化：如果你遇到fastjson：toJsonError,多半是这个问题。4.还有一种思路是将前端的File对象转为Base64的字符串，这样可能可以解决fastjson序列化的问题。（我参考别人的博客，是采用pojo对象包裹MultipartFile ，并在MultipartFile 加上@JSONField(serialize &#x3D; false)  &#x2F;&#x2F;反序列化）这个标签</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">    * 导入标的-图片</span><br><span class="line">    */</span><br><span class="line">   @PreAuthorize(&quot;@ss.hasPermi(&#x27;target:wuyerent:import&#x27;)&quot;)</span><br><span class="line">   @Log(title = &quot;标的-物业出租&quot;, businessType = BusinessType.IMPORT)</span><br><span class="line">   @RepeatSubmit</span><br><span class="line">   @PostMapping(&quot;/importDataPic&quot;)</span><br><span class="line">   public AjaxResult importDataPic( TargetUploadFile targetUploadFile) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">       TargetAnnoMent ment = targetAnnoMentMapper.selectTargetAnnoMentById(targetUploadFile.getAnnoId());</span><br><span class="line">       if(ment==null)&#123;</span><br><span class="line">           return AjaxResult.error(&quot;没有这个公告&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">       TargetWuyeSubject util = new TargetWuyeSubject();</span><br><span class="line">       util.setAnnoId(targetUploadFile.getAnnoId());</span><br><span class="line">       List&lt;TargetWuyeSubject&gt; targetWuyeSubjectList = targetWuyeSubjectService.selectTargetWuyeSubjectList(util);</span><br><span class="line"></span><br><span class="line">       // 上传文件路径</span><br><span class="line">       String filePath = BysConfig.getUploadPath();</span><br><span class="line"></span><br><span class="line">       List&lt;SysFileBusiness&gt; picList =  new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">       for(MultipartFile file: targetUploadFile.getFiles())&#123;</span><br><span class="line">           String indexNumber = file.getOriginalFilename().split(&quot;/&quot;)[1];</span><br><span class="line">           int index = Integer.valueOf(indexNumber); //序号</span><br><span class="line">           System.err.println(index);</span><br><span class="line">           SysFileBusiness picFile = new SysFileBusiness();</span><br><span class="line">           TargetWuyeSubject entity=targetWuyeSubjectList.get(index);</span><br><span class="line"></span><br><span class="line">           picFile.setId(IdUtils.simpleUUID());</span><br><span class="line">           picFile.setBusinessModular(MODULAR1);</span><br><span class="line">           picFile.setOtherId(String.valueOf(entity.getId()));</span><br><span class="line">           picFile.setSname(file.getOriginalFilename());</span><br><span class="line">           picFile.setFileType(file.getContentType());</span><br><span class="line">           picFile.setPath(FileUploadUtils.upload(filePath, file));</span><br><span class="line">           picFile.setSize(FileUtils.toFileSize(file.getSize()));</span><br><span class="line">           picList.add(picFile);</span><br><span class="line">           &#125;</span><br><span class="line">       sysFileBusinessMapper.batchInsert(picList);</span><br><span class="line">       return AjaxResult.success();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">TargetUploadFile类：</span><br><span class="line"></span><br><span class="line">@Data</span><br><span class="line">public class TargetUploadFile &#123;</span><br><span class="line"></span><br><span class="line">    @JSONField(serialize = false)  //反序列化</span><br><span class="line">    private MultipartFile[] files;</span><br><span class="line"></span><br><span class="line">    private Long annoId;  //公告id</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这次实现这个功能花了一天的时间，主要难点在解决fastJson这个错误上，我看以下别人的博客，估计是我原本controller是（MultipartFile[] files，Long annoId）这样接收参数，多了个annoId,导致springboot会把文件类型数据转为json，从而报错。也许可以参考那种将file转为base64字符串的思路，我没试过。</p>
+<p>还有一点就是这种网站文件上传，其实都是现在本地的tomcat有个缓存目录，把文件先放在缓存目录里在上传到服务器。</p>
 
       
 
@@ -181,7 +200,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">常识判断</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
         		</li>
       		
 		</ul>
@@ -193,7 +212,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
+        			<a href="/categories/develop//" class="article-tag-list-link color3">develop</a>
         		</li>
       		
 		</ul>
@@ -202,7 +221,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E5%B8%B8%E8%AF%86%E5%88%A4%E6%96%AD/%E5%B8%B8%E8%AF%86/">展开全文 >></a>
+          <a class="article-more-a" href="/2024/02/07/develop/%E5%85%B3%E4%BA%8E%E5%AE%9E%E7%8E%B0%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E5%8A%9F%E8%83%BD/">展开全文 >></a>
         </p>
       
 
@@ -232,44 +251,148 @@
 
 
   
-    <article id="post-gyw/行测/言语理解/言语理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-develop/关于Mysql插入生僻字报错" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E8%A8%80%E8%AF%AD%E7%90%86%E8%A7%A3/%E8%A8%80%E8%AF%AD%E7%90%86%E8%A7%A3/">言语理解</a>
+      <a class="article-title" href="/2024/02/01/develop/%E5%85%B3%E4%BA%8EMysql%E6%8F%92%E5%85%A5%E7%94%9F%E5%83%BB%E5%AD%97%E6%8A%A5%E9%94%99/">关于Mysql插入生僻字报错</a>
     </h1>
   
 
         
-        <a href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E8%A8%80%E8%AF%AD%E7%90%86%E8%A7%A3/%E8%A8%80%E8%AF%AD%E7%90%86%E8%A7%A3/" class="archive-article-date">
-  	<time datetime="2023-11-29T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-29</time>
+        <a href="/2024/02/01/develop/%E5%85%B3%E4%BA%8EMysql%E6%8F%92%E5%85%A5%E7%94%9F%E5%83%BB%E5%AD%97%E6%8A%A5%E9%94%99/" class="archive-article-date">
+  	<time datetime="2024-02-01T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li><p>涸辙之鲋：比喻在困境中急需救援的人。</p>
+        <p>j今天在处理excel导入时候出现，生僻字报错，因为utf-8当时在数据库建库选用的字符集，但是有些生僻字超出了utf-8的范围，所以要用utf8mb4来选用,设置表的字符格式，因为有时候设置整个数据库的字符格式并没有效果，单独设置字符格式，可以达到效果。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;You table name&gt; CONVERT to CHARACTER set utf8mb4;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/develop//" class="article-tag-list-link color3">develop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/02/01/develop/%E5%85%B3%E4%BA%8EMysql%E6%8F%92%E5%85%A5%E7%94%9F%E5%83%BB%E5%AD%97%E6%8A%A5%E9%94%99/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-develop/关于小程序推送消息问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/02/01/develop/%E5%85%B3%E4%BA%8E%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF%E9%97%AE%E9%A2%98/">关于小程序推送消息</a>
+    </h1>
+  
+
+        
+        <a href="/2024/02/01/develop/%E5%85%B3%E4%BA%8E%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2024-02-01T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>周二时候去演示系统时候，甲方提出要发送消息，是要在小程序发消息，之前没对接过。之前就搞过微信公众号的消息对接，还是外包弄的，但是这次外包也没弄过，要我们自己弄，听上去好像很难，实际上就花了一天的时间。</p>
+<p>（题外话，微信的小程序给的demo是错的，微信还贴心给了一种付费的托管平台，真是醉了，花了很多时间在研究它的文档）</p>
+<p>下面配置的大概步骤：</p>
+<ol>
+<li><p>配置：<br>需要在微信小程序后台配置一些基本的配置，这些可以参照官方文档。<br><img src="/img/20240201-1.png">。<br>这里的url是要验证的，只是需要验证一次即可；这里token可以理解成密钥，随意；这个EncodingAESKey，用小程序后台随机生成的吧，刚好也满足43位要求；消息加密一般选安全，格式通常用json吧；</p>
 </li>
-<li><p>李代桃僵：互相顶替或待人受过。</p>
+<li><p>验证：<br>一旦确定之后，微信会发送一个请求给你填写的url，来验证服务器支持响应<br>这里涉及第一个坑：文档写需要校验三个参数，实际上只需要校验三个。里面的Java的demo需要修改部分代码，首先要修改它的SHA1，它的encrypt参数不需要参与解密。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * SHA1 class</span><br><span class="line"> *</span><br><span class="line"> * 计算公众平台的消息签名接口.</span><br><span class="line"> */</span><br><span class="line">class SHA1 &#123;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * 用SHA1算法生成安全签名</span><br><span class="line">	 * @param token 票据</span><br><span class="line">	 * @param timestamp 时间戳</span><br><span class="line">	 * @param nonce 随机字符串</span><br><span class="line">	 * @param encrypt 密文</span><br><span class="line">	 * @return 安全签名</span><br><span class="line">	 * @throws AesException </span><br><span class="line">	 */</span><br><span class="line">	public static String getSHA1(String token, String timestamp, String nonce, String encrypt) throws AesException</span><br><span class="line">			  &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			String[] array = new String[] &#123; token, timestamp, nonce &#125;;</span><br><span class="line">			StringBuffer sb = new StringBuffer();</span><br><span class="line">			// 字符串排序</span><br><span class="line">			Arrays.sort(array);</span><br><span class="line">			for (int i = 0; i &lt;3; i++) &#123;</span><br><span class="line">				sb.append(array[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			String str = sb.toString();</span><br><span class="line">			// SHA1签名生成</span><br><span class="line">			MessageDigest md = MessageDigest.getInstance(&quot;SHA-1&quot;);</span><br><span class="line">			md.update(str.getBytes());</span><br><span class="line">			byte[] digest = md.digest();</span><br><span class="line"></span><br><span class="line">			StringBuffer hexstr = new StringBuffer();</span><br><span class="line">			String shaHex = &quot;&quot;;</span><br><span class="line">			for (int i = 0; i &lt; digest.length; i++) &#123;</span><br><span class="line">				shaHex = Integer.toHexString(digest[i] &amp; 0xFF);</span><br><span class="line">				if (shaHex.length() &lt; 2) &#123;</span><br><span class="line">					hexstr.append(0);</span><br><span class="line">				&#125;</span><br><span class="line">				hexstr.append(shaHex);</span><br><span class="line">			&#125;</span><br><span class="line">			return hexstr.toString();</span><br><span class="line">		&#125; catch (Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">			throw new AesException(AesException.ComputeSignatureError);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其次就是第二个坑，就是获取微信的请求参数，一开始我以为它是直接拼接在url里面的，其实它发送是在data里面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">     *  验证小程序url</span><br><span class="line">     */</span><br><span class="line">    @GetMapping(&quot;sendMessage&quot;)</span><br><span class="line">    public String sendMessgeToMinProgram(@RequestParam Map&lt;String,String&gt; param) throws AesException &#123;</span><br><span class="line"></span><br><span class="line">        String token = &quot;xxxxx&quot;; //这里填写小程序配置token</span><br><span class="line">        String encodingAesKey = &quot;xxx&quot;;这里填写小程序配置encodingAesKey</span><br><span class="line">        String appId = WechatConfig.MP_APPID;  //配置小程序的mp_appid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        String msgSignature = param.get(&quot;signature&quot;);  //小程序携带的参数</span><br><span class="line">        String timeStamp = param.get(&quot;timestamp&quot;);</span><br><span class="line">        String nonce = param.get(&quot;nonce&quot;);</span><br><span class="line">        String echoStr = param.get(&quot;echostr&quot;);</span><br><span class="line"></span><br><span class="line">		//WXBizMsgCrypt是demo验证类，里面的verifyUrl就是验证方法</span><br><span class="line">       	WXBizMsgCrypt wxBizMsgCrypt =new WXBizMsgCrypt(token,encodingAesKey,appId);</span><br><span class="line">        String result=wxBizMsgCrypt.verifyUrl(msgSignature,timeStamp,nonce,echoStr);</span><br><span class="line"></span><br><span class="line">        System.err.println(&quot;result=&quot;+result);</span><br><span class="line"></span><br><span class="line">        System.err.println(&quot;验证成功&quot;);</span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">WXBizMsgCrypt类：</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">	 * 验证URL</span><br><span class="line">	 * @param msgSignature 签名串，对应URL参数的msg_signature</span><br><span class="line">	 * @param timeStamp 时间戳，对应URL参数的timestamp</span><br><span class="line">	 * @param nonce 随机串，对应URL参数的nonce</span><br><span class="line">	 * @param echoStr 随机串，对应URL参数的echostr</span><br><span class="line">	 * </span><br><span class="line">	 * @return 解密之后的echostr</span><br><span class="line">	 * @throws AesException 执行失败，请查看该异常的错误码和具体的错误信息</span><br><span class="line">	 */</span><br><span class="line">	public String verifyUrl(String msgSignature, String timeStamp, String nonce, String echoStr)</span><br><span class="line">			throws AesException &#123;</span><br><span class="line">		String signature = SHA1.getSHA1(token, timeStamp, nonce, echoStr);</span><br><span class="line"></span><br><span class="line">		if (!signature.equals(msgSignature)) &#123;</span><br><span class="line">			throw new AesException(AesException.ValidateSignatureError);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		//String result = decrypt(echoStr);</span><br><span class="line">		return echoStr;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实就是WXBizMsgCrypt类的verifyUrl里面的signature跟微信请求一致的话，我们原路返回微信请求的echostr，说明成功，微信会把服务器标识通过，即可进入下一步了。</p>
+<p>（题外话，如果解密过程出现base64:Last encoded character (before the paddings if any…))的错误，这多半是下面这个依赖没引入。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;commons-codec&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;commons-codec&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.9&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
 </li>
-<li><p>越俎代庖：超出自己职能范围去管理别人管理的事。</p>
+<li><p>模板申请：<br><img src="/img/20240201-2.png"></p>
 </li>
-<li><p>萧规曹随：后人沿袭前人遗制。</p>
+<li><p>用户授权:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">需要小程序调起授权接口</span><br><span class="line">//uniapp封装了wx.requestSubscribeMessage接口</span><br><span class="line">uni.requestSubscribeMessage(&#123;</span><br><span class="line"> tmplIds: [&#x27;4ondVRxk4L20ihrJ3iI15BDK72XatGPxE0MeCVwHasQ&#x27;],</span><br><span class="line">  success (res) &#123;</span><br><span class="line">	  console.log(res);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>管中窥豹：指所见不全或略有所得</p>
+<li><p>消息推送实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 小程序发送通知工具类</span><br><span class="line"> */</span><br><span class="line">public class WeChatMiniProgramSendUtil &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static final String API_URL = &quot;https://api.weixin.qq.com/cgi-bin/message/subscribe/send&quot;;</span><br><span class="line"></span><br><span class="line">    public static void sendSubscribeMessage(String accessToken, String openid, String templateId, String page, String data) throws Exception &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            String url = API_URL + &quot;?access_token=&quot; + accessToken;</span><br><span class="line"></span><br><span class="line">            URL apiUrl = new URL(url);</span><br><span class="line">            HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();</span><br><span class="line">            connection.setRequestMethod(&quot;POST&quot;);</span><br><span class="line">            connection.setRequestProperty(&quot;Content-Type&quot;, &quot;application/json;charset=UTF-8&quot;);</span><br><span class="line">            connection.setDoOutput(true);</span><br><span class="line"></span><br><span class="line">            // 构建请求体</span><br><span class="line">            String body = buildRequestBody(openid, templateId, page, data);</span><br><span class="line">            byte[] requestBodyBytes = body.getBytes(StandardCharsets.UTF_8);</span><br><span class="line"></span><br><span class="line">            // 发送请求</span><br><span class="line">            connection.getOutputStream().write(requestBodyBytes);</span><br><span class="line"></span><br><span class="line">            // 读取响应</span><br><span class="line">            int responseCode = connection.getResponseCode();</span><br><span class="line">            BufferedReader reader = new BufferedReader(new 		  InputStreamReader(connection.getInputStream()));</span><br><span class="line">            StringBuilder response = new StringBuilder();</span><br><span class="line">            String line;</span><br><span class="line">            while ((line = reader.readLine()) != null) &#123;</span><br><span class="line">                response.append(line);</span><br><span class="line">            &#125;</span><br><span class="line">            reader.close();</span><br><span class="line"></span><br><span class="line">            if (responseCode == HttpURLConnection.HTTP_OK) &#123;</span><br><span class="line">                // 请求成功处理逻辑</span><br><span class="line">                System.out.println(&quot;发送订阅消息成功&quot;);</span><br><span class="line">                System.out.println(response.toString());</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 请求失败处理逻辑</span><br><span class="line">                System.out.println(&quot;发送订阅消息失败&quot;);</span><br><span class="line">                System.out.println(&quot;响应码：&quot; + responseCode);</span><br><span class="line">                System.out.println(response.toString());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            connection.disconnect();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            // 异常处理逻辑</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static String buildRequestBody(String openid, String templateId, String page, String data) &#123;</span><br><span class="line">        // 构建请求体的JSON字符串</span><br><span class="line">//        return String.format(</span><br><span class="line">//                &quot;&#123;\&quot;touser\&quot;:\&quot;%s\&quot;,\&quot;template_id\&quot;:\&quot;%s\&quot;,\&quot;page\&quot;:\&quot;%s\&quot;,\&quot;data\&quot;:%s&#125;&quot;,</span><br><span class="line">//                openid, templateId, page, data);</span><br><span class="line"></span><br><span class="line">        // 构建请求体的JSON字符串</span><br><span class="line">        return String.format(</span><br><span class="line">                &quot;&#123;\&quot;touser\&quot;:\&quot;%s\&quot;,\&quot;template_id\&quot;:\&quot;%s\&quot;,\&quot;page\&quot;:\&quot;%s\&quot;,\&quot;data\&quot;:&#123;\&quot;number2\&quot;:&#123;\&quot;value\&quot;:\&quot;11\&quot;&#125;,\&quot;amount3\&quot;:&#123;\&quot;value\&quot;:\&quot;101\&quot;&#125;,\&quot;time5\&quot;:&#123;\&quot;value\&quot;:\&quot;2024-01-31\&quot;&#125;,\&quot;thing4\&quot;:&#123;\&quot;value\&quot;:\&quot;芙宁娜\&quot;&#125;&#125;&#125;&quot;,</span><br><span class="line">                openid, templateId, page);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //推送消息的时候需要accessToken，这里是获取token的方法，在实际环境中，一般是定时刷新，两个小时内有效，获取accesstoken时需要appid和secret信息，一般是后台参数或常量进行配置。</span><br><span class="line">    //获取accessToken的请求接口</span><br><span class="line">    private final static String GetAccessToken = &quot;https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=&#123;appid&#125;&amp;secret=&#123;secret&#125;&quot;;</span><br><span class="line"></span><br><span class="line">    public static String refreshAccessToken(String appid, String secret) throws Exception &#123;</span><br><span class="line">        if(StringUtils.isEmpty(appid) || StringUtils.isEmpty(secret))&#123;</span><br><span class="line">            //logger.error(&quot;刷新微信AccessToken时，缺少appid或secret参数！&quot;);</span><br><span class="line">            throw new Exception(&quot;刷新微信AccessToken时，缺少appid或secret参数！&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        Map&lt;String, Object&gt; param = new HashMap&lt;&gt;();</span><br><span class="line">        param.put(&quot;appid&quot;,appid);</span><br><span class="line">        param.put(&quot;secret&quot;,secret);</span><br><span class="line">        RestTemplate restTemplate =new RestTemplate();</span><br><span class="line">        ResponseEntity&lt;JSONObject&gt; resp = restTemplate.getForEntity(GetAccessToken, JSONObject.class,param);</span><br><span class="line">        JSONObject jsonObj = resp.getBody();</span><br><span class="line">        String accessToken = null;</span><br><span class="line">        if(jsonObj != null)&#123;</span><br><span class="line">            accessToken = jsonObj.getString(&quot;access_token&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return accessToken;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>controller实现的方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value = &quot;sendMsg&quot;)</span><br><span class="line">       @ResponseBody</span><br><span class="line">       public String sendMsg(HttpServletRequest request) throws Exception &#123;</span><br><span class="line">           //String token = request.getParameter(&quot;token&quot;);</span><br><span class="line">           //请求 微信接口 获取 accessToken</span><br><span class="line">           String accessToken = WeChatMiniProgramSendUtil.refreshAccessToken(&quot;你的appid&quot;,&quot;你的小程序密钥&quot;);</span><br><span class="line">           String openid = &quot;xxxxx&quot;;  //用户微信小程序openid</span><br><span class="line">           String templateId = &quot;xxxxxxxxxxx&quot;; //微信小程序模板的id</span><br><span class="line">           String page = &quot;&quot;;</span><br><span class="line">           // 构建订阅消息内容的JSON对象</span><br><span class="line">           // 构建订阅消息内容的JSON对象</span><br><span class="line">           JSONObject messageData = new JSONObject();</span><br><span class="line">           JSONObject data = new JSONObject();</span><br><span class="line">           JSONObject number2 =new  JSONObject();</span><br><span class="line">           number2.put(&quot;value&quot;,&quot;test11&quot;);</span><br><span class="line">           JSONObject amount3 =new  JSONObject();</span><br><span class="line">           amount3.put(&quot;value&quot;,&quot;100&quot;);</span><br><span class="line">           JSONObject time5 =new  JSONObject();</span><br><span class="line">           time5.put(&quot;value&quot;,&quot;2023-06-30&quot;);</span><br><span class="line">           JSONObject thing4 =new  JSONObject();</span><br><span class="line">           thing4.put(&quot;value&quot;,&quot;芙宁娜&quot;);</span><br><span class="line">           messageData.put(&quot;number2&quot;,number2);</span><br><span class="line">           messageData.put(&quot;amount3&quot;,amount3);</span><br><span class="line">           messageData.put(&quot;time5&quot;,time5);</span><br><span class="line">           messageData.put(&quot;thing4&quot;,thing4);</span><br><span class="line">           // 将订阅消息内容转换为JSON字符串</span><br><span class="line">           String jsonData = JSONUtils.toJSONString(messageData);</span><br><span class="line">           System.err.println(jsonData);</span><br><span class="line">           WeChatMiniProgramSendUtil.sendSubscribeMessage(accessToken,openid,templateId,page,jsonData);</span><br><span class="line">           return null;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的坑主要是data格式，里面的格式必须要按照下面这种编排，传统的JSON.toString（）还不行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private static String buildRequestBody(String openid, String templateId, String page, String data) &#123;</span><br><span class="line">      // 构建请求体的JSON字符串</span><br><span class="line">      return String.format(</span><br><span class="line">              &quot;&#123;\&quot;touser\&quot;:\&quot;%s\&quot;,\&quot;template_id\&quot;:\&quot;%s\&quot;,\&quot;page\&quot;:\&quot;%s\&quot;,\&quot;data\&quot;:&#123;\&quot;number2\&quot;:&#123;\&quot;value\&quot;:\&quot;11\&quot;&#125;,\&quot;amount3\&quot;:&#123;\&quot;value\&quot;:\&quot;101\&quot;&#125;,\&quot;time5\&quot;:&#123;\&quot;value\&quot;:\&quot;2024-01-31\&quot;&#125;,\&quot;thing4\&quot;:&#123;\&quot;value\&quot;:\&quot;芙宁娜\&quot;&#125;&#125;&#125;&quot;,</span><br><span class="line">              openid, templateId, page);</span><br><span class="line">   </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里要对应小程序模板的data内容，要注意是data.thing4.value才是属性值。<br><img src="/img/20240201-3.png"></p>
 </li>
-<li><p>洞若观火：观察事物非常清晰</p>
-</li>
-<li><p>一叶知秋：通过个别迹象，可以得到整个形式发展趋向，侧重规律性</p>
-</li>
-<li><p>见微知著：见到事物微小苗头，就知道实质和发展趋势。</p>
-</li>
-</ul>
+</ol>
 
       
 
@@ -283,7 +406,102 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">言语理解</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/develop//" class="article-tag-list-link color3">develop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/02/01/develop/%E5%85%B3%E4%BA%8E%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8E%A8%E9%80%81%E6%B6%88%E6%81%AF%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-gyw/行测/数量关系/数量关系-空瓶换酒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/01/19/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB-%E7%A9%BA%E7%93%B6%E6%8D%A2%E9%85%92/">（非重点）数量关系-空瓶换酒</a>
+    </h1>
+  
+
+        
+        <a href="/2024/01/19/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB-%E7%A9%BA%E7%93%B6%E6%8D%A2%E9%85%92/" class="archive-article-date">
+  	<time datetime="2024-01-19T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这属于低频考点，考的频率不高。抓住主要矛盾</p>
+<p>例如N个空瓶,换1瓶酒</p>
+<p>等价于</p>
+<p>N个空瓶&#x3D;1份酒+1个空瓶</p>
+<p>等于</p>
+<p>(N-1)个空瓶&#x3D;1份酒</p>
+<p>这里注意一个前提，剩下的空瓶可以满足N个空瓶换一瓶酒的问题</p>
+<p>例如6个空瓶换一瓶酒，共有35个空瓶，可以换多少瓶？</p>
+<p>35&#x2F;（6-1）&#x3D;35&#x2F;5&#x3D;7</p>
+<p>这里7要减1，也就是6瓶，也就是出现整除的时候要减去1.</p>
+<p>如果是36个空瓶，则可以换36&#x2F;5&#x3D;7….1 ,也就是7个空瓶，出现余数则不需要减1.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数字推理</a>
         		</li>
       		
 		</ul>
@@ -304,7 +522,404 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E8%A8%80%E8%AF%AD%E7%90%86%E8%A7%A3/%E8%A8%80%E8%AF%AD%E7%90%86%E8%A7%A3/">展开全文 >></a>
+          <a class="article-more-a" href="/2024/01/19/gyw/%E8%A1%8C%E6%B5%8B/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB/%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB-%E7%A9%BA%E7%93%B6%E6%8D%A2%E9%85%92/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-gyw/复盘/2024年深圳市考" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/01/08/gyw/%E5%A4%8D%E7%9B%98/2024%E5%B9%B4%E6%B7%B1%E5%9C%B3%E5%B8%82%E8%80%83/">2023shenzhenshikao</a>
+    </h1>
+  
+
+        
+        <a href="/2024/01/08/gyw/%E5%A4%8D%E7%9B%98/2024%E5%B9%B4%E6%B7%B1%E5%9C%B3%E5%B8%82%E8%80%83/" class="archive-article-date">
+  	<time datetime="2024-01-08T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>2023年1月7日，shenzhenshikao。</p>
+<p>  考点设置在深圳坪山区，讲道理，一开始我还没意识到这个考点位置之偏，还以为考完试或者什么的还可以稍微在深游玩一下，毕竟多年没去过深圳，借着考试的机会感受一下，好家伙先说考到晚上6点，在一查地图，深圳坪山是偏远的分区，直接断送我的念想。</p>
+<p>  深圳坪山给我的感觉就是城乡结合部的感觉，这里慢慢在走城市化的路子，听载我回高铁的滴滴司机告诉我，以前的主干道十分漂亮，绿树成荫，现在道路修修补补，忙着搞地铁，道不好走，尘土飞扬，不过，这也是走向城市化的必由之路，然而就是在这种还未发展起来的地方，房价也已经去到4w，实在让我感受到深圳房价的恐怖之处。</p>
+<p>总体而言，这次去深圳考试是不值得，主要原因在于深圳市考的题型跟省考不太一样。</p>
+<h3 id="申论："><a href="#申论：" class="headerlink" title="申论："></a>申论：</h3><p>也是三道题，第一题讲究的是概括经验做法，第二题是给出对策，第三则是议论文1200字-（加强信心和底气），其实本次最值得考就是申论，我真希望，这次申论能突破60分，至少给点正反馈给我，让我觉得以前写的文章还算有效努力，考了两次申论都是58分，希望这次市考和省考能给点不一样的结果。</p>
+<h3 id="行测："><a href="#行测：" class="headerlink" title="行测："></a>行测：</h3><p>行测跟省考相比，多了时间-顺序分析题，少了5道图推，多了5道语句语病题，少了5道逻辑判断，完全没有类比推理，多了5道言语理解，总体而言，市考更灵活，而且资料分析难度也比省考大。</p>
+<h4 id="素质测试"><a href="#素质测试" class="headerlink" title="素质测试"></a>素质测试</h4><p>考的是计算机，其实基本是常识，但是我当初也没想着考深圳，主要是难度太大，报录比又大，没准备复习这科目，其中一些什么软件开发模型真的折磨我，感觉像是简单题目，其实做起来并不简单。</p>
+<p>本次目的，我只想看看申论复习有没有效果，前前后后花了400，心在滴血，400快可以打一整天桌球了，吃两顿怂火锅了。流泪啊。</p>
+<p><img src="/img/gyw/20240108-1.jpg" alt="广州南"></p>
+<p><img src="/img/gyw/20240108-2.jpg" alt="shenzhenpingshan"></p>
+<h2 id="后续："><a href="#后续：" class="headerlink" title="后续："></a>后续：</h2><p>行测55，申论70，计算机素质41.6</p>
+<p>总评价58.2属于D类考生</p>
+<p>G了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">复盘</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/01/08/gyw/%E5%A4%8D%E7%9B%98/2024%E5%B9%B4%E6%B7%B1%E5%9C%B3%E5%B8%82%E8%80%83/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-尚硅谷的mysql/(五)MySql聚合函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MySQL聚合函数"><a href="#MySQL聚合函数" class="headerlink" title="MySQL聚合函数"></a>MySQL聚合函数</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#1.AVG():平均数</span><br><span class="line">SELECT AVG(job) from company_persons</span><br><span class="line"></span><br><span class="line">#2.SUM():求和</span><br><span class="line"></span><br><span class="line">#3.</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/12/22/%E5%B0%9A%E7%A1%85%E8%B0%B7%E7%9A%84mysql/(%E4%BA%94)MySql%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-develop/hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/12/22/develop/hello-world/">Hello World</a>
+    </h1>
+  
+
+        
+        <a href="/2023/12/22/develop/hello-world/" class="archive-article-date">
+  	<time datetime="2023-12-22T04:15:35.079Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>111</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/12/22/develop/hello-world/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-develop/关于idea文件标黄,git无法提交的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/12/21/develop/%E5%85%B3%E4%BA%8Eidea%E6%96%87%E4%BB%B6%E6%A0%87%E9%BB%84,git%E6%97%A0%E6%B3%95%E6%8F%90%E4%BA%A4%E7%9A%84%E9%97%AE%E9%A2%98/">关于idea文件标黄,git无法提交的问题</a>
+    </h1>
+  
+
+        
+        <a href="/2023/12/21/develop/%E5%85%B3%E4%BA%8Eidea%E6%96%87%E4%BB%B6%E6%A0%87%E9%BB%84,git%E6%97%A0%E6%B3%95%E6%8F%90%E4%BA%A4%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2023-12-21T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在提交git时候，同事发现有些文件缺失，打开我本地的文件夹，发现文件标黄，Google一下，发现是在.gitignore文件配置了忽略，因为我本身的文件夹名字取名叫做target，与idea编译器产生的classes文件也是target，在.gitignore中配置了target开头的文件夹不予提交，导致了我的代码没提交到git上。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.gitignore文件部分内容</span><br><span class="line"></span><br><span class="line">######################################################################</span><br><span class="line"># Build Tools</span><br><span class="line"></span><br><span class="line">.gradle</span><br><span class="line">/build/</span><br><span class="line">!gradle/wrapper/gradle-wrapper.jar</span><br><span class="line"></span><br><span class="line">target/</span><br><span class="line">!.mvn/wrapper/maven-wrapper.jar</span><br><span class="line"></span><br><span class="line">######################################################################</span><br></pre></td></tr></table></figure>
+
+<p>解决方法，更改本地文件夹名字，我把target改成targetSubject以此解决本地冲突。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/develop//" class="article-tag-list-link color3">develop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/12/21/develop/%E5%85%B3%E4%BA%8Eidea%E6%96%87%E4%BB%B6%E6%A0%87%E9%BB%84,git%E6%97%A0%E6%B3%95%E6%8F%90%E4%BA%A4%E7%9A%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-gyw/行测/判断推理/图形推理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/12/06/gyw/%E8%A1%8C%E6%B5%8B/%E5%88%A4%E6%96%AD%E6%8E%A8%E7%90%86/%E5%9B%BE%E5%BD%A2%E6%8E%A8%E7%90%86/">图形推理</a>
+    </h1>
+  
+
+        
+        <a href="/2023/12/06/gyw/%E8%A1%8C%E6%B5%8B/%E5%88%A4%E6%96%AD%E6%8E%A8%E7%90%86/%E5%9B%BE%E5%BD%A2%E6%8E%A8%E7%90%86/" class="archive-article-date">
+  	<time datetime="2023-12-06T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>图推主打就是一个感觉，只能靠大量的练习，寻求眼缘。</p>
+<h2 id="一笔画"><a href="#一笔画" class="headerlink" title="一笔画"></a>一笔画</h2><p>判断一个图形是否可以一笔画，用去框法最好，去框去的是<strong>封闭图形</strong>，去框的时候，线也去掉了，</p>
+<p>这里特别注意要是封闭图形，像一个圆相切一条线，我们去掉的是圆，而不能是圆加线。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">判断推理</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/12/06/gyw/%E8%A1%8C%E6%B5%8B/%E5%88%A4%E6%96%AD%E6%8E%A8%E7%90%86/%E5%9B%BE%E5%BD%A2%E6%8E%A8%E7%90%86/">展开全文 >></a>
         </p>
       
 
@@ -433,733 +1048,9 @@
 
 
   
-    <article id="post-gyw/行测/科学推理/电" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%94%B5/">电</a>
-    </h1>
-  
-
-        
-        <a href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%94%B5/" class="archive-article-date">
-  	<time datetime="2023-11-29T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="电学"><a href="#电学" class="headerlink" title="电学"></a>电学</h1><h2 id="并联电路"><a href="#并联电路" class="headerlink" title="并联电路"></a>并联电路</h2><p>并联电路，一条旁路电阻变小，总电阻变小。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">科学推理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/29/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E7%94%B5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gyw/行测/科学推理/光，声" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/11/28/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E5%85%89%EF%BC%8C%E5%A3%B0/">光,声</a>
-    </h1>
-  
-
-        
-        <a href="/2023/11/28/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E5%85%89%EF%BC%8C%E5%A3%B0/" class="archive-article-date">
-  	<time datetime="2023-11-28T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-11-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="光"><a href="#光" class="headerlink" title="光"></a>光</h1><h2 id="1-光的直线传播"><a href="#1-光的直线传播" class="headerlink" title="1.光的直线传播"></a>1.光的直线传播</h2><p>光在<strong>真空</strong>或者<strong>同种均匀</strong>的介质中沿直线传播。</p>
-<p>实例：小孔成像（倒立实像），日月食，影子形成。</p>
-<p>光速约为3*10^8次方米每秒。</p>
-<h2 id="2-光的反射"><a href="#2-光的反射" class="headerlink" title="2.光的反射"></a>2.光的反射</h2><p><img src="/img/gyw/20231128-1.png"></p>
-<p><img src="/img/gyw/20231128-2.png"></p>
-<p><img src="/img/gyw/20231128-3.png"></p>
-<p>（角反射器的原理）</p>
-<h2 id="3-平面镜成像"><a href="#3-平面镜成像" class="headerlink" title="3.平面镜成像"></a>3.平面镜成像</h2><p><img src="/img/gyw/20231128-4.png"></p>
-<p>（平面镜成像上下一致，左右相反）</p>
-<p>拓展：</p>
-<p>凸透镜成像：</p>
-<p><img src="/img/gyw/20240103-1.png"></p>
-<h2 id="4-光的折射"><a href="#4-光的折射" class="headerlink" title="4.光的折射"></a>4.光的折射</h2><p><img src="/img/gyw/20231128-5.png"></p>
-<p><img src="/img/gyw/20231128-6.png"></p>
-<p>（日出也是光的折射，我们看的日出是椭圆形并非圆形，这是光的折射原因）</p>
-<p><img src="/img/gyw/20231128-7.png"></p>
-<p>（高速公路的海市蜃楼）</p>
-<p><img src="/img/gyw/20231128-8.png"></p>
-<p>（岸高水浅）（水里的人看岸上的东西比实际高，岸上的人看水里的东西比实际浅）</p>
-<p><img src="/img/gyw/20231128-9.png"></p>
-<p>（谁去看，光线进入谁的眼睛）</p>
-<p><img src="/img/gyw/20231128-10.png"></p>
-<p><img src="/img/gyw/20231128-11.png"></p>
-<p>（利用光路可逆性，假设右边同等位置也射入一条光源，那么就会跟左边光路重合）</p>
-<h2 id="5-光的色散"><a href="#5-光的色散" class="headerlink" title="5.光的色散"></a>5.光的色散</h2><p><img src="/img/gyw/20231128-12.png"></p>
-<p>红光波长最长，偏折最小。</p>
-<h2 id="6-凸透镜，凹透镜"><a href="#6-凸透镜，凹透镜" class="headerlink" title="6.凸透镜，凹透镜"></a>6.凸透镜，凹透镜</h2><p><img src="/img/gyw/20231128-13.png"></p>
-<p><img src="/img/gyw/20231128-14.png"></p>
-<p>（近凹远凸，近视看不清远，远视眼看不清近）</p>
-<h1 id="2-声"><a href="#2-声" class="headerlink" title="2.声"></a>2.声</h1><h2 id="1-声音产生与传播"><a href="#1-声音产生与传播" class="headerlink" title="1.声音产生与传播"></a>1.声音产生与传播</h2><p><img src="/img/gyw/20231128-15.png"></p>
-<p>声音在固体传播最快，液体次之，气体最慢。</p>
-<h2 id="2-声音的特征"><a href="#2-声音的特征" class="headerlink" title="2.声音的特征"></a>2.声音的特征</h2><p><img src="/img/gyw/20231128-16.png"></p>
-<p><img src="/img/gyw/20231128-17.png"></p>
-<p><img src="/img/gyw/20231128-18.png"></p>
-<p>（敲和吹的区别）</p>
-<p><img src="/img/gyw/20231128-19.png"></p>
-<p><img src="/img/gyw/20231128-20.png"></p>
-<h2 id="3-超声和次声"><a href="#3-超声和次声" class="headerlink" title="3.超声和次声"></a>3.超声和次声</h2><p><img src="/img/gyw/20231128-21.png"></p>
-<h2 id="4-声音的利用"><a href="#4-声音的利用" class="headerlink" title="4.声音的利用"></a>4.声音的利用</h2><p><img src="/img/gyw/20231128-22.png"></p>
-<h2 id="5-噪声的防止"><a href="#5-噪声的防止" class="headerlink" title="5.噪声的防止"></a>5.噪声的防止</h2><p><img src="/img/gyw/20231128-23.png"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">科学推理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/11/28/gyw/%E8%A1%8C%E6%B5%8B/%E7%A7%91%E5%AD%A6%E6%8E%A8%E7%90%86/%E5%85%89%EF%BC%8C%E5%A3%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gyw/申论/大作文" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/09/06/gyw/%E7%94%B3%E8%AE%BA/%E5%A4%A7%E4%BD%9C%E6%96%87/">大作文</a>
-    </h1>
-  
-
-        
-        <a href="/2023/09/06/gyw/%E7%94%B3%E8%AE%BA/%E5%A4%A7%E4%BD%9C%E6%96%87/" class="archive-article-date">
-  	<time datetime="2023-09-06T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="策论文"><a href="#策论文" class="headerlink" title="策论文"></a>策论文</h2><p>策论文的观点基本从材料抄，一般观点在5点左右，需要整合所给材料。其实文章总体写起来有种八股文的味道</p>
-<p>从</p>
-<p>1.提出问题（提出观点）</p>
-<p>2.分析问题（分析背景，分析不足）</p>
-<p>3.整合材料观点（一般5个方面）</p>
-<p>4.结尾点题</p>
-<p>其实不足就是观点需要加强的地方，把5个观点转换为不足，基本可以组成这一段了；</p>
-<p>整合材料观点这里，一般我们用第一，第二，第三，第四，第五，这样开头去写。最好不要用1.2.3.4这样写，基本上申论除了小题才能用1，2，3，4</p>
-<h2 id="议论文"><a href="#议论文" class="headerlink" title="议论文"></a>议论文</h2><p>归纳分论点，一般在3点左右；其实分论点有机会从小题归纳出来；</p>
-<p>开头写一段总结</p>
-<p>中间3个点，其中论点写出来，外加材料的举例论证可以构成一个段落</p>
-<p>结尾写一段总结。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">申论</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/09/06/gyw/%E7%94%B3%E8%AE%BA/%E5%A4%A7%E4%BD%9C%E6%96%87/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gyw/行测/判断推理/翻译推理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/09/06/gyw/%E8%A1%8C%E6%B5%8B/%E5%88%A4%E6%96%AD%E6%8E%A8%E7%90%86/%E7%BF%BB%E8%AF%91%E6%8E%A8%E7%90%86/">翻译推理</a>
-    </h1>
-  
-
-        
-        <a href="/2023/09/06/gyw/%E8%A1%8C%E6%B5%8B/%E5%88%A4%E6%96%AD%E6%8E%A8%E7%90%86/%E7%BF%BB%E8%AF%91%E6%8E%A8%E7%90%86/" class="archive-article-date">
-  	<time datetime="2023-09-06T02:25:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这种题型他们说是送分题，但是我觉得很花时间，特别是要翻译下来写在纸上，我觉得是很浪费时间的，特别是</p>
-<p>前面主语很长的情况。翻译推理题型大概是经典问法最折磨我。</p>
-<h2 id="前推后"><a href="#前推后" class="headerlink" title="前推后"></a>前推后</h2><p>A————&gt;B</p>
-<p>如果A推B，那么则有：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">前推后类型：</span><br><span class="line"></span><br><span class="line">如果，那么</span><br><span class="line">只要 .....  就.....;</span><br><span class="line">若。。。。 则。。。。;</span><br><span class="line"></span><br><span class="line">要想A  ... 必须B</span><br><span class="line">....离不开。。。</span><br><span class="line">。。必然。。。</span><br><span class="line">。。。一定。。。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">。。。凡是A 都是B</span><br><span class="line">所有。。都是。。</span><br><span class="line">每个。。都是。。。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="后推前"><a href="#后推前" class="headerlink" title="后推前"></a>后推前</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">只有。。。才。。。。</span><br><span class="line">除非。。。 才。。。</span><br><span class="line">除非。。。。 否则不。。。</span><br><span class="line">没有a，，，，没有b</span><br><span class="line">不a。。。。。不b。。。。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">基础/前提/关键     不可缺少/必不可少   必要条件</span><br><span class="line">（**谁重要谁在箭头后面**）</span><br><span class="line">例如</span><br><span class="line">人类生存，必不可少的是食物</span><br><span class="line">生存---&gt;食物</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">除非a,否则不b</span><br><span class="line">b------&gt;a</span><br><span class="line"></span><br><span class="line">除非a,否则b</span><br><span class="line">除非a,否则不不b</span><br><span class="line">(-b)-----&gt;a</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="翻译原则"><a href="#翻译原则" class="headerlink" title="翻译原则"></a>翻译原则</h2><p>肯前必肯后；否后必否前。否前不确定，肯后不确定，</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">判断推理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/09/06/gyw/%E8%A1%8C%E6%B5%8B/%E5%88%A4%E6%96%AD%E6%8E%A8%E7%90%86/%E7%BF%BB%E8%AF%91%E6%8E%A8%E7%90%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-develop/关于MySQL将查询结果插入表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/09/01/develop/%E5%85%B3%E4%BA%8EMySQL%E5%B0%86%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8F%92%E5%85%A5%E8%A1%A8/">关于MySQL将查询结果插入表</a>
-    </h1>
-  
-
-        
-        <a href="/2023/09/01/develop/%E5%85%B3%E4%BA%8EMySQL%E5%B0%86%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8F%92%E5%85%A5%E8%A1%A8/" class="archive-article-date">
-  	<time datetime="2023-09-01T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天做字典管理时候，发现导出的一个字典类型刚好是表中数据库的名字,想着直接把数据库中查询的用到结果直接插入到字典表中。</p>
-<p>因为数据库中的表里面的字段备注是存储在information_schema。</p>
-<p>所以我们可以通过查询来获得,下面这个例子就是以company_sun_project这张表来查询他的列以及列的备注。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line"> COLUMN_COMMENT,  </span><br><span class="line"> COLUMN_Name,</span><br><span class="line"> FROM information_schema.COLUMNS </span><br><span class="line"> WHERE TABLE_NAME=&#x27;company_sun_project&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>下面将查询结果作为结果集，插入到数据字典中，因为sys_dict_data这张表在数据库company中，所以我们通过xx.表名的方法来使用。这里其实区别普通的插入是没有values。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO company.sys_dict_data(</span><br><span class="line">dict_sort,</span><br><span class="line">dict_label,</span><br><span class="line">dict_value,</span><br><span class="line">dict_type,</span><br><span class="line">STATUS,</span><br><span class="line">create_by,</span><br><span class="line">create_time,</span><br><span class="line">update_by,</span><br><span class="line">update_time,</span><br><span class="line">remark</span><br><span class="line">)</span><br><span class="line">(</span><br><span class="line">SELECT</span><br><span class="line"> 1,</span><br><span class="line"> COLUMN_COMMENT,</span><br><span class="line"> COLUMN_Name,</span><br><span class="line"> &#x27;company_sun_project_field&#x27;,</span><br><span class="line"> &#x27;0&#x27;,</span><br><span class="line"> &#x27;admin&#x27;,</span><br><span class="line"> NOW(),</span><br><span class="line"> &#x27;admin&#x27;,</span><br><span class="line"> NOW(),</span><br><span class="line"> &#x27;阳光政务导出&#x27;</span><br><span class="line"> FROM information_schema.COLUMNS </span><br><span class="line"> WHERE  TABLE_NAME=&#x27;company_sun_project&#x27;</span><br><span class="line"> )</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> //普通插入</span><br><span class="line"> insert into xxxx(</span><br><span class="line"> xxx,</span><br><span class="line"> xxx</span><br><span class="line"> )values(</span><br><span class="line"> 	xx,</span><br><span class="line"> 	xx</span><br><span class="line"> )</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/develop//" class="article-tag-list-link color3">develop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/09/01/develop/%E5%85%B3%E4%BA%8EMySQL%E5%B0%86%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E6%8F%92%E5%85%A5%E8%A1%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-develop/关于MySQL导入出现离线问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/08/31/develop/%E5%85%B3%E4%BA%8EMySQL%E5%AF%BC%E5%85%A5%E5%87%BA%E7%8E%B0%E7%A6%BB%E7%BA%BF%E9%97%AE%E9%A2%98/">关于MySQL导入出现离线问题</a>
-    </h1>
-  
-
-        
-        <a href="/2023/08/31/develop/%E5%85%B3%E4%BA%8EMySQL%E5%AF%BC%E5%85%A5%E5%87%BA%E7%8E%B0%E7%A6%BB%E7%BA%BF%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2023-08-31T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-08-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在导入大文件sql文件时候，经常出现MySQL离线的问题，以前是修改配置文件，但是找不到那篇博客了，修改的是MySQL本身的配置文件，好像是my.inf.</p>
-<p>下面是即时设置的参数方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">选择mysql数据库</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#添加下面命令</span><br><span class="line">SET GLOBAL max_allowed_packet=30000000;</span><br><span class="line">SET GLOBAL net_buffer_length=300000;</span><br><span class="line">SET GLOBAL interactive_timeout=35900000;</span><br><span class="line">SET GLOBAL wait_timeout=3590000;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bug</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/develop//" class="article-tag-list-link color3">develop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/08/31/develop/%E5%85%B3%E4%BA%8EMySQL%E5%AF%BC%E5%85%A5%E5%87%BA%E7%8E%B0%E7%A6%BB%E7%BA%BF%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gyw/行测/资料分析/资料分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/08/23/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/">资料分析</a>
-    </h1>
-  
-
-        
-        <a href="/2023/08/23/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2023-08-23T01:15:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="求增长量"><a href="#求增长量" class="headerlink" title="求增长量"></a>求增长量</h2><p>1.现期-基期&#x3D;增长量(考虑截位法，尾数法)</p>
-<p>2.百化分<br>$$<br>\frac{现期量}{1+增长率}*增长率&#x3D;增长量<br>$$</p>
-<p>速算的话：如果增长率是可以化成几分之一，例如1&#x2F;3，那么相当于现期量&#x2F;4，其他都约分了。</p>
-<p>常用的分数,感觉1&#x2F;16之前可以记一下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1/2=50%             1/11=9.1%</span><br><span class="line">1/3=33%             1/12=8.3%</span><br><span class="line">1/4=25%             1/13=7.7%</span><br><span class="line">1/5=20%             1/14=7.1%</span><br><span class="line">1/6=16.7%           1/15=6.7%</span><br><span class="line">1/7=14.3%           1/16=6.25%</span><br><span class="line">1/8=12.5%           1/17=5.9%</span><br><span class="line">1/9=11.1%           1/18=5.5%</span><br><span class="line">1/10=10%            1/19=5.3%</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="求基期"><a href="#求基期" class="headerlink" title="求基期"></a>求基期</h2><ol>
-<li>$$<br>\frac{现期}{1+r}&#x3D;基期<br>$$<br><em>这里r是增长率，r是带符号的，这里有小技巧，当|r|&lt;&#x3D;5%,可以化除为乘<br>$$<br>\frac{现期}{1+r}&#x3D;现期</em>(1-r)<br>$$</li>
-</ol>
-<p>$$<br>\frac{现期}{1-r}&#x3D;现期*(1+r)<br>$$</p>
-<h2 id="增长量比大小"><a href="#增长量比大小" class="headerlink" title="增长量比大小"></a>增长量比大小</h2><ol>
-<li><p>注意题目问的方法，变化量问的是绝对值。</p>
-</li>
-<li><p>大大为大（现期大，增长率大，总体大）；</p>
-</li>
-<li><p>一大一小：看倍数关系</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">220*5.6%                          22*65%</span><br><span class="line">220是22的10倍，65%是5.6%10+倍</span><br><span class="line">220*5.6%              &lt;            22*65%</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>​	</p>
-<h2 id="增长率比大小"><a href="#增长率比大小" class="headerlink" title="增长率比大小"></a>增长率比大小</h2><p>①当现期与基期小于2倍，用它比大小<br>$$<br>\frac{增长量}{基期量}<br>$$<br>②当现期与基期大于2倍，直接用倍数大小</p>
-<h2 id="隔年增长率"><a href="#隔年增长率" class="headerlink" title="隔年增长率"></a>隔年增长率</h2><p>1.2016年，2017年增长率r1,2018年增长率r2</p>
-<p>求2018相比2016年增长率：r</p>
-<p>r&#x3D;r1+r2+r1*r2   (r1,r2都小于10%，可以忽略乘积)</p>
-<h2 id="隔年基期与隔年倍数"><a href="#隔年基期与隔年倍数" class="headerlink" title="隔年基期与隔年倍数"></a>隔年基期与隔年倍数</h2><p>1.是多少倍：n</p>
-<p>2.多多少倍：n-1</p>
-<p>3.隔年基期<br>$$<br>\frac{现期}{1+r隔}&#x3D;隔年基期<br>$$<br>4.隔年倍数<br>$$<br>1+r1+r2+r1*r2<br>$$</p>
-<h2 id="基期比重"><a href="#基期比重" class="headerlink" title="基期比重"></a>基期比重</h2><p>1.现期A,增长率a</p>
-<p>现期B，增长率b<br>$$<br>\frac{A}{B}*\frac{1+b}{1+a}<br>$$</p>
-<p>2.求基期倍数等价于等价于求基期比重</p>
-<h2 id="两期变化"><a href="#两期变化" class="headerlink" title="两期变化"></a>两期变化</h2><p>部分现期A,增长率a</p>
-<p>整体现期B，增长率b</p>
-<p>1.当a&gt;b,两期比值比原来上升</p>
-<p>2.当a&lt;b两期比值比原来下降</p>
-<h2 id="两期比重差"><a href="#两期比重差" class="headerlink" title="两期比重差"></a>两期比重差</h2><p>现期A，增长率a</p>
-<p>现期B，增长率b</p>
-<p>1.题目问的是两期比重上升几个百分点，重点是求得<strong>百分点</strong><br>$$<br>\frac{A}{B}*\frac{a-b}{1+a}&lt;|a-b|<br>$$</p>
-<h2 id="平均数增长率"><a href="#平均数增长率" class="headerlink" title="平均数增长率"></a>平均数增长率</h2><p>现期A，增长率a</p>
-<p>现期B，增长率b</p>
-<p>求A&#x2F;B的增长率，题目问题是增长百分之多少<br>$$<br>\frac{a-b}{1+b}<br>$$</p>
-<h2 id="混合增长率"><a href="#混合增长率" class="headerlink" title="混合增长率"></a>混合增长率</h2><p>求两部分混合之后的增长率,</p>
-<p>部分现期A，增值率a；部分现期B，增长率b<br>$$<br>总体&#x3D;部分A+部分B<br>$$<br>①混合增长率居中不正中，偏向现期大的</p>
-<p>②距离（增速之差）与基期量之比成反比<br>$$<br>\frac{A}{B}&#x3D;\frac{rb-r混}{r混-ra}<br>$$</p>
-<p>③在数轴标号增长率大小，把对应基期写在下面，然后运用公式②</p>
-<p>pis:这里有个技巧是假设基期比都是1:1情况下，混合增长率刚好是居中的，用于判断一些临界问题。</p>
-<h2 id="乘积增长率"><a href="#乘积增长率" class="headerlink" title="乘积增长率"></a>乘积增长率</h2><p>求两部分乘积之后的增长率,</p>
-<p>部分现期A，增值率a；部分现期B，增长率b<br>$$<br>总体&#x3D;部分A*部分B<br>$$</p>
-<p>$$<br>r混&#x3D;ra+rb+ra*rb<br>$$</p>
-<h2 id="拉动增长率，增长贡献率"><a href="#拉动增长率，增长贡献率" class="headerlink" title="拉动增长率，增长贡献率"></a>拉动增长率，增长贡献率</h2><p>拉动率&#x3D;部分增量÷整体基期值 </p>
-<p>贡献率&#x3D;部分增量÷整体增量 </p>
-<p>每个部分的拉动率相加之和等于整体增长率 每个部分的贡献率相加之和等于100%<br>$$<br>拉动增长率&#x3D;增长贡献率*总体增长率<br>$$</p>
-<h2 id="特殊考点"><a href="#特殊考点" class="headerlink" title="特殊考点"></a>特殊考点</h2><p>①“十五”时期：2001-2005年</p>
-<p>②1亿&#x3D;1万万</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">资料分析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/gyw//" class="article-tag-list-link color4">gyw</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/08/23/gyw/%E8%A1%8C%E6%B5%8B/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/%E8%B5%84%E6%96%99%E5%88%86%E6%9E%90/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1171,7 +1062,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2024 Xi
+    		&copy; 2025 Xi
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1263,11 +1154,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1287,11 +1178,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数量关系</a>
+                <a href="javascript:void(0)" class="js-tag color3">公专</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常识判断</a>
+                <a href="javascript:void(0)" class="js-tag color3">政治</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">科学推理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数字推理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数量关系</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1299,7 +1202,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数字推理</a>
+                <a href="javascript:void(0)" class="js-tag color5">常识判断</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1308,10 +1211,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">资料分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">科学推理</a>
               </li>
             
             <div class="clearfix"></div>
